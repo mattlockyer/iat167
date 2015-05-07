@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-        <!-- 
+        <!--
         This page uses the Reveal.js presentation framework
         To find out more about reveal, visit http://lab.hakim.se/reveal-js/
         or https://github.com/hakimel/reveal.js
@@ -141,7 +141,7 @@ if (diff.mag() > cutoff) {
 diff.mult(strength * 1/PVector.dot(diff, diff));
 if (mousePressed) {
 acc.sub(diff);
-} 
+}
 else {
 acc.add(diff);
 }
@@ -242,8 +242,8 @@ else
 sepAcc.mult(1.5); //controls
 alignAcc.mult(1.5); //controls
 cohAcc.mult(1); //controls
-acc.add(sepAcc); 
-acc.add(alignAcc); 
+acc.add(sepAcc);
+acc.add(alignAcc);
 acc.add(cohAcc);
 }
 
@@ -399,28 +399,35 @@ endShape();
 			<ul class="list-style-none">
 				<li><a href="#/info">Course Info</a></li>
 				<li><a href="#/calendar">Schedule</a></li>
+				<!--
 				<li><a href="#/assignments">Assignments</a></li>
                 <li><a href="#/project">Final Project</a></li>
                 <li><a href="report.html">Final Report</a></li>
                 <li>&nbsp;</li>
                 <li><a href="debug.html">Debugging</a></li>
                 <li style="font-size:0.7em">Alex Mandryka<a href="img/alex_mandryka_talk.pptx"> Talk </a><a href="http://www.gamewhispering.com">Web</a></li>
+                -->
             </ul>
         </div>
         <div class="col3">
          <ul class="list-style-none">
+				<!--
           <li><a href="terms.html">Course Terms</a></li>
+                -->
           <li><a href="#/graphics">Graphics</a></li>
           <li><a href="#/datatypes">Data Types</a></li>
           <li><a href="methods.html">Methods</a></li>
           <li><a href="control.html">Control Flow</a></li>
+				<!--
           <li><a href="loops.html">Loops</a></li>
           <li><a href="#/objects">Objects</a></li>
+                -->
       </ul>
   </div>
   <div class="col3">
      <ul class="list-style-none">
         <li><a href="inputphysics.html">Input + Physics</a></li>
+				<!--
         <li><a href="collisions.html">Collisions</a></li>
         <li><a href="design.html">Design + UML</a></li>
         <li><a href="genres.html">Genres</a></li>
@@ -431,8 +438,13 @@ endShape();
         <li><a href="animation.html">Animation</a></li>
     </ul>
 </div>
+-->
 </div>
 </section>
+
+
+<!-- SECTIONS FOR MAIN PAGE -->
+
 
 <section id="info">
    <section>
@@ -473,7 +485,7 @@ endShape();
 <section>
   <h2>Tools and Texts</h2>
   <p>
-     We will be using <a href="http://processing.org/download/">Processing 2.0 beta 8</a>
+     We will be using <a href="http://processing.org/download/">Processing</a>
      and <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a> among other tools we will mention when you need them.
  </p>
  <p>
@@ -489,19 +501,17 @@ endShape();
 
 <section id="calendar">
    <section>
-      <iframe src="https://www.google.com/calendar/embed?src=v61s4blmrbhfum46hn5aak2v00%40group.calendar.google.com&ctz=America/Vancouver" style="border: 0" width="900" height="600" frameborder="0" scrolling="no"></iframe>
-  </section>
+       <iframe src="https://www.google.com/calendar/embed?src=j2vgkq83mpbsjbjpjej0ogh2gc%40group.calendar.google.com&ctz=America/Vancouver" style="border: 0" width="900" height="600" frameborder="0" scrolling="no"></iframe>
 </section>
 
-
+</section>
+<!--
 <section id="assignments">
    <h2>Assignments</h2>
    <ul class="list-style-none">
       <li><a href="assignment1.html">Assignment 1</a></li>
       <li><a href="assignment2.html">Assignment 2</a></li>
       <li><a href="assignment3.html">Assignment 3</a></li>
-                <!--
-            -->
         </ul>
     </section>
     <section id="project">
@@ -512,6 +522,7 @@ endShape();
             <li><a href="report.html">Report</a></li>
         </ul>
     </section>
+            -->
 
     <section id="graphics">
      <h2>Graphics</h2>
@@ -535,7 +546,7 @@ endShape();
   <li><a href="arraylist.html">ArrayList</a></li>
 </ul>
 </section>
-
+<!--
 <section id="objects">
  <h2>Objects</h2>
  <ul class="list-style-none">
@@ -544,6 +555,7 @@ endShape();
   <li><a href="inheritance.html">Inheritance</a></li>
 </ul>
 </section>
+-->
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
