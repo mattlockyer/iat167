@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - ArrayLists</title>
+        <meta name="description" content="IAT 167 - Digital Games - Strings">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>ArrayLists</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Declaring</a></li>
+                        <li><a href="#/2">Initializing</a></li>
+                        <li><a href="#/3">Adding</a></li>
+                        <li><a href="#/4">Getting</a></li>
+                        <li><a href="#/5">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/reference/ArrayList.html">ArrayList</a> (required)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 23 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        A list is only as strong as its weakest link. [Donald Knuth]
+                    </blockquote>
+
+                </section>
+
+
+                <section>
+                    <h3>Declaring an ArrayList</h3>
+                    <p>
+                        An ArrayList is an object like an array. We need to declare a reference variable that will store a
+                        reference to our ArrayList object.
+                    </p>
+                    <p>
+                        <span class="code">ArrayList lottoNumbers;</span><br />
+                        Declares a reference variable named lottoNumbers of the type ArrayList.
+                    </p>
+                    <p>
+                        Now that we have a reference variable of the type ArrayList, we can go ahead and create a new ArrayList
+                        object and assign it to this variable.
+                    </p>
+
+                </section>
+                <section>
+
+                    <h3>Initializing an ArrayList</h3>
+                    <p>
+                        We need to create a new ArrayList object and assign it to our reference variable in order to initialize
+                        the variable. Essentially, we need our reference variable to point to some ArrayList object instead of
+                        pointing at nothing.
+                    </p>
+                    <p>
+                        <span class="code">lottoNumbers = new ArrayList();</span><br />
+                        Creates a new ArrayList object and assigns it to the reference variabel lottoNumbers.<br/>
+                        <span class="code">ArrayList lottoNumbers = new ArrayList();</span><br />
+                        Optionally, like our primitive variables or arrays, we can do this in one line.
+                    </p>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Adding Elements to an ArrayList</h3>
+                        <p>
+                            Notice the ArrayList did not specify how many, or what type of data it will hold. This is because
+                            an ArrayList is both size and type agnostic, meaning that it doesn't care. These are some of the great
+                            advantages an ArrayList has over an array. However with more advantages comes some additional work.
+                        </p>
+                        
+                </section>
+                <section>
+                    
+                        <p>
+                            <span class="code">lottoNumbers.add(2);</span><br />
+                            Adds the literal value 2 to the last position in the ArrayList.<br/>
+                            The ArrayList was empty. Now 2 is only element in the list.<br/>
+                            <span class="code">lottoNumbers.add(4);</span><br />
+                            Adds the literal value of 4 to the last position in the ArrayList.<br/>
+                            What position is 2 in now?<br/>
+                            <span class="code">lottoNumbers.add(8);</span> lottoNumbers -> [ 2, 4, 8 ]<br />
+                            <span class="code">lottoNumbers.add(16);</span> lottoNumbers -> [ 2, 4, 8, 16 ]<br />
+                            <span class="code">lottoNumbers.add(32);</span> lottoNumbers -> [ 2, 4, 8, 16, 32 ]<br />
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <p>
+                            The only way to add elements to an ArrayList is at the back, or last position. This requires some
+                            preparation in a program if the order of elements is important.
+                        </p>
+
+                        <div class="important">The ArrayList add method will always add elements to the end of the ArrayList.</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Getting Elements from an ArrayList</h3>
+
+                        <p>
+                            Remember how ArrayLists are type agnostic? Well if the ArrayList doesn't care what types of data it
+                            contains, how would we go about using that data. Let's take a look at how we get elements out of an
+                            ArrayList.
+                        </p>
+                        <p>
+                            <span class="code">ArrayList stuff = new ArrayList();</span><br />
+                            <span class="code">stuff.add("one");</span><br />
+                            <span class="code">stuff.add("two");</span><br />
+                            <span class="code">stuff.add(3);</span><br />
+                            <span class="code">stuff.add(4);</span><br />
+                            So now the ArrayList has four elements, two string literals and two integers.<br/>
+                        </p>
+
+                    </section>
+                    <section>
+                        <p>
+                            Let's assume we wanted test the strings for equality. We need some way of getting objects out of
+                            the ArrayList and preserving their type. Let's take a look at how this is done.
+                        </p>
+                        <p>
+                            <span class="code">String firstElement = (String) stuff.get(0);</span><br />
+                            This will get the first item that was added to the ArrayList and cast it as a String,
+                            then assign it to the String variable named firstElement.<br/>
+                            <span class="code">String secondElement = (String) stuff.get(1);</span><br />
+                            Here we've done the same thing with the second element in the ArrayList.<br />
+                            <span class="code">firstElement.equals(secondElement);</span> false<br />
+                            Now that we safely extracted our String elements, cast them as Strings, and assigned them
+                            to some variables, we can use the methods of the String datatype to check if they are equal.<br/>
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <p>
+                            There is a large problem though. Say we tried to compare the elements at positions 2 and 3.
+                            These are not String literals, they are integers, so our casting to a string will not work.
+                            It is this reason that using ArrayLists requires some extra planning on the part of the programmer.
+                            You should know what types you have put in each list and how to treat them safely when getting elements
+                            back out.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">ArrayLists are type agnostic, they are containers without a label.</div>
+                        <div class="important">When getting elements out of an ArrayList you must always cast the element.</div>
+                        <div class="important">Plan ahead what types get added to the ArrayList and how they will be retrieved.</div>
+
+                    </section>
+                </section>
+
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+ArrayList particles = new ArrayList();
+
+//a class to describe a particle
+class Particle {
+  
+  //fields
+  float xPos, yPos, xVel, yVel;
+  //a constructor to initialize the fields above with initial values
+  Particle(float xPos, float yPos, float xVel, float yVel) {
+    this.xPos = xPos; 
+    this.yPos = yPos; 
+    this.xVel = xVel; 
+    this.yVel = yVel;
+  }
+  
+  //update the state of this particle (movement and collision with walls)
+  void update() {
+    //update position
+    xPos += xVel;
+    yPos += yVel;
+    //check walls
+    if (abs(xPos - width/2) > width/2 - 16) {
+      xVel *= -1;
+    }
+    if (abs(yPos - height/2) > height/2 - 16) {
+      yVel *= -1;
+    }
+  }
+  
+  //draw the particle
+  void draw() {
+    pushMatrix();
+    translate(xPos, yPos);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+  
+}//Particle class
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(0, 128);
+  strokeWeight(2);
+  fill(255, 0, 0, 128);
+  //the ArrayList doesn't have a size yet
+  //so we have to set how much we will loop literally
+  for (int i = 0; i < 100; i++) {
+    //make a new Particle object, assign to ref. var. newParticle
+    Particle newParticle = new Particle(
+    //arguments passed to the constructor set the initial values for a Particle object's fields
+    //take a look at the parameters for the constructor in the Particle class
+    random(16, width - 16), 
+    random(16, height - 16), 
+    random(-4, 4), 
+    random(-4, 4)
+      //end of arguments
+    );
+    //add the newParticle object to the ArrayList particles
+    particles.add(newParticle);
+  }
+}
+
+void draw() {
+  background(255);
+  //loop over all elements in the particles ArrayList, 0 - (particles.size() - 1)
+  for (int i = 0; i < particles.size(); i++) {
+    //get the current ball in the loop, the ball at position i
+    //notice how we cast it as type Particle
+    //this is so we can have access to the Particle variables (xPos, yPos, ...)
+    Particle curParticle = (Particle) particles.get(i);
+    //call the update method of the Particle class
+    curParticle.update();
+    //call the draw method of the Particle class
+    curParticle.draw();
+  }
+}
+                        </textarea>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

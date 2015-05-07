@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Assignment 1 - Shapes and Transformations</title>
+        <meta name="description" content="IAT 167 - Digital Games - Assignment 1">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Assignment 1 - Shapes and Transformations</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Guidelines</a></li>
+                        <li><a href="#/2">Part 1 Drawing Directly</a></li>
+                        <li><a href="#/3">Part 2 Drawing with Transformations</a></li>
+                        <li><a href="#/4">Part 3 Drawing Methods</a></li>
+                        <li><a href="#/5">Tips and Tricks</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Guidelines</h2>
+                        <h3>
+                            Due 11.59pm, Sunday, May 25th.
+                        </h3>
+                        <ul class="list-style-none">
+                            <li>You are graded on the completeness, neatness, comments, and visual style of your final assignment</li>
+                            <li>All assignments are individual</li>
+                            <li><b>ZIP SKETCH FOLDERS</b> (not individual files) INTO ONE FILE</li>
+                            <li><b>Each part</b> of this assignment should be a <b>separate sketch</b></li>
+                            <li>Submit to WebCT before the deadline</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p class="important">
+                            There is no late policy for this course!
+                        </p>
+                        <p class="important">
+                            If you do not complete the assignment by the deadline, you will receive 0<br />
+                            You "may" be excused pending discussion with your TA
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Part 1 - Drawing Directly
+                        </h2>
+                        <p>
+                            Draw a scene using the shapes covered in lectures and labs. <br />
+                            Place this code inside the setup method. <br />
+                            Examples:
+                        </p>
+                        <ul>
+                            <li>A location (city, street, ocean, mountains, island, jungle)</li>
+                            <li>A pattern (shapes in grid layout, shapes inside shapes)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Requirements:
+                        </h2>
+                        <p>
+                            Practice each shape type and have some variation in position, size, shape.
+                        </p>
+                        <div class="row">
+                            <div class="col2">
+                                <p>At least 4:</p>
+                                <ul>
+                                    <li>Lines</li>
+                                    <li>Rectangles</li>
+                                    <li>Ellipses</li>
+                                    <li>Triangles</li>
+                                    <li>Quads</li>
+                                    <li>Arcs</li>
+                                    <li>Curves</li>
+                                </ul>
+                            </div>
+                            <div class="col2">
+                                <p>Strokes and Fills:</p>
+                                <ul>
+                                    <li>8 different fills</li>
+                                    <li>4 different strokes</li>
+                                    <li>4 different stroke widths</li>
+                                    <li>Use both RGB and HSB color modes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Part 2 - Drawing with Transformations
+                        </h2>
+                        <p>
+                            Draw a character for your scene. <br />
+                            Place this code inside the draw method and clear the background.<br />
+                            Examples:
+                        </p>
+                        <ul>
+                            <li>A spaceship</li>
+                            <li>An animal</li>
+                            <li>A person</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Requirements:
+                        </h2>
+                        <ul>
+                            <li><b>Centered around (0, 0)</b> <a target="_blank" href="http://dg.mattlockyer.com/transformations.html#/2/2">like this</a></li>
+                            <li>Use at least 4 different shapes</li>
+                            <li>Use at least 16 shapes in total</li>
+                            <li>Your character should no more than 200 pixels wide or tall</li>
+                        </ul>
+                        <h3>
+                            Transformations
+                        </h3>
+                        <ul>
+                            <li>Translate your character to the center of the screen</li>
+                            <li>Rotate your character 45 degrees to the left and 45 degrees to the right based on the mouseX position</li>
+                            <li>Scale your character based on the mouseY position (suggested values: 0.5 - 2)</li>
+                            <li>Your mouseX and mouseY interaction must use the full width and height of the window</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Part 3 - Drawing Methods
+                        </h2>
+                        <p>
+                            New sketch (using scene from Part 1 and character from Part 2).<br />
+                            Move your scene and character code inside their own methods. <br />
+                            Call these methods from the draw method.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>
+                            Requirements:
+                        </h2>
+                        <ul>
+                            <li>Clear the background</li>
+                            <li>Call the scene method</li>
+                            <li>Provide x, y, rotation, and scale parameters for your character method</li>
+                            <li>Call your character method at least 8 times with different positions, rotations, and scalings</li>
+                            <li>At least 2 calls to the character method must use mouseX and mouseY, respectively (transformation should be different from part 2).</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Tips and Tricks
+                        </h2>
+                        <ul>
+                            <li>Be creative with your character! You will be reusing these characters in future assignments</li>
+                            <li>Style counts! Take time to design your scene and character</li>
+                            <li>Start now! Use Part 1 to practice the shapes learned in the lectures</li>
+                        </ul>
+                    </section>
+                </section>
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

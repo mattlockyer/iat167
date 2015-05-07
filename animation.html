@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Animation</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Animation</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Timers Recap</a></li>
+                        <li><a href="#/2">Character State</a></li>
+                        <li><a href="#/3">Frame Management</a></li>
+                        <li><a href="#/4">Other Techniques</a></li>
+                        <li><a href="#/5">Example Game (with timers)</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">                        
+                        <li><a href="http://en.wikipedia.org/wiki/Game_programming" target="_blank">Game Programming</a></li>
+                        <li><a href="http://entropyinteractive.com/2011/02/game-engine-design-the-game-loop/" target="_blank">Game Loop</a></li>
+                    </ul>
+
+                </section>
+                <section>
+                    <section>
+                        <h3>Timers</h3>
+                        <p>
+                            Remember that processing runs at 60 fps. This means that an integer, incrementing every frame will hit a multiple of 60 every 1 second.
+                        </p>
+                        <p>
+                            60 (1s), 120 (2s), 180 (3s), ...
+                        </p>
+                        <p>
+                            You may also use the global reserved variable frameCount which is an integer representing the amount of frames since your sketch has started.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Resetting Timers</h3>
+                        <p>
+                            Let's assume you want to loop 3 images, each for 1 second and then back to the first.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void updateTimer() {
+    if (timer == 0) {
+        showImage1();
+    }
+    ...
+    timer++;
+    //check timer limit and reset
+    //notice this happens after we increment so we go back to image 1
+    //in the next loop and timer == 0
+    if (timer > 180) { //often checking limits with > is safer
+        timer = 0;
+    }
+}</textarea>
+                    </section>
+                    <section>
+                        <h3>Using FrameCount</h3>
+                        <p>
+                            Using another variable as a timer also works, provided you keep track of the current frame you want to show.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void updateTimer() {
+    if (frameCount % 60 == 0) {
+        frame++;
+        //assuming your frames are in an array
+        //frames 1-3 -> 0, 1, 2
+        if (frame > 2) {
+            frame = 0;
+        }
+        switchImage(frame);
+    }
+    
+}</textarea>
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Character State</h3>
+
+                        <p>
+                            You're going to have to maintain the state of your character, and at some point it will change.
+                        </p>
+                        <p>
+                            For example, your character will be either: idle, moving, firing / action, ...
+                        </p>
+                        <p>
+                            To keep this as simple as possible use a single integer to keep track and leave a comment for yourself.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Character state</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+//0 standing
+//1 walking
+//2 shooting
+int state;
+class Character {
+    Character() {
+        state = 0;
+    }
+    void setState(state) {
+        this.state = state;
+    }
+}</textarea>
+                    </section>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Frame Management</h3>
+
+                        <p>
+                            There are 2 options for managing a list of frames for your character, an Array or an ArrayList. Since your character will most likely not
+                            add or remove any animation frames during your game, an ArrayList is not necessary.
+                        </p>
+                        <p>
+                            For every animation of your character you will need to store a list of frames for that animation. We'll use arrays.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Arrays of Frames</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+PImage standing;
+PImage[] walking = new PImage[3];
+PImage[] shooting = new PImage[6];
+PImage character;
+class Character {
+    Character() {
+        standing = loadImage("images/standing.jpg");
+        for (int i = 0; i < walking.length; i++) {
+            walking[i] = loadImage("images/walking" + i + ".jpg");
+        }
+        for (int i = 0; i < shooting.length; i++) {
+            walking[i] = loadImage("images/shooting" + i + ".jpg");
+        }
+    }
+}</textarea>
+                    </section>
+                    <section>
+                        <h3>Changing Frames</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+PImage standing;
+PImage[] walking = new PImage[3];
+PImage[] shooting = new PImage[6];
+PImage character;
+class Character {
+    ...
+    void update() {
+        ...
+        if (frameCount % 5 == 0) {
+            ...
+            currentFrame++;
+            switch (state) {
+            //walking
+            case 1:
+                if (currentFrame == walking.length) {
+                    currentFrame = 0;
+                }
+                changeFrame(walking, currentFrame);
+                break;
+            case ...
+            default:
+                character = standing;
+                break;
+            }
+        }
+    }
+    void changeFrame(PImage[] list, frame) {
+        //the PImage reference for character is now
+        //the frame in the list we want
+        character = list[frame]; 
+    }
+    void draw() {
+        ...
+        image(character, -character.width/2, -character.height/2);
+    }
+}</textarea>
+                    </section>
+                    <section>
+                        <h3>Discussion</h3>
+                        <p>
+                            Notice how we are looping our frame at a rate of 60 / 5 which means 12 frames per second, which is pretty good for animation.
+                        </p>
+                        <p>
+                            Also notice how we must check the state our character is in, is the character walking? shooting? or just standing there.
+                        </p>
+                        <div class="important">
+                            Review switch statements in the processing documentation! Default will execute if no cases were matched.
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h3>Storing Frames</h3>
+                        <p>
+                            Make sure not to be loading the same frames for multiple instances of the same object. This will most likely
+                            incur a performance penalty.
+                        </p>
+                        <p>
+                            Storing all arrays of frames inside an Animation class would be the preferred technique.
+                            Then to access those frames it's simply a matter of calling <br />
+                            <span class="code">
+                                animation.sequence[framePosition]
+                            </span>
+                        </p>
+                        <div class="important">
+                            Store animation frame sequences in a single class and load them all in the constructor.
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="important">
+                            Plan out your character states and frame arrays carefully.
+                        </div>
+                        <div class="important">
+                            When updating frames, make sure you're updating the right list and checking the limit of your frame Array and not exceeding it.
+                        </div>
+                        <div class="important">
+                            Watch out for an index out of bounds error, this means your currentFrame variable is trying to access a frame in one of your arrays that is
+                            not there. This usually means the currentFrame variable is too large or you are updating the wrong list.
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Other Techniques</h3>
+                        <p>
+                            Not all animation requires frames, for example the arms of a clock rotate based on the time.
+                        </p>
+                        <p>
+                            Regardless of the style of animation you decide to use, timers will be important in managing that animation.
+                        </p>
+                        <p>
+                            Timers can be based on a custom integer, or reserver global variables like frameCount and millis()
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Rotation Example</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void setup() {
+    noStroke();
+    size(fullWidth, fullHeight);
+}
+void draw() {
+    fill(255, 32);
+    rect(0, 0, width, height);
+    pushMatrix();
+    translate(width/2, height/2);
+    rotate((float) frameCount / 60.0);
+    fill(64);
+    rect(-100, -4, 200, 8);
+    popMatrix();
+}</textarea>
+                    </section>
+                </section>
+
+
+
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right, fire;
+
+int addEnemy = 90;
+
+int state = 0;
+
+ArrayList<Background> backgrounds = new ArrayList<Background>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
+//store missile frames for the whole sketch
+int totalFrames = 60;
+PImage[] frames = new PImage[totalFrames];
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+    else if (keyCode == UP) fire = true;
+  } else {
+    if (key == ' ') fire = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+    else if (keyCode == UP) fire = false;
+  } else {
+    if (key == ' ') fire = false;
+  }
+}
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+
+  player = new Character(new PVector(width/2, height - 50));
+
+  backgrounds.add(new Background("img/levels/bg.jpg", 2, 2, 0.25));
+  backgrounds.add(new Background("img/levels/stars.png", 2, 2, 1));
+
+  //load animation frames
+    int fileNum = 10;
+    for (int i = 0; i < totalFrames; i++) {
+        frames[i] = loadImage("img/game/160x120/explosion1_00" + (fileNum) + ".png");
+        fileNum++;
+    }
+}
+
+void draw() {
+    switch (state) {
+        case 0: level1(); break;
+        case 1: gameOver(); break;
+    }
+}
+
+void level1() {
+    background(255);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+    if (fire) player.fireMissile();
+
+    if (frameCount % addEnemy == 0) {
+        enemies.add( new Enemy(new PVector(random(64, width - 128), -64)) );
+        if (addEnemy > 20) {
+             addEnemy--;
+        }
+    }
+    //draw bgs
+    for (int i = 0; i < backgrounds.size(); i++) {
+        backgrounds.get(i).draw(new PVector(-player.pos.x / 4, frameCount * 2));
+    }
+    //draw enemies
+    for (int i = 0; i < enemies.size(); i++) {
+        Enemy e = enemies.get(i);
+        e.update();
+        e.draw();
+        if (e.collision(player)) {
+            player.hit();
+        }
+    }
+    //update + draw player
+    player.update();
+    //draw other stuff
+    drawHealthBar();
+    drawScore();
+}
+
+void gameOver() {
+    background(255);
+    text("Game Over", width/2 - 40, height/2);
+}
+
+void drawScore() {
+    text("SCORE: " + player.score, width - 100, 40);
+}
+
+void drawHealthBar() {
+    int healthBarWidth = 200;
+    pushMatrix();
+    fill(0, 64);
+    translate(20, 20);
+    rect(0, 0, healthBarWidth, 20); //container for health
+    fill(255, 0, 0, 255);
+    rect(0, 0, healthBarWidth * player.healthPercentage, 20); //health bar
+    popMatrix();
+}
+                                            </textarea>
+                                            <textarea data-name="BG.pde">
+//a class to describe a Background
+class Background {
+    PImage img;
+    int repeatX, repeatY;
+    float speed;
+    Background(String path, int repeatX, int repeatY, float speed) {
+        img = loadImage(path);
+        this.repeatX = repeatX;
+        this.repeatY = repeatY;
+        this.speed = speed;
+    }
+    void draw(PVector pos) {
+        pos.mult(speed);
+        //in java mode you may have to cast the right side
+        //of this assignment as an int, ex: = (int) -floor(...)
+        int tilesX = -floor(pos.x / img.width);
+        int tilesY = -floor(pos.y / img.height);
+        for (int i = tilesX - 1; i < tilesX + repeatX; i++) {
+            for (int j = tilesY - 1; j < tilesY + repeatY; j++) {
+                image(img, pos.x + img.width * i, pos.y + img.height * j);
+            }
+        }
+    }
+}</textarea>
+                                            <textarea data-name="Ms.pde">
+//a class to describe a Tile
+class Missile {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    ArrayList<Explosion> explosions;
+    //animation frames
+    int frameTimer;
+    Missile(pos, vel, life, list) {
+        this.pos = pos;
+        this.vel = vel;
+        this.life = life;
+        this.list = list;
+        explosions = new ArrayList<Explosion>();
+        frameTimer = totalFrames;
+    }
+    boolean collision(MovingObject other) {
+        if (dist(pos.x, pos.y, other.pos.x, other.pos.y) < other.radius) {
+            return true;
+        }
+        return false;
+    }
+    void update() {
+        //off screen
+        if (pos.y < 0) {
+            life = -1;
+            frameTimer = -1;
+            list.remove(this);
+        }
+        //hit enemy
+        if (life == 0) {
+            vel.mult(0.4); //slow down speed, this looks cool
+            for (int i = 0; i < 32; i++) {
+                explosions.add( new Explosion(new PVector(pos.x, pos.y), explosions ));
+            }
+        }
+        //explosion finished
+        if (life < 0 && frameTimer == 0) {
+            list.remove(this);
+        }
+        //update explosions
+        for (int i = 0; i < explosions.size(); i++) {
+            Explosion e = explosions.get(i);
+            e.update();
+            e.draw();
+        }
+        //update
+        pos.add(vel);
+        life--;
+    }
+    void draw() {
+        stroke(200);
+        strokeWeight(2);
+        fill(63);
+        if (life > 0) {
+            pushMatrix();
+            translate(pos.x, pos.y);
+            ellipse(0, 0, 8, 8);
+            popMatrix();
+        } else {
+            if (frameTimer > 0) {
+                pushMatrix();
+                translate(pos.x, pos.y);
+                image(frames[totalFrames - frameTimer], -80, -60);
+                popMatrix();
+                frameTimer--;
+            }
+        }
+    }
+}</textarea>
+                                                        <textarea data-name="Exp.pde">
+//a class to describe a Tile
+class Explosion {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    float speed;
+    Explosion(pos, list) {
+        this.pos = pos;
+        this.list = list;
+        life = (int) random(24);
+        float angle = random(TWO_PI);
+        speed = 8;
+        vel = new PVector(speed * cos(angle), speed * sin(angle));
+    }
+    void update() {
+        pos.add(vel);
+        life--;
+        if (life < 0) {
+            list.remove(this);
+        }
+    }
+    void draw() {
+        noStroke();
+        fill(128 + random(127), random(127), 0);
+        pushMatrix();
+        translate(pos.x, pos.y);
+        rect(-2, -2, 4, 4);
+        popMatrix();
+    }
+}</textarea>
+                                                        <textarea data-name="MO.pde">
+//a class to describe a generic Character
+class MovingObject {
+  //fields
+  PVector pos, vel, acc;
+  float radius;
+  float damp = 0.8; //constant damping factor
+
+  MovingObject(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  boolean collision(MovingObject other) {
+      if (dist(pos.x, pos.y, other.pos.x, other.pos.y) < radius + other.radius) {
+          return true;
+      }
+      return false;
+   }
+  //update the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void draw() {
+    stroke(200);
+    strokeWeight(2);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}</textarea>                                                                         
+                                                        <textarea data-name="Char.pde">
+//a class to describe a generic Character
+class Character extends MovingObject {
+  ArrayList<Missile> missiles;
+  //control firing
+  int fireTimer = 0;
+  int invincibleTimer = 60;
+  int health;
+  int maxHealth;
+  float healthPercentage;
+  int score = 0;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    super(pos);
+    missiles = new ArrayList<Missile>();
+    radius = 24;
+    maxHealth = 10;
+    health = maxHealth;
+    healthPercentage = 1;
+  }
+
+  void fireMissile() {
+    if (fireTimer === 0) {
+        missiles.add( new Missile(new PVector(pos.x, pos.y), new PVector(0, -8), 200, missiles) );
+        fireTimer = 6;
+    }
+    fireTimer--;
+  }
+
+  void hit() {
+    if (invincibleTimer == 0) {
+        health--;
+        if (health == 0) {
+            state = 1;
+        }
+        invincibleTimer = 60;
+        healthPercentage = (float) health / (float) maxHealth;
+    }
+  }
+  
+  //update the character
+  void update() {
+    for (int i = 0; i < missiles.size(); i++) {
+        Missile m = missiles.get(i);
+        m.update();
+        m.draw();
+        for (int j = 0; j < enemies.size(); j++) {
+            Enemy e = enemies.get(j);
+            if (m.collision(e) && m.life > 0) {
+                m.life = 0;
+                enemies.remove(e);
+                score += 100;
+            }
+        }
+    }
+    super.update();
+    if (invincibleTimer > 0) {
+        if (invincibleTimer % 2 == 0) {
+            draw();
+        }
+        invincibleTimer--;
+    } else {
+        draw();
+    }
+  }
+  
+  void draw() {
+    stroke(200);
+    strokeWeight(2);
+    fill(63);
+    
+    pushMatrix();
+    translate(pos.x, pos.y);
+    if (vel.x < -0.5) {
+        rotate(-PI/8);
+    } else if (vel.x > 0.5) {
+        rotate(PI/8);
+    }
+    ellipse(0, 0, radius * 2, radius);
+    arc(0, -4, radius * 2 - 12, radius, -PI, 0);
+    popMatrix();
+  }
+}</textarea>
+                                                                    <textarea data-name="NME.pde">
+//a class to describe a generic Character
+class Enemy extends MovingObject {
+  int health;
+  int dartTimer;
+  PVector down;
+  PVector dart;
+  int redTimer, redDir;
+  Enemy(PVector pos) {
+    super(pos);
+    health = 5;
+    dartTimer = (int) random(height/10, height/4);
+    radius = 32;
+    down = new PVector(0, height * 0.001); //initialize here to use width / height
+    dart = new PVector(0, height * 0.008); //initialize here to use width / height
+    redTimer = 0;
+    redDir = 1;
+  }
+  
+  //update the character
+  void update() {
+    dartTimer--;
+    if (dartTimer < 0) {
+        move(dart);
+    } else {
+        move(down);
+    }
+    //represents a color value from 0 to just over 100
+    redTimer += 16 * redDir;
+    if (redTimer > 100 || redTimer < 0) {
+    	redDir *= -1;
+    }
+    super.update();
+  }
+  
+  void draw() {
+    stroke(200);
+    strokeWeight(2);
+    //add the redTimer to the fill, making enemies color pulse
+    fill(128 + redTimer, 0, 0);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, radius * 2, radius * 2);
+    popMatrix();
+  }
+}</textarea>
+
+                                                                    </div>
+
+                                                                    </section>
+
+                                                                    </div>
+                                                                    </div>
+
+
+
+                                                                    <script src="lib/js/head.min.js"></script>
+                                                                    <script src="js/reveal.min.js"></script>
+                                                                    <script src="js/codetabs.js"></script>
+                                                                    <script type="text/javascript">
+                                                                        Reveal.addEventListener('ready', function() {
+                                                                            setTimeout(checkSketches, 1500);
+                                                                        });
+                                                                        Reveal.addEventListener('overviewshown', checkSketches);
+                                                                        Reveal.addEventListener('overviewhidden', checkSketches);
+                                                                        Reveal.addEventListener('slidechanged', checkSketches);
+                                                                        function checkSketches() {
+                                                                            var slide = Reveal.getCurrentSlide();
+                                                                            var sketch = document.getElementById('sketch');
+                                                                            if (sketch) {
+                                                                                sketch.hide();
+                                                                                if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                                                                                    sketch.fadeIn();
+                                                                                    document.getElementsByClassName('slides')[0].style.display = 'none';
+                                                                                } else {
+                                                                                    document.getElementsByClassName('slides')[0].style.display = 'block';
+                                                                                    Reveal.layout();
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    </script>
+                                                                    <script>
+                                                                        // Full list of configuration options available here:
+                                                                        // https://github.com/hakimel/reveal.js#configuration
+                                                                        Reveal.initialize({
+                                                                            width: 1024,
+                                                                            height: 768,
+                                                                            margin: 0.06,
+                                                                            controls: true,
+                                                                            progress: true,
+                                                                            history: true,
+                                                                            center: true,
+                                                                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                                                                            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        
+                                                                            // Optional libraries used to extend on reveal.js
+                                                                            dependencies: -[
+                                                                                {src: 'lib/js/classList.js', condition: function() {
+                                                                                        return !document.body.classList;
+                                                                                    }},
+                                                                                {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                                                                                        return !!document.body.classList;
+                                                                                    }},
+                                                                                {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                                                                                        return !!document.body.classList;
+                                                                                    }}
+                                                                            ]
+                                                                        });
+                                                                    </script>
+                                                                    </body>
+                                                                    </html>

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Collisions</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Collisions</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Radial Collisions</a></li>
+                        <li><a href="#/2">Bounding Boxes</a></li>
+                        <li><a href="#/3">The Next Level</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        TBA
+                    </ul>
+                    <blockquote>
+                        Man is flying too fast for a world that is round. Soon he will catch up with himself in a great rear end collision. [James Thurber]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Radial Collisions</h3>
+                        <p>
+                            Since we have been drawing our character's with a center point at 0,0 it is easy for us to place an ellipse around
+                            our character after translation by using <br /><span class="code">ellipse(0, 0, charWidth, charHeight);</span>
+                            where width and height are the width and height of the character.
+                        </p>
+                        <p>
+                            We're going to see a collision detection technique that works by measuring the distance of a point to the character's center
+                            and checking if that distance is less than a radius.
+                        </p>
+                        <p>
+                            Since we can only check one radius value for the entire circle around our character, this technique is best suited for characters
+                            with width == height.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>In The Character Class</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="550" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Character {
+  PVector pos, ...;
+  int charWidth, charHeight, diameter, radius, ...;
+  ...
+  //NOTE: return type is not void, this method returns a boolean
+  boolean hasRadialCollision(Character other) {
+    //assume charWidth == charHeight or use "diameter" or "radius"
+    if ( dist(pos.x, pos.y, other.pos.x, other.pos.y) < 
+                    radius + other.radius) {
+      return true; //collision
+    }
+    return false; //no collision
+  }
+  ...
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>What Happened?</h3>
+
+                        <img class="left" src="img/collisions/circle.png" />
+
+                        <p class="left">
+                            We created a method that has a parameter of another Character, when the distance between both character's center points is less than the
+                            sum of their two width's (radii in this case), then we have a collision. If this is not true, we MUST return false.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="important">When using this technique, characters MUST be round or have width == height, otherwise results will be poor</div>
+                        <div class="important">To check if a single point is inside the character's radius, check if distance is less than character radius only</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Bounding Box Collisions</h3>
+
+                        <p>
+                            Sometimes we might encounter a situation where our character has a width > height or vice versa. In order to accommodate this we must check
+                            what is referred to in video games as a "bounding box".
+                        </p>
+
+                        <p>
+                            Think about putting a box around your character using<br /><span class="code">rect(-charWidth, -charHeight, charWidth, charHeight);</span> which will place a
+                            perfect bounding box around your character (provided that the numbers are correct).
+                        </p>
+
+                        <p>
+                            There are two cases to consider when two bounding boxes are colliding:
+                        <ol>
+                            <li>boxes overlap on the X axis</li>
+                            <li>boxes overlap on the Y axis</li>
+                            </p>
+
+                    </section>
+                    <section>
+                        <p>
+                            In The Character Class
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Character {
+  PVector pos, ...;
+  int charWidth, charHeight, ...;
+  ...
+  //NOTE: return type is not void, this method returns a boolean
+  boolean hasBoxCollision(Character other) {
+    if (abs(pos.x - other.pos.x) < charWidth/2 + other.charWidth/2 &&
+        abs(pos.y - other.pos.y) < charHeight/2 + other.charHeight/2) {
+      return true; //collision
+    }
+    return false; //no collision
+  }
+  ...
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+                        <h3>What Happened?</h3>
+
+                        <img class="left" src="img/collisions/box.png" />
+
+                        <p class="left">
+                            We created a method that checks two character's to see if the absolute value (distance) of their x and y
+                            coordinates is less than their combined widths and heights. Since both of the cases for box collisions must be true, we combined 
+                            the logic of each statement using an &&.
+                        </p>
+
+                    </section>
+
+                    <section>
+
+                        <div class="important">Box collisions are not much more work, and should be used for square, or rectangular characters</div>
+                        <div class="important">Notice how both conditions must be true in order for this collision to work properly</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Box Volume and Accuracy</h3>
+                        <img class="left" src="img/collisions/boxes.jpg" width="500" height="320"/>
+                        <p class="smaller left">
+                            Obviously you can't hope for really good looking collisions with only detecting a box or circle collision
+                            around a complex character.
+                        </p>
+                        <p class="smaller left">
+                            In most modern video games, characters are composed of several "hit boxes" which must be checked against the colliding objects.
+                        </p>
+                        <p class="smaller left">
+                            The key problem here is that when you increase accuracy by adding more detailed hit boxes, you increase complexity in the amount
+                            of areas you must check.
+                        </p>
+                        <p class="smaller left">
+                            The solution for not checking all boxes is to place one large hit box around a character, and if this box 
+                            has collided with the other object, then you begin to check each of the smaller hit boxes inside.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>About N Squared Problems, What..?</h3>
+                        <p>
+                            What does N-Squared mean? It means that in order to solve a problem involving n objects, we must perform n * 2 calculations.
+                        </p>
+                        <p>
+                            An example of this is a nested loop: a loop inside that runs 10 times will run 10 times for every 1 time the outer loop runs.
+                            If the outer loop runs 10 or 100 times, we will have 100 or 1000 loops. Oops!
+                        </p>
+
+                        <p>
+                            When it comes to collisions, there has been a lot of work around increasing speed with various methods and data structures:
+                        </p>
+                        <ul>
+                            <li>Pairwise Checks</li>
+                            <li>Hash Tables</li>
+                            <li>Binary Space Partitioning (BSP Trees)</li>
+                        </ul>
+                    </section>
+                    <section>
+
+                        <div class="important">In order to get realistic collisions for complex characters, check a large hit box AROUND your character, then check
+                            hit boxes that represent things like: leftArm, rightArm, torso...</div>
+                        <div class="important">Advanced collision detection means more calculation, so use this simple technique to speed things up!</div>
+
+                    </section>
+                </section>
+
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+//TYPED ARRAYLIST, WOO HOO!
+ArrayList<Particle> particles = new ArrayList<Particle>();
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(0, 128);
+  strokeWeight(2);
+  //the ArrayList doesn't have a size yet
+  //so we have to set how much we will loop literally
+  for (int i = 0; i < 10; i++) {
+    //make a new Particle object, assign to ref. var. newParticle
+    Particle newParticle = new Particle(
+    //arguments passed to the constructor set the initial values for a Particle object's fields
+    //take a look at the parameters for the constructor in the Particle class
+    new PVector(random(width), random(height)), 
+    new PVector(random(-16, 16), random(-16, 16)),
+    random(16, 128) //radius
+      //end of arguments
+    );
+    //add the newParticle object to the ArrayList particles
+    particles.add(newParticle);
+  }
+}
+
+void shakeIt(force, particle) {
+    particle.move(new PVector(random(-force, force), random(-force, force)));
+}
+
+void draw() {
+  background(255);
+  //loop over all elements in the particles ArrayList, 0 - (particles.size() - 1)
+  for (int i = 0; i < particles.size(); i++) {
+    //get the current ball in the loop, the ball at position i
+    //notice how we cast it as type Particle
+    //this is so we can have access to the Particle variables (xPos, yPos, ...)
+    //TYPED ARRAYLIST (CHECK DECLARATION AT TOP)
+    //NO NEED TO CAST OBJECT TO PARTICLE TYPE!
+    Particle curParticle = particles.get(i);
+
+    if (mousePressed) {
+        //average the mouse velocity
+        float force = (abs(pmouseX - mouseX) + abs(pmouseY - mouseY)) / 2;
+        //tone it down
+        force /= 16;
+        shakeIt(force, curParticle);
+    }
+
+    //loop all OTHER particles, but not the one we're currently on
+    for (int j = i + 1; j < particles.size(); j++) {
+      Particle otherParticle = particles.get(j);
+      if (curParticle.hasRadialCollision(otherParticle)) {
+        curParticle.resolveCollision(otherParticle);
+      }
+    }
+    //call the update method of the Particle class
+    curParticle.update();
+    //call the draw method of the Particle class
+    curParticle.draw();
+  }
+}
+                                    </textarea>
+                                    <textarea data-name="Particle.pde">
+//a class to describe a particle
+class Particle {
+  
+  //fields
+  PVector pos, vel, acc;
+  float radius, damp = 0.99;
+  //a constructor to initialize the fields above with initial values
+  Particle(PVector pos, PVector vel, float radius) {
+    this.pos = pos;
+    this.vel = vel;
+    acc = new PVector(); //set up blank
+    this.radius = radius;
+  }
+  //check collision
+  boolean hasRadialCollision(Particle other) {
+    if (dist(pos.x, pos.y, other.pos.x, other.pos.y) < radius/2 + other.radius/2) {
+      return true;
+    }
+    return false;
+  }
+  //resolve collision
+  void resolveCollision(Particle other) {
+      //find the angle between these two so we can bounce them
+      //this isn't realistic, but it looks decent and it's simple
+      float angle = atan2(pos.y - other.pos.y, pos.x - other.pos.x);
+      //calculate the momentum between the 2 objects
+      //normally this would be vel * mass, assume mass = 1
+      float momen = vel.mag() / 2 + other.vel.mag() / 2;
+      //off we go in opposite directions 
+      vel = new PVector(momen * cos(angle), momen * sin(angle));
+      angle += PI;
+      other.vel = new PVector(momen * cos(angle), momen * sin(angle));
+  }
+  //move method
+  void move(PVector force) {
+    acc.add(force);
+  }
+  //update the state of this particle (movement and collision with walls)
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+
+    if (pos.x > width + radius/2) pos.x = -radius/2;
+    if (pos.x <  -radius/2) pos.x = width + radius/2;
+    if (pos.y > height + radius/2) pos.y = -radius/2;
+    if (pos.y < -radius/2) pos.y = height + radius/2;
+  }
+  
+  //draw the particle
+  void draw() {
+    fill(255, 0, 0, 128);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, radius, radius);
+    popMatrix();
+  }
+  
+}//Particle class
+                    
+                                    </textarea>
+
+                                    </div>
+                                    </section>
+
+                                    </div>
+                                    </div>
+
+
+
+                                    <script src="lib/js/head.min.js"></script>
+                                    <script src="js/reveal.min.js"></script>
+                                    <script src="js/codetabs.js"></script>
+                                    <script type="text/javascript">
+                                        Reveal.addEventListener('ready', function() {
+                                            setTimeout(checkSketches, 1500);
+                                        });
+                                        Reveal.addEventListener('overviewshown', checkSketches);
+                                        Reveal.addEventListener('overviewhidden', checkSketches);
+                                        Reveal.addEventListener('slidechanged', checkSketches);
+                                        function checkSketches() {
+                                            var slide = Reveal.getCurrentSlide();
+                                            var sketch = document.getElementById('sketch');
+                                            if (sketch) {
+                                                sketch.hide();
+                                                if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                                                    sketch.fadeIn();
+                                                    document.getElementsByClassName('slides')[0].style.display = 'none';
+                                                } else {
+                                                    document.getElementsByClassName('slides')[0].style.display = 'block';
+                                                    Reveal.layout();
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                    <script>
+                                        // Full list of configuration options available here:
+                                        // https://github.com/hakimel/reveal.js#configuration
+                                        Reveal.initialize({
+                                            width: 1024,
+                                            height: 768,
+                                            margin: 0.06,
+                                            controls: true,
+                                            progress: true,
+                                            history: true,
+                                            center: true,
+                                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                                            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                                            // Optional libraries used to extend on reveal.js
+                                            dependencies: -[
+                                                {src: 'lib/js/classList.js', condition: function() {
+                                                        return !document.body.classList;
+                                                    }},
+                                                {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }},
+                                                {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }}
+                                            ]
+                                        });
+                                    </script>
+                                    </body>
+                                    </html>

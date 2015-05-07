@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Input + Physics</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Input + Physics</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">PVectors</a></li>
+                        <li><a href="#/2">Keyboard Input</a></li>
+                        <li><a href="#/3">Holding Multiple Keys</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/tutorials/pvector/" target="_blank">Learning PVectors</a> (required)</li>
+                        <li><a href="http://natureofcode.com/book/chapter-4-particle-systems/" target="_blank">Nature of Code: Particle Systems</a> (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        It should be possible to explain the laws of physics to a barmaid. [Albert Einstein]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>PVectors</h3>
+                        <p>
+                            Processing includes a special type called a PVector which is simply an object that has fields x, y, z, and some
+                            special methods to perform vector math calculations, making them very convenient for physics!
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>Declaring and Initializing PVectors</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="260" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+PVector acc; //PVector to store acceleration values
+acc = new PVector(); //initialize and assign to reference variable
+//declare and initialize PVector to store positions
+//sets values for x,y by passing in arguments random(width), random(height)
+PVector pos = new PVector(random(width), random(height));
+                            </textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>Basic Physics Movement</h3>
+                        <p>
+                            We've seen parts of this before. <span class="code">xPos += xVel</span>. Here is the final physics update method for
+                            our characters and objects.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="280" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>A Move Method</h3>
+                        <p>
+                            Now that our update method is perfected, we only need a simple move method with a single parameter 
+                            to apply a small force to our acceleration PVector.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="280" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+void move(PVector force) {
+    acc.add(force)
+}
+//calling the move method
+PVector moveRightForce = new PVector(2, 0);
+move(moveRightForce);</textarea></div>
+
+                    </section>
+                    <section>
+                        <h3>Theory</h3>
+                        <p>
+                            What will happen when the move method is called as a result of a keypress? The acceleration vector will have the move force
+                            applied to it, changing it's x,y,z values. The next time we call our update method, these values are applied to the velocity.
+                            The velocity must then be "dampened" to ensure our object never gets too fast. Velocity is added to the position, and finally
+                            we must clear all the forces from the acceleration PVector by setting all fields to 0 using the set method.
+                        </p>
+
+                    </section>
+
+                    <section>
+
+                        <div class="important">When using the set method of a PVector, you must use 3 arguments</div>
+                        <div class="important">Use PVectors instead of seperate variables for things like coordinates (x, y, z)</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Keyboard Input</h3>
+
+                        <p>
+                            There are two methods for working with the keyboard: <span class="code">keyPressed()</span> and <span class="code">keyReleased()</span>
+                        </p>
+
+                        <p>
+                            Here's how you check what key was pressed:
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="240" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+void keyPressed() {
+  if (key == 'a' || key == 'A') {
+    //the a key, single quote marks are neccessary!
+  }
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+                        <p>
+                            How about special keys, like the arrow keys:
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="360" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) { //UP is a special keyword
+      //up arrow pressed
+    } else if (keyCode == DOWN) { //DOWN or LEFT or RIGHT
+      //down arrow pressed
+    } 
+  }
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+                        <p>
+                            The keyReleased() method works in the exact same way, except it will be called when a key is released.
+                        </p>
+
+                        <div class="important">When referring to keys, remember they are char data types and you must use single quotes.</div>
+                        <div class="important">The keyPressed and keyReleased methods are only called once when a key is pressed, or released</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Holding Multiple Keys</h3>
+
+                        <p>
+                            Since the <span class="code">keyPressed()</span> and <span class="code">keyReleased()</span> methods are only called when
+                            the key is pressed or released, in order to maintain the "state" of keys currently "down" we must store this ourselves.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+boolean up, down, left, right;
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) up = true;
+    else if (keyCode == DOWN) down = true;
+    else if ...
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == UP) up = false;
+    else if (keyCode == DOWN) down = false;
+    else if ...
+  }
+}</textarea></div>
+
+
+
+                    </section>
+
+                    <section>
+
+                        <h3>Using Stored Key States</h3>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+PVector moveUp = new PVector(0, -2);
+PVector moveDown = new PVector(0, 2);
+boolean up, down, left, right;
+void draw() {
+  if (up)  character.move(moveUp);
+  if (down) character.move(moveDown);
+}</textarea></div>
+
+
+
+                    </section>
+                </section>
+
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right;
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) up = true;
+    else if (keyCode == DOWN) down = true;
+    else if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == UP) up = false;
+    else if (keyCode == DOWN) down = false;
+    else if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+  }
+}
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+  player = new UFO(new PVector(width/2, height/2));
+}
+void draw() {
+    background(255);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    player.update();
+    player.draw();
+}
+                        </textarea>
+                        <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character {
+  //fields
+  PVector pos, vel, acc;
+  float damp = 0.8; //constant damping factor
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  
+  //update the physics for the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+
+    if (pos.x > width) pos.x = 0;
+    if (pos.x < 0) pos.x = width;
+    if (pos.y > height) pos.y = 0;
+    if (pos.y < 0) pos.y = height;
+  }
+  
+  void draw() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}
+                        </textarea>
+                        <textarea data-name="UFO.pde">
+//a class to describe a subclass of Character called UFO
+class UFO extends Character {
+  UFO(PVector pos) {
+    super(pos);
+  }
+  void draw() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, 64, 32);
+    arc(0, -8, 40, 32, -PI, 0);
+    popMatrix();
+  }
+}
+                        </textarea>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+Reveal.addEventListener('ready', function() {
+setTimeout(checkSketches, 1500);
+});
+Reveal.addEventListener('overviewshown', checkSketches);
+Reveal.addEventListener('overviewhidden', checkSketches);
+Reveal.addEventListener('slidechanged', checkSketches);
+function checkSketches() {
+var slide = Reveal.getCurrentSlide();
+var sketch = document.getElementById('sketch');
+if (sketch) {
+sketch.hide();
+if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+sketch.fadeIn();
+document.getElementsByClassName('slides')[0].style.display = 'none';
+} else {
+document.getElementsByClassName('slides')[0].style.display = 'block';
+Reveal.layout();
+}
+}
+}
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: -[
+                    {src: 'lib/js/classList.js', condition: function() {
+                            return !document.body.classList;
+                        }},
+                    {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }},
+                    {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }}
+                ]
+            });
+        </script>
+    </body>
+</html>

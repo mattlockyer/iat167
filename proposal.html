@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Project Proposal</title>
+        <meta name="description" content="IAT 167 - Digital Games - Assignment 1">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Project Proposal</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Guidelines</a></li>
+                        <li><a href="#/2">Overview</a></li>
+                        <li><a href="#/3">Interview</a></li>
+                        <li><a href="#/4">Proposal Requirements</a></li>
+                        <li><a href="#/5">UML Requirements</a></li>
+                        <li><a href="#/6">Tips and Tricks</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Guidelines</h2>
+                        <h3>
+                            Interviews, Wednesday, July 2nd
+                        </h3>
+                        <h3>
+                            Due 11.59pm, Sunday, July 6th
+                        </h3>
+                        <ul class="list-style-none">
+                            <li>You are graded on the completeness, neatness, comments, and visual style of your final assignment</li>
+                            <li>All assignments are individual</li>
+                            <li>Submit to Canvas before the deadline</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p class="important">
+                            There is no late policy for this course!
+                        </p>
+                        <p class="important">
+                            If you do not complete the assignment by the deadline, you will receive 0<br />
+                            You "may" be excused pending discussion with your TA
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Overview
+                        </h2>
+                        <p>
+                            You are to propose a game that will fulfill all programming requirements and demonstrate
+                            your abilities. Your proposal should detail EXACTLY how you will build your game
+                            including a UML diagram, timeline, and detailed paragraphs explaining the game.
+                        </p>
+                    </section>
+                    
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Interview
+                        </h2>
+                        <p>
+                            You will be meeting your TA or Instructor and be required to discuss the following:
+                        </p>
+                        <ul>
+                            <li>A Game Idea</li>
+                            <li>A Genre and Narrative</li>
+                            <li>A Perspective</li>
+                            <li>Ideas for Game Mechanics</li>
+                        </ul>
+                    </section>
+                    
+                </section>
+
+                <section>
+                        <h2>
+                            Proposal Requirements
+                        </h2>
+                        <ul>
+                            <li>Detailed overview of your application</li>
+                            <li>Proposed timeline</li>
+                            <li>Table of <a href="project.html#/3">project requirements</a> with matching description of how each requirement will be met</li>
+                            <li>UML diagram of classes and architecture of your program</li>
+                            <li>Design rationale: why is your application worth making?</li>
+                        </ul>
+                    </section>
+                <section>
+                    <section>
+                        <h2>UML Requirements:</h2>
+                        <ul>
+                            <li>Class name</li>
+                            <li>Fields with type</li>
+                            <li>Methods with name, parameters, and return type</li>
+                            <li>Inheritance relationships</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Example:
+                        </h2>
+                         <img src="img/uml/umlMethods.png" />
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>
+                            Tips and Tricks
+                        </h2>
+                        <ul>
+                            <li>Another UML example: <a href="http://dg.mattlockyer.com/design.html#/4" target="_blank">Asteroids</a></li>
+                            <li>Include types for all fields, return types for methods, and parameters and types using the : syntax
+                            shown in the example</li>
+                        </ul>
+                    </section>
+                </section>
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

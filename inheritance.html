@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Using Objects</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Using Objects</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">How / Why / When</a></li>
+                        <li><a href="#/2">Subclass and Superclass</a></li>
+                        <li><a href="#/3">Polymorphism</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/basics/inheritance.html">Learning Inheritance</a> (required)</li>
+                        <li><a href="http://processing.org/learning/topics/multipleparticlesystems.html">Multiple Particle Systems</a> (required)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 22 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        The most perfect political community is one in which the middle class is in control, and outnumbers both of the other classes. [Aristotle]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Why Extend a Class</h3>
+                        <img class="left" src="img/objects/inheritance.gif" />
+                        <p class="left">
+                            In processing and other programming languages there are various tools to help add complexity to a program
+                            without requiring the programmer to rewrite a lot of code. In fact, good programming practice should have you never
+                            writing the same code twice. Since we are working with objects, sometimes it's beneficial to describe
+                            objects as more specific versions of some general object.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>How to Extend a Class</h3>
+                        <p>
+                            Extending a class is simple. In a new class definition, simply add the word <span class="code">extends</span> and the name of the class
+                            you want to extend. This new class is now a <span class="code">subclass</span> of the class which it extends.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class RaceBike extends Bicycle {
+    //The RaceBike constructor
+    RaceBike() {
+        println("Hi I'm a RaceBike object");
+    }
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>Theory</h3>
+                        <p>
+                            Think about the bikes. There is a general Bicycle object, and then there are a few specific Bicycle objects.
+                            Each specific Bicycle object <span class="code">extends</span> the general Bicycle class, and therefore is a
+                            <span class="code">subclass</span> of the Bicycle class.
+                        </p>
+
+                    </section>
+                    <section>
+                        <h3>When to Extend a Class (Abstraction)</h3>
+                        <p>
+                            As mentioned previously, the goal of efficient programming is to never repeat yourself. If we find that when creating
+                            a new object we're repeating a lot of the fields and methods that belong to another, similar object. We might want to
+                            <span class="code">"abstract"</span> out the common properties of both classes, and put these into a parent class. 
+                            Now each object from before can <span class="code">inherit</span> these common fields and methods, 
+                            and there's no need to code them for each object.
+                        </p>
+
+
+                    </section>
+                    <section>
+                        <p>
+                            Take another look at the bikes. Every bicycle needs a position, wheel rotation, gear, etc...
+                            But only a mountain bike would need shock suspension. And perhaps only a race bike would need road tires,
+                            or a spedometer.
+                            When designing several classes, always remember that common fields and methods should be combined
+                            into a parent class, and each class should extend from that parent. This will save time and create cleaner,
+                            more flexible code.
+                        </p>
+
+                        <div class="important">Use the extends keyword when declaring a class to make it a subclass of another.</div>
+                        <div class="important">Use inheritence when several classes are sharing common fields and methods.</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Subclasses</h3>
+
+                        <p>
+                            A subclass is simply a class which extends another class. This is called <span class="code">inheritance</span>
+                            because the sublclass <span class="code">inherits</span> the fields and methods of the <span class="code">parent</span> class.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Bicycle {
+    float xPos, yPos, xVel, yVel;
+    Bicycle() { ... } //A simple constructor
+    void move() { ... } //A move method
+    ...
+}
+class RaceBike extends Bicycle {
+    //RaceBike inherits xPos, yPos, xVel, yVel
+    //We only declare are fields unique to RaceBike
+    int spedometer; 
+    //Every class needs a unique constructor
+    RaceBike() { ... }
+    //RaceBike inherits the move method
+    //All we have to code are methods unique to RaceBike
+    void updateSpedometer() { ... }
+    ...
+}</textarea></div>
+
+
+                        <p>
+                            Notice how our subclass RaceBike inherits the fields and methods of Bicycle? This means that each new RaceBike object
+                            can set the values of xPos, yPos, xVel, yVel, in addition to the new field spedometer (specific to the RaceBike class).
+                        </p>
+
+
+                    </section>
+                    <section>
+                        <p>
+                            How could we create an instance of the RaceBike class and use some inherited fields and methods
+                            from the Bicycle class?
+                        </p>
+
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+RaceBike myBike = new RaceBike();
+myBike.xPos = width/2; //belongs to all Bicycle objects
+myBike.yPos = height/2;
+myBike.xVel = 1;
+myBike.move(); //belongs to all Bicycle objects
+myBike.updateSpedometer(); //unique to RaceBike objects</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <h3>Super</h3>
+
+                        <p>
+                            Super is a special scoped reference variable which can be used to the set the scope to the parent class.
+                            Scope is what is visible or accessible by processing. This means we can use super to transition from the
+                            scope of our subclass to the scope of the parent class.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h4>The super( ... ) Constructor</h4>
+                        <p>
+                            Sometimes it may be advantageous for a subclass to call the constructor of it's parent class. We can achieve this
+                            by using the super( ... ) constructor.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Bicycle {
+    float xPos, yPos, xVel, yVel;
+    Bicycle() {
+        xPos = random(width); yPos = random(height);
+    }
+    //an overloaded constructor
+    Bicycle(int startX, int startY) {
+        xPos = startX; yPos = startY;
+    }
+    ...
+}
+class RaceBike extends Bicycle {
+    int spedometer; 
+    RaceBike() {
+        super(); //call Bicycle constructor
+        spedometer = 0;
+    }
+    RaceBike(int startX, int startY) {
+        //call overloaded Bicycle constructor
+        super(startX, startY); 
+        spedometer = 0;
+    }
+    ...
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <p>
+                            Notice when using super( ... ) we must pass in parameters to match the constructor we are calling. There are two constructors here:
+                            one to initialize the bike with a random position, and the other (overloaded) one to initialize it with a specific position. 
+                            By using super( ... ) with appropriate arguments for each constructor in the subclass RaceBike, we've managed to match parameters and
+                            leverage the code that was already written in the Bicycle class constructors.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h4>The super Reference Variable</h4>
+                        <p>
+                            We can also use super as a special reference variable to call methods of a parent class from within the subclass.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Bicycle {
+    ...
+    void move() { ... }
+    void changeGear(int gear) { ... }
+    ...
+}
+class RaceBike extends Bicycle {
+    ...
+    void race() {
+        super.move();
+        if (speed < 4) {
+            super.changeGear(gear - 1);
+        }
+    }
+    ...
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">A subclass inherits all fields and methods of the parent class, except the constructor.</div>
+                        <div class="important">Each class must have a unique constructor, however we can use the super() method to call
+                            the parent class constructor.</div>
+                        <div class="important">We can call methods of a parent class using super as a reference variable</div>
+                        <div class="important">When we use super(), we MUST call the constructors and methods
+                            with the correct arguments specified by the parameters of the parent class methods.</div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Polymorphism</h3>
+
+                        <p>
+                            Remember how a subclass inherits all of the fields and methods of a parent class? This means that processing now
+                            considers the subclass to be an equivalent of the parent class. This principle is called polymorphism and we usually say that
+                            an instance of a subclass <span class="code">"is a"</span> instance of the parent class. <br />
+                            In other words: a RaceBike "is a" Bicycle.<br />
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="260" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+//Same reference type as the object instance
+RaceBike myBike = new RaceBike();
+//Using the parent type to store a subclass reference
+Bicycle myBike2 = new RaceBike();</textarea></div>
+
+
+
+                    </section>
+                    <section>
+
+                        <p class="important">
+                            Storing a subclass reference using the parent class type is totally legal, however the reverse is not possible.
+                            Since a RaceBike "is a" Bicycle, we can use a Bicycle reference variable to store a RaceBike reference, but a
+                            Bicycle is not necessarily a RaceBike.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h3>Advantages</h3>
+                        <p>
+                            Polymorphism has it's advantages, since all Bicycle subclasses can be treated as if they were Bicycles. For instance
+                            we can take all Bicycle instances, regardless of type, and store them in a single typed ArrayList since they are all
+                            Bicycles.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h3>Disadvantages</h3>
+                        <p>
+                            There is a disadvantage to using the parent type to store a reference of a subclass. The reference variable type
+                            is of the parent class, therefore we cannot use this variable to access the fields or methods of the subclass.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+//Same reference type as the object instance
+RaceBike myBike = new RaceBike();
+//Using the parent type to store a subclass reference
+Bicycle myBike2 = new RaceBike();
+myBike.xPos = width/2; //works
+myBike2.xPos = width/2; //works
+myBike.updateSpedometer(); //works
+myBike2.updateSpedometer(); //fails (myBike2 is type Bicycle)</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <h3>Overriding</h3>
+
+                        <p>
+                            Overriding is similar to method overloading, however it involves a subclass implementing a method with the exact same method signature as
+                            the parent class. If an instance of the subclass is stored in a reference variable of the parent type, the overridden methods of
+                            the subclass will be called instead of the parent's methods. By overriding methods properly we can treat all objects as the parent
+                            type, call the same methods, while having different implementations.
+                        </p>
+
+                    </section>
+                    <section>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Bicycle {
+    ...
+    void move() { ... }
+    void changeGear(int gear) { ... }
+    ...
+}
+class RaceBike extends Bicycle {
+    ...
+    void move() { RaceBike move method }
+    void changeGear(int gear) { RaceBike changeGear method }
+    ...
+}</textarea></div>
+
+
+                        <p>
+                            Notice how the RaceBike methods have the same method signature as the Bicycle methods. Even if a RaceBike is stored in a
+                            reference variable of type Bicycle, when we call the methods of this variable we will in fact be calling the overridden methods
+                            from the RaceBike class.
+                        </p>
+
+                    </section>
+                    <section>
+                        <div class="important">A class which extends another has an "is a" relationship with it's parent class.</div>
+                        <div class="important">When an instance of a subclass is stored in a reference variable of the parent class type,
+                            only the fields and methods belonging to the parent class are visible.</div>
+                        <div class="important">Overriding allows us to call methods of the subclass even when using reference variables of
+                            the parent class type.</div>
+                    </section>
+                </section>
+
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+//TYPED ARRAYLIST, WOO HOO!
+ArrayList<Particle> particles = new ArrayList<Particle>();
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(0, 128);
+  strokeWeight(2);
+  //the ArrayList doesn't have a size yet
+  //so we have to set how much we will loop literally
+  for (int i = 0; i < 50; i++) {
+    //make a new Particle object, assign to ref. var. newParticle
+    Particle newParticle = new Particle(
+    //arguments passed to the constructor set the initial values for a Particle object's fields
+    //take a look at the parameters for the constructor in the Particle class
+    random(16, width - 16), 
+    random(16, height - 16), 
+    random(-4, 4), 
+    random(-4, 4)
+      //end of arguments
+    );
+    //add the newParticle object to the ArrayList particles
+    particles.add(newParticle);
+  }
+  //NOW ADD SOME COOL PARTICLES!
+  for (int i = 0; i < 50; i++) {
+    //make a new CoolParticle object, assign to ref. var. newParticle
+    //ASSIGNMENT IS LEGAL WHY?
+    //a CoolParticle "is a" Particle because it extends from the Particle class
+    Particle newParticle = new CoolParticle(
+    //arguments passed to the constructor set the initial values for a Particle object's fields
+    //take a look at the parameters for the constructor in the Particle class
+    random(16, width - 16), 
+    random(16, height - 16), 
+    random(-4, 4), 
+    random(-4, 4),
+    //color and radius arguments for CoolParticle constructor
+    color(random(128, 255), random(127), random(63), 64),
+    random(16, 128)
+      //end of arguments
+    );
+    //add the newParticle object to the ArrayList particles
+    particles.add(newParticle);
+  }
+}
+
+void draw() {
+  background(255);
+  //loop over all elements in the particles ArrayList, 0 - (particles.size() - 1)
+  for (int i = 0; i < particles.size(); i++) {
+    //get the current ball in the loop, the ball at position i
+    //notice how we cast it as type Particle
+    //this is so we can have access to the Particle variables (xPos, yPos, ...)
+    //TYPED ARRAYLIST (CHECK DECLARATION AT TOP)
+    //NO NEED TO CAST OBJECT TO PARTICLE TYPE!
+    Particle curParticle = particles.get(i);
+    //call the update method of the Particle class
+    curParticle.update();
+    //call the draw method of the Particle class
+    curParticle.draw();
+  }
+}
+                                    </textarea>
+                        <textarea data-name="Particle.pde">
+//a class to describe a particle
+class Particle {
+  
+  //fields
+  float xPos, yPos, xVel, yVel;
+  //a constructor to initialize the fields above with initial values
+  Particle(float xPos, float yPos, float xVel, float yVel) {
+    this.xPos = xPos; 
+    this.yPos = yPos; 
+    this.xVel = xVel; 
+    this.yVel = yVel;
+  }
+  
+  //update the state of this particle (movement and collision with walls)
+  void update() {
+    //update position
+    xPos += xVel;
+    yPos += yVel;
+    //check walls
+    if (abs(xPos - width/2) > width/2 - 16) {
+      xVel *= -1;
+    }
+    if (abs(yPos - height/2) > height/2 - 16) {
+      yVel *= -1;
+    }
+  }
+  
+  //draw the particle
+  void draw() {
+    fill(255, 0, 0, 128);
+    pushMatrix();
+    translate(xPos, yPos);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+  
+}//Particle class
+                                    </textarea>
+                        <textarea data-name="CoolParticle.pde">
+class CoolParticle extends Particle {
+    //new fields
+    color c;
+    float rad;
+    //a unique constructor for the CoolParticle class
+    CoolParticle(float xPos, float yPos, float xVel, float yVel, float c, float rad) {
+        //call the constructor of the Particle class with these arguments
+        //let the Particle class work for us
+        super(xPos, yPos, xVel, yVel);
+        //set the values of the new fields
+        this.c = c;
+        this.rad = rad;
+    }
+    //override the draw method of the Particle class
+    void draw() {
+      fill(c);
+      pushMatrix();
+      translate(xPos, yPos);
+      ellipse(0, 0, rad, rad);
+      popMatrix();
+    }
+}
+                                    </textarea>
+                         
+                                    </div>
+                                    </section>
+
+                                    </div>
+                                    </div>
+
+
+
+                                    <script src="lib/js/head.min.js"></script>
+                                    <script src="js/reveal.min.js"></script>
+                                    <script src="js/codetabs.js"></script>
+                                    <script type="text/javascript">
+                                        Reveal.addEventListener('ready', function() {
+                                            setTimeout(checkSketches, 1500);
+                                        });
+                                        Reveal.addEventListener('overviewshown', checkSketches);
+                                        Reveal.addEventListener('overviewhidden', checkSketches);
+                                        Reveal.addEventListener('slidechanged', checkSketches);
+                                        function checkSketches() {
+                                            var slide = Reveal.getCurrentSlide();
+                                            var sketch = document.getElementById('sketch');
+                                            if (sketch) {
+                                                sketch.hide();
+                                                if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                                                    sketch.fadeIn();
+                                                    document.getElementsByClassName('slides')[0].style.display = 'none';
+                                                } else {
+                                                    document.getElementsByClassName('slides')[0].style.display = 'block';
+                                                    Reveal.layout();
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                    <script>
+                                        // Full list of configuration options available here:
+                                        // https://github.com/hakimel/reveal.js#configuration
+                                        Reveal.initialize({
+                                            width: 1024,
+                                            height: 768,
+                                            margin: 0.06,
+                                            controls: true,
+                                            progress: true,
+                                            history: true,
+                                            center: true,
+                                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                                            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                                            // Optional libraries used to extend on reveal.js
+                                            dependencies: -[
+                                                {src: 'lib/js/classList.js', condition: function() {
+                                                        return !document.body.classList;
+                                                    }},
+                                                {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }},
+                                                {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }}
+                                            ]
+                                        });
+                                    </script>
+                                    </body>
+                                    </html>

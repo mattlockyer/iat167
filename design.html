@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Design</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script class="left" src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h2>Program Design</h2>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Planning</a></li>
+                        <li><a href="#/2">UML</a></li>
+                        <li><a href="#/3">Patterns</a></li>
+                        <li><a href="#/4">Case Study</a></li>
+                    </ul>
+                    <h2>Reading</h2>
+                    <ul class="list-style-none">
+                        <li><a href="http://en.wikipedia.org/wiki/Unified_Modeling_Language" target="_blank">UML (required)</a><br /></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Decorator_pattern" target="_blank">Decorator Pattern (recommended)</a><br /></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank">Factory Pattern (recommended)</a><br /></li>
+                    </ul>
+                    <blockquote>
+                        An important work of architecture will create polemics. [Richard Meier]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h4>Ideas</h4>
+
+                        <p>
+                            Every program starts with an idea. Make sure you are working with a topic that you know well and is of interest to you.
+                            Once you have chosen the main idea, research the domain it falls in:
+                        </p>
+                        <ul>
+                            <li>Painting Application</li>
+                            <li>Generative Art Application</li>
+                            <li>Interactive Slideshow</li>
+                            <li>Data Visualization</li>
+                            <li>Videogame
+                                <ul>
+                                    <li>Puzzle Game</li>
+                                    <li>Arcade Game</li>
+                                    <li>Action Game</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </section>
+                    <section>
+                        <p>
+                            Why does your application fit into this domain? What makes your application similar to existing applications
+                            in this domain, and what makes it different?
+                        </p>
+
+                        <h4>Requirements</h4>
+                        <p>
+                            What does your application need to do? Before programming you should make a detailed list of everything that will be included
+                            in your application.
+                        </p>
+
+                    </section>
+                    <section>
+                        <p>
+                            Example for painting application:
+                        </p>
+                        <ul>
+                            <li>Welcome / start screen</li>
+                            <li>3 brush tool buttons</li>
+                            <li>1 clear screen button</li>
+                            <li>1 save button</li>
+                            <li>3 brush tools
+                                <ul>
+                                    <li>1 regular brush</li>
+                                    <li>1 splatter brush</li>
+                                    <li>1 geometric brush</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </section>
+                    <section>
+
+                        <h4>Scope</h4>
+                        <p>
+                            Put a time estimate next to your list of requirements. How long will each take? Give yourself lots of room for error.
+                        </p>
+                        <p>
+                            Is it too much time? Maybe you can cut some requirements? Maybe the idea is beyond your skill level.
+                        </p>
+                        <p>
+                            Whatever it is, make sure you have scoped your design to something manageable before you start working.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">Choose an idea and research the domain.</div>
+                        <div class="important">Prepare a list of detailed requirements.</div>
+                        <div class="important">Scope the requirements to your skill level.</div>
+
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h4>Universal Modeling Language</h4>
+
+                        <p>
+                            Disclaimer: this is not the correct way to write UML. There are in fact many ways to do UML diagrams, and we will
+                            only be looking at those features that are important to this course and multimedia programming.
+                        </p>
+                        <p>
+                            If you'd like to learn more, take a look. This lecture should provide you with the basics.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Modeling a Class</h4>
+
+                        <img class="left" src="img/uml/umlClass.png" />
+
+
+                        <p class="left">
+                            A UML diagram for a class begins with the class name at the top. Clearly we are going to define a
+                            Moving Object class, followed by two sub-classes: Player and Enemy.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Adding Fields</h4>
+
+                        <img class="left" src="img/uml/umlFields.png" />
+
+
+                        <p class="left">
+                            Now we've added some fields to the classes, and notice this takes on the same structure as if we were to
+                            actually code the class. Define the class name, list the fields, list the methods.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Adding Methods</h4>
+
+                        <img class="left" src="img/uml/umlMethods.png" />
+
+
+                        <p class="left">
+                            When adding methods it is important to encapsulate the method signature and the return type. This should give you a clear idea
+                            of what the method will be doing based on: name and parameters (signature) and the return type.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Relationships</h4>
+
+                        <img class="left" src="img/uml/umlRelationships.png" />
+
+
+                        <p class="left">
+                            We're only concerned with showing our inheritance relationship in our UML diagrams. This is displayed by drawing a solid
+                            white arrow from the subclass pointing to the superclass.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>Warning</h3>
+                        
+                        <div class="important">In proper UML: + and - are used to denote public and private fields and methods</div>
+                        <div class="important">Since we do not cover these concepts, we will use them to denote the fields (-) and methods (+) of the class</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h4>Software Design Patterns</h4>
+
+                        <img class="left" src="img/uml/patterns.jpg" />
+
+
+                        <p class="left">
+                            There are several ways to organize objects into a functioning application. Design patters are a way to
+                            approach the problem of complexity. Mainly, we cannot have all objects contained in ArrayLists declared in the
+                            main program, at some point we'd like those objects to simply take care of themselves.
+                            We're going to look at two useful software design patterns that organize complexity in an application.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Decorator Pattern</h4>
+
+                        <img class="left" src="img/uml/decorator.svg" width="700" height="500" />
+
+
+                        <p class="left">
+                            In the decorator pattern there is a main object that needs to be decorated, <strong>Component</strong>. The <strong>Component</strong>
+                            contains a list of objects of type <strong>Decorator</strong>. The <strong>Concrete</strong> objects here are simply subclasses of the
+                            two main classes we're talking about <strong>Components</strong> and <strong>Decorators</strong>.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <p>
+                            Example: Rewards in a Game
+                        </p>
+                        <p>
+                            A Player class has an ArrayList of type Reward. As the instance of Player scores points, instances of Reward are created and
+                            added to the player's ArrayList. The player instance is now "decorated" with objects of type Reward.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h4>Factory Pattern</h4>
+
+                        <img class="left" src="img/uml/factory.svg" width="700" height="400" />
+
+
+                        <p class="left">
+                            In the factory pattern there are objects that need to be created with different properties and returned to some object
+                            that contains them. A <strong>Creator</strong> has a factory method to create a <strong>Product</strong> which can be though of as
+                            simply any object that needs creating. Subclasses of the <strong>Creator</strong> can override the factory method to return products of
+                            different types.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <p>
+                            Example: Painting Application
+                        </p>
+                        <p>
+                            A painting application may have several different instances of a BrushMovement and several different instances of BrushTips.
+                            A factory method in the main Brush class can be used to return a single Brush object that combines a BrushMovement
+                            with a BrushTip and returns the composite object to the main sketch where it can be added to an ArrayList.
+                        </p>
+
+                    </section>
+                    <section>
+                        <div class="important">Both Decorator and Factory design patterns can be combined and are closely related.</div>
+                        <div class="important">Decorator Patterns are useful when an object needs to have several different objects added to it.</div>
+                        <div class="important">Factory Patters are useful for creating different objects that may be composed of one or more objects.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h4>Case Study: Asteroids</h4>
+
+                        <img class="left" src="img/uml/asteroids.jpg" width="500"/>
+
+                        <p class="left">
+                            Everyone should be familiar with the game asteroids by now, but how would one go about coding it?
+                            Let's take a look at the requirements:
+                        </p>
+
+
+                    </section>
+                    <section>
+                        <h3>
+                            Classes:
+                        </h3>
+                        <ul>
+                            <li>MovingObject class</li>
+                            <li>Player class</li>
+                            <li>Missile class</li>
+                            <li>Enemy class</li>
+                            <li>Asteroid class</li>
+                            <li>AsteroidFactory class</li>
+                        </ul>
+
+
+                    </section>
+                    <section>
+                        <h3>
+                            Functionality:
+                        </h3>
+                        <ul>
+                            <li>Player is created and can shoot missiles</li>
+                            <li>Asteroids created from AsteroidFactory, added to list of asteroids</li>
+                            <li>Enemies are created and added to the list of enemies</li>
+                            <li>Player, Enemy, Missile, and Asteroid are subclasses of MovingObject</li>
+                            <li>MovingObject detects collisions between other MovingObject instances</li>
+                            <li>MovingObject stores and updates location of the instance</li>
+                            <li>Subclasses of MovingObject implement handleCollision</li>
+                            <li>The handleCollision method is overridden</li>
+                            <li>Player lives and score displayed on the screen</li>
+                            <li>Pause button</li>
+                            <li>...</li>
+                        </ul>
+
+                    </section>
+                    <section>
+
+                        <img src="img/uml/asteroidsuml.png" width="900" />
+
+
+                    </section>
+                    <section>
+                        <p>
+                            Notice with the UML diagram that if it were complete we would have everything we needed to know in order
+                            to create this game. We would know what classes, fields, methods and everything else to implement.
+                            It's highly recommended to always create a detailed UML diagram for any application that goes beyond 2 or 3
+                            classes or has more than a few simple functions.
+                        </p>
+                    </section>
+                </section>
+
+            </div>
+        </div>
+
+
+
+        <script class="left" src="lib/js/head.min.js"></script>
+        <script class="left" src="js/reveal.min.js"></script>
+        <script class="left" src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener('ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener('overviewshown', checkSketches);
+            Reveal.addEventListener('overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: -[
+                    {src: 'lib/js/classList.js', condition: function() {
+                            return !document.body.classList;
+                        }},
+                    {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }},
+                    {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }}
+                ]
+            });
+        </script>
+    </body>
+</html>

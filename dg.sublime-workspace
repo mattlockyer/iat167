@@ -1,0 +1,1149 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"quer",
+				"querySelectorAll"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
+				"colla",
+				"collaborator"
+			],
+			[
+				"public",
+				"public-doc"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"email",
+				"emailAddress"
+			],
+			[
+				"file",
+				"fileId"
+			],
+			[
+				"showMenu",
+				"showMenuTimeout"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"sett",
+				"settingsMenuVisible"
+			],
+			[
+				"sele",
+				"selectTitles"
+			],
+			[
+				"line",
+				"lineWidthEl"
+			],
+			[
+				"ubi-dra",
+				"ubi-draw-toolbar-label"
+			],
+			[
+				"js",
+				"jscolor"
+			],
+			[
+				"colo",
+				"colorPicker"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"ed",
+				"editObj"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"crea",
+				"createElement"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"set",
+				"setListeners"
+			],
+			[
+				"dra",
+				"dragstart"
+			],
+			[
+				"p",
+				"pt1"
+			],
+			[
+				"resiz",
+				"resizing"
+			],
+			[
+				"las",
+				"lastScale"
+			],
+			[
+				"updat",
+				"updateInterval"
+			],
+			[
+				"clear",
+				"clearTimeout"
+			],
+			[
+				"butt",
+				"buttons"
+			],
+			[
+				"acti",
+				"activeObj"
+			],
+			[
+				"add",
+				"address"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"pare",
+				"parentNode"
+			],
+			[
+				"tool",
+				"toolbar"
+			],
+			[
+				"fa",
+				"fa-italic"
+			],
+			[
+				"range",
+				"rangeText"
+			],
+			[
+				"inse",
+				"insertHtmlAtSelectionEnd"
+			],
+			[
+				"inde",
+				"indexOf"
+			],
+			[
+				"inner",
+				"innerHTML"
+			],
+			[
+				"selec",
+				"selectedText"
+			],
+			[
+				"sel",
+				"selection"
+			],
+			[
+				"toolba",
+				"toolbarListeners"
+			],
+			[
+				"rtch",
+				"rtchat-input"
+			],
+			[
+				"attr",
+				"getAttribute"
+			],
+			[
+				"client",
+				"clientid"
+			],
+			[
+				"query",
+				"querySelector"
+			],
+			[
+				"load",
+				"loadNewFile"
+			],
+			[
+				"remove",
+				"removeChild"
+			],
+			[
+				"re",
+				"resizeObj"
+			],
+			[
+				"creat",
+				"createModel"
+			],
+			[
+				"out",
+				"outMult"
+			],
+			[
+				"pin",
+				"pinchstartX"
+			],
+			[
+				"pi",
+				"pinchstart"
+			],
+			[
+				"drag",
+				"dragResize"
+			],
+			[
+				"inn",
+				"innerHTML"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"backgroud",
+				"background-color"
+			],
+			[
+				"clien",
+				"clientId"
+			],
+			[
+				"auth",
+				"authSuccess"
+			],
+			[
+				"strin",
+				"stringify"
+			],
+			[
+				"is",
+				"isDrawing"
+			],
+			[
+				"str",
+				"stringify"
+			],
+			[
+				"ini",
+				"initializeModel"
+			],
+			[
+				"on",
+				"onFileLoaded"
+			],
+			[
+				"fileId",
+				"fileIds"
+			],
+			[
+				"cli",
+				"clientId"
+			],
+			[
+				"inne",
+				"innerHeight"
+			],
+			[
+				"cols",
+				"colsCompleted"
+			],
+			[
+				"story",
+				"story_tags"
+			],
+			[
+				"trans",
+				"transform"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"event",
+				"eventData"
+			],
+			[
+				"NO",
+				"NO_URL"
+			],
+			[
+				"BY",
+				"BYTES_TOTAL"
+			],
+			[
+				"eve",
+				"eventData"
+			],
+			[
+				"backgr",
+				"background"
+			],
+			[
+				"send",
+				"sendSignedRequest"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"res",
+				"responseCount"
+			],
+			[
+				"inter",
+				"intervalTimeout"
+			],
+			[
+				"autho",
+				"authorized"
+			],
+			[
+				"inte",
+				"intervalTimeout"
+			],
+			[
+				"response",
+				"responseText"
+			],
+			[
+				"widt",
+				"widgetID"
+			],
+			[
+				"wid",
+				"widgetID"
+			],
+			[
+				"test",
+				"testComment"
+			],
+			[
+				"an",
+				"animSpeed"
+			],
+			[
+				"fb",
+				"fb2g-comment"
+			],
+			[
+				"messag",
+				"fb2g-message"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"backgro",
+				"background"
+			],
+			[
+				"number",
+				"numbersAction"
+			],
+			[
+				"flash",
+				"flashMsg"
+			],
+			[
+				"anima",
+				"animating"
+			],
+			[
+				"qe",
+				"querySelectorAll"
+			],
+			[
+				"ac",
+				"activeElement"
+			],
+			[
+				"upda",
+				"updateZoom"
+			],
+			[
+				"rend",
+				"renderer"
+			],
+			[
+				"tab",
+				"tabID"
+			],
+			[
+				"edit",
+				"editTree"
+			],
+			[
+				"curre",
+				"currentTreeID"
+			],
+			[
+				"curr",
+				"currentTreeID"
+			],
+			[
+				"rename",
+				"renameName"
+			],
+			[
+				"anim",
+				"animating"
+			],
+			[
+				"newTre",
+				"newTreeName"
+			],
+			[
+				"camer",
+				"cameraPositions"
+			],
+			[
+				"css",
+				"cssScene"
+			],
+			[
+				"loading",
+				"loadingIcon"
+			],
+			[
+				"dyn",
+				"dynamo"
+			],
+			[
+				"stor",
+				"storeName"
+			],
+			[
+				"db",
+				"dbName"
+			],
+			[
+				"time",
+				"timeStamp"
+			],
+			[
+				"forwar",
+				"forwardChildren"
+			],
+			[
+				"con",
+				"contentWindow"
+			],
+			[
+				"exec",
+				"executeScript"
+			],
+			[
+				"cap",
+				"captureDelay"
+			],
+			[
+				"webvie",
+				"webviewTime"
+			],
+			[
+				"web",
+				"webviewTime"
+			],
+			[
+				"traver",
+				"_traverseDown"
+			],
+			[
+				"brea",
+				"breadcrumbTarget"
+			],
+			[
+				"breadcr",
+				"breadcrumb"
+			],
+			[
+				"breadcru",
+				"breadcrumbTarget"
+			],
+			[
+				"bread",
+				"breadcrumbTarget"
+			],
+			[
+				"Plane",
+				"THREE.PlaneGeometry"
+			],
+			[
+				"spinD",
+				"spinDownInt"
+			],
+			[
+				"Twee",
+				"TWEEN"
+			],
+			[
+				"back",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<!doctype html>\n<html lang=\"en\">\n<head>\n        <!-- \n        This page uses the Reveal.js presentation framework\n        To find out more about reveal, visit http://lab.hakim.se/reveal-js/\n        or https://github.com/hakimel/reveal.js\n      -->\n      <title>IAT 167 - Digital Games</title>\n      <meta name=\"description\" content=\"An introduction to digital game programming concepts using Processing (targetting Javascript) and Object Oriented Programming.\">\n      <meta charset=\"utf-8\">\n      <meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n      <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\" />\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n      <meta name=\"author\" content=\"Matt Lockyer\">\n      <link rel=\"stylesheet\" href=\"css/reveal.min.css\">\n      <link rel=\"stylesheet\" href=\"css/theme/sky.css\" id=\"theme\">\n      <link rel=\"stylesheet\" href=\"css/main.css\" id=\"theme\">\n      <!-- If the query includes 'print-pdf', use the PDF print sheet -->\n      <script>\n        document.write( '<link rel=\"stylesheet\" href=\"css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css\" type=\"text/css\" media=\"print\">' );\n      </script>\n        <!--[if lt IE 9]>\n        <script src=\"lib/js/html5shiv.js\"></script>\n        <![endif]-->\n      </head>\n      <body>\n        <div class=\"reveal\">\n          <div class=\"slides\">\n\n            <section>\n              <a href=\"#/1\"><img src=\"img/logo.jpg\" /></a>\n              <div class=\"codetabs\" data-name=\"sketch\" data-processing=\"js/local/processing.min.js\"\n              data-isplaying=\"true\" data-nofullscreen=\"true\" data-nozip=\"true\"\n              data-width=\"916\" data-height=\"300\" data-fontsize=\"16px\" data-lines=\"#eee\">\n              <textarea data-name=\"FlockingRibbons.pde\">\n                ArrayList ribbonParticles = new ArrayList();\n                LeadParticle lead;\n                int boundaryExpansion = 1024;\n                int addSpeed = 12, addTick = 0;\n\n                void setup() {\n                size(fullWidth, fullHeight);\n                noStroke();\n                imageMode(CENTER);\n                //smooth();\n\n                lead = new LeadParticle();\n              }\n\n              void draw() {\n              background(64);\n\n              if (mousePressed) {\n              addTick++;\n              lead.pos.set(mouseX, mouseY, 0);\n              if (addTick === addSpeed) {\n              addTick = 0;\n              if (ribbonParticles.size() < 64) {\n              ribbonParticles.add(new RibbonParticle());\n            }\n          }\n        }\n\n        lead.perlin(0.4);\n        lead.walls();\n        lead.update();\n        lead.drawMe();\n\n        for (int i = 0; i < ribbonParticles.size(); i++) {\n        RibbonParticle p = (RibbonParticle) ribbonParticles.get(i);\n\n        p.beginFlock();\n        for (int j = i+1; j < ribbonParticles.size(); j++) {\n        RibbonParticle p2 = (RibbonParticle) ribbonParticles.get(j);\n        p.flock(p2);\n      }\n      p.endFlock();\n      //p.perlin(ribbonPerlin);\n      p.particleAttract(lead, 160, 64);\n      //p.mouseAttract(64, 16);\n      //p.repeat();\n      p.update();\n      p.drawMe();\n    }\n  }\n</textarea>\n<textarea data-name=\"Particle.pde\">\n  class Particle {\n  //fields\n  PVector pos, vel, acc, sepAcc, alignAcc, cohAcc;\n  float mass, damp;\n  int life, boundX, boundY, boundW, boundH, sepCount, alignCount, cohCount;\n  color c;\n\n  //constructor\n  Particle() {\n  //pos = new PVector(random(width), random(height));\n  //vel = new PVector(random(-8, 8), random(-8, 8));\n  pos = new PVector(mouseX, mouseY);\n  vel = new PVector(0, 0);\n  acc = new PVector(0,0);\n  mass = random(4, 16);\n  damp = 0.98;\n  life = 128;\n  boundX = 0;\n  boundY = 0;\n  boundW = width;\n  boundH = height;\n  sepAcc = new PVector(0,0);\n  alignAcc = new PVector(0,0);\n  cohAcc = new PVector(0,0);\n  c = color(random(255), random(255), random(255));\n}\n\nvoid repel(Particle o, int strength, int cutoff) {\nPVector dir = PVector.sub(pos, o.pos);\nfloat distSq = sq(dir.mag());\nif (distSq > cutoff) {\ndir.normalize();\nfloat f = 1/distSq * strength;\n\nacc.add( PVector.mult( dir, f ) );\no.acc.sub( PVector.mult( dir, f ) );\n}\n}\n\nvoid repelledBy(Particle o, int strength, int cutoff) {\nPVector dir = PVector.sub(pos, o.pos);\nfloat distSq = sq(dir.mag());\nif (distSq > cutoff) {\ndir.normalize();\nfloat f = 1/distSq * strength;\nacc.add( PVector.mult( dir, f ) );\n}\n}\n\nvoid mouseAttract(int strength, int cutoff) {\nPVector diff = PVector.sub(new PVector(mouseX, mouseY), pos);\nif (diff.mag() > cutoff) {\ndiff.mult(strength * 1/PVector.dot(diff, diff));\nif (mousePressed) {\nacc.sub(diff);\n} \nelse {\nacc.add(diff);\n}\n}\n}\n\nvoid particleAttract(Particle p, int strength, int cutoff) {\nPVector diff = PVector.sub(new PVector(p.pos.x, p.pos.y), pos);\nif (diff.mag() > cutoff) {\ndiff.mult(strength * 1/PVector.dot(diff, diff));\nacc.add(diff);\n}\n}\n\nvoid beginFlock() {\nsepCount = 0;\nalignCount = 0;\ncohCount = 0;\nsepAcc.set(0,0,0);\nalignAcc.set(0,0,0);\ncohAcc.set(0,0,0);\n}\nvoid flock(Particle other) {\nfloat distance = pos.dist(other.pos);\nif ((distance > 0) && (distance < 32)) //flockDist\n{\n  //Separation\n  PVector diff = PVector.sub(pos, other.pos);\n  diff.normalize();\n  diff.div(distance);\n  sepAcc.add(diff);\n  sepCount++;\n  other.sepAcc.add(diff);\n  other.sepCount++;\n  //Alignment\n  alignAcc.add(other.vel);\n  alignCount++;\n  other.alignAcc.add(vel);\n  other.alignCount++;\n  //Cohesion\n  cohAcc.add(other.pos);\n  cohCount++;\n  other.cohAcc.add(pos);\n  other.cohCount++;\n}\n}\nvoid endFlock() {\nif (sepCount > 0)\n{\n  sepAcc.div(sepCount);\n}\nif (sepAcc.mag() > 0)\n{\n  sepAcc.normalize();\n  sepAcc.mult(16); //strength\n  sepAcc.sub(vel);\n  sepAcc.limit(1); //control\n}\n\nif (alignCount > 0)\n{\n  alignAcc.div(alignCount);\n}\nif (alignAcc.mag() > 0)\n{\n  alignAcc.normalize();\n  alignAcc.mult(16); //strength\n  alignAcc.sub(vel);\n  alignAcc.limit(1); //control\n}\n\nif (cohCount > 0)\n{\n  cohAcc.div(cohCount);\n  PVector desired = PVector.sub(cohAcc, pos);\n  float distance = desired.mag();\n  boolean slowDown = true; //control\n  int slowDownCutoff = 64; //control\n  if (distance > 0)\n  {\n  desired.normalize();\n  if (slowDown && distance < slowDownCutoff)\n  {\n  desired.mult(16 * (distance/slowDownCutoff));\n}\nelse\n{\n  desired.mult(16); //strength\n}\ncohAcc = PVector.sub(desired, vel);\ncohAcc.limit(1); //control\n}\nelse\n{\n  cohAcc.set(0,0,0);\n}\n}\nsepAcc.mult(1.5); //controls\nalignAcc.mult(1.5); //controls\ncohAcc.mult(1); //controls\nacc.add(sepAcc); \nacc.add(alignAcc); \nacc.add(cohAcc);\n}\n\nvoid perlin(float pDamp) {\nfloat angle = noise(frameCount * 0.02);\nangle = map(angle, 0.45, 0.6, -PI, PI);\nPVector perlinAcc = new PVector(cos(angle), sin(angle));\nperlinAcc.mult(0.1);\nacc.add(perlinAcc);\n}\n\nvoid repeat() {\nif (pos.x > width + boundaryExpansion) pos.x = -boundaryExpansion;\nif (pos.x < -boundaryExpansion) pos.x = width + boundaryExpansion;\nif (pos.y > height + boundaryExpansion) pos.y = -boundaryExpansion;\nif (pos.y < -boundaryExpansion) pos.y = height + boundaryExpansion;\n}\n\nvoid walls() {\nif (pos.x > boundW) {\npos.x = boundW;\nvel.x *= -1;\n}\nif (pos.x < boundX) {\npos.x = boundX;\nvel.x *= -1;\n}\nif (pos.y > boundH) {\npos.y = boundH;\nvel.y *= -1;\n}\nif (pos.y < boundY) {\npos.y = boundY;\nvel.y *= -1;\n}\n}\n\nvoid update() {\nvel.add(acc);\npos.add(vel);\nvel.mult(damp);\nacc.set(0,0,0);\n}\n}\n\n</textarea>\n<textarea data-name=\"LeadParticle.pde\">\n  class LeadParticle extends Particle {\n  \n  LeadParticle() {\n  super();\n  pos.set(width/2, height/2, 0);\n  boundX = 0;\n  boundY = 0;\n  boundW = width;\n  boundH = height;\n  mass = 8;\n}\n\nvoid drawMe() {\nfill(160);\nellipse(pos.x, pos.y, mass, mass);\n}\n}\n</textarea>\n<textarea data-name=\"RibbonParticle.pde\">\n  class RibbonParticle extends Particle {\n\n  ArrayList past;\n  float angle, pastVel;\n  int pastSize, halfPastSize;\n\n  int ribbonLength = 64;\n  int ribbonSpread = 16;\n\n  RibbonParticle() {\n  super();\n\n  life = 255;\n  past = new ArrayList();\n  pastVel = 0;\n\n  c = color(random(128, 255), random(128), 0);\n}\n\nvoid update() {\n//life\nlife--;\nif (life < 1) {\nribbonParticles.remove(this);\n} else {\nsuper.update();\n//keep track of past points\nangle = atan2(vel.y, vel.x);\npast.add( new PVector(pos.x, pos.y, angle) );\n//PAST LENGTH\nif (past.size() > ribbonLength) {\npast.remove(past.get(0));\n}\n}\n}\n\nvoid drawMe() {\nfloat newSpread;\n\npastSize = past.size();\nhalfPastSize = Math.floor(pastSize/2);\nPVector p;\nint i;\nfloat opacity = 128;\nif (life < 32) {\nopacity = (float) life / 32 * 128\n}\nfill(c, opacity);\nbeginShape();\nfor (i = 0; i < halfPastSize; i++) {\np = (PVector) past.get(i);\np.x += pastVel;\nnewSpread = (ribbonSpread * (float)i/pastSize);\ncurveVertex(p.x + (newSpread * cos(p.z - PI/2)), p.y + (newSpread * sin(p.z - PI/2)));\n}\nfor (i = halfPastSize; i < pastSize; i++) {\np = (PVector) past.get(i);\np.x += pastVel;\nnewSpread = ribbonSpread - (ribbonSpread * (float)i/pastSize);\ncurveVertex(p.x + (newSpread * cos(p.z - PI/2)), p.y + (newSpread * sin(p.z - PI/2)));\n}\nfor (i = pastSize-1; i > halfPastSize; i--) {\np = (PVector) past.get(i);\nnewSpread = ribbonSpread - (ribbonSpread * (float)i/pastSize);\ncurveVertex(p.x + (newSpread * cos(p.z + PI/2)), p.y + (newSpread * sin(p.z + PI/2)));\n}\nfor (i = halfPastSize; i >= 0; i--) {\np = (PVector) past.get(i);\nnewSpread = (ribbonSpread * (float)i/past.size());\ncurveVertex(p.x + (newSpread * cos(p.z + PI/2)), p.y + (newSpread * sin(p.z + PI/2)));\n}\nendShape();\n}\n}\n</textarea>\n</div>\n<ul class=\"list-style-none tiny\">\n  <li><a href=\"https://github.com/hakimel/reveal.js/\" Slides: title=\"Reveal.js on GitHub\" target=\"_blank\">Slides: Reveal.js</a></li>\n  <li><a href=\"https://github.com/mattlockyer/codetabs/\" title=\"Code Tabs on GitHub\" target=\"_blank\">Editor: Code Tabs</a></li>\n</ul>\n</section>\n\n<section>\n  <h2>Digital Games</h2>\n  <div class=\"row\">\n    <div class=\"col3\">\n      <ul class=\"list-style-none\">\n        <li><a href=\"#/info\">Course Info</a></li>\n        <li><a href=\"#/calendar\">Schedule</a></li>\n                                <!--\n                                <li><a href=\"#/assignments\">Assignments</a></li>\n                                <li><a href=\"#/project\">Final Project</a></li>\n                                <li><a href=\"report.html\">Final Report</a></li>\n                                <li>&nbsp;</li>\n                                <li><a href=\"debug.html\">Debugging</a></li>\n                              -->\n                            </ul>\n                          </div>\n                          <div class=\"col3\">\n                            <ul class=\"list-style-none\">\n                              <li><a href=\"terms.html\">Course Terms</a></li>\n                              <li><a href=\"#/graphics\">Graphics</a></li>\n                                <!--\n                                <li><a href=\"#/datatypes\">Data Types</a></li>\n                                <li><a href=\"#/methods\">Methods</a></li>\n                                <li><a href=\"control.html\">Control Flow</a></li>\n                                <li><a href=\"loops.html\">Loops</a></li>\n                                <li><a href=\"#/objects\">Objects</a></li>\n                              -->\n                            </ul>\n                          </div>\n                          <div class=\"col3\">\n                            <ul class=\"list-style-none\">\n                            <!--\n                                <li><a href=\"inputphysics.html\">Input + Physics</a></li>\n                                <li><a href=\"collisions.html\">Collisions</a></li>\n                                <li><a href=\"movement.html\">Movement</a></li>\n                                <li><a href=\"design.html\">Design + UML</a></li>\n                                <li><a href=\"genres.html\">Genres</a></li>\n                                <li><a href=\"levels.html\">Levels</a></li>\n                                <li><a href=\"gameloops.html\">Game Loops</a></li>\n                                <li><a href=\"gamestate.html\">Game States</a></li>\n                                <li><a href=\"animation.html\">Animation</a></li>\n                              -->\n                            </ul>\n                          </div>\n                        </div>\n                      </section>\n\n                      <section id=\"info\">\n                        <section>\n                          <h2>Course Info</h2>\n                          <ul class=\"list-style-none\">\n                            <li><a href=\"syllabus.html\">Syllabus</a></li>\n                            <li><a href=\"success.html\">Success</a></li>\n                            <li><a href=\"#/calendar\">Schedule</a></li>\n                            <li><a href=\"#/2/2\">Inspiration: Exhibitions</a></li>\n                            <li><a href=\"#/2/3\">Inspiration: People</a></li>\n                            <li><a href=\"#/2/4\">Tools</a></li>\n                          </ul>\n                        </section>\n                        <section>\n                          <h2>Exhibitions</h2>\n                          <ul class=\"list-style-none\">\n                            <li><a href=\"http://processingjs.org/exhibition/\">Processing.js Exhibition</a></li>\n                            <li><a href=\"http://processing.org/exhibition/\">Processing Exhibition</a></li>\n                            <li><a href=\"http://www.openprocessing.org/\">Open Processing</a></li>\n                            <li><a href=\"http://creativejs.com/\">Creative JS</a></li>\n                          </ul>\n                          <p>\n                            More coming soon\n                          </p>\n                        </section>\n                        <section>\n                          <h2>People</h2>\n                          <ul class=\"list-style-none\">\n                            <li><a href=\"http://www.joshuadavis.com/\">Joshua Davis</a></li>\n                            <li><a href=\"http://www.memo.tv/\">Memo Akten</a></li>\n                            <li><a href=\"http://www.complexification.net/gallery/\">Jared Tarbell</a></li>\n                          </ul>\n                          <p>\n                            More coming soon\n                          </p>\n                        </section>\n                        <section>\n                          <h2>Tools and Texts</h2>\n                          <p>\n                            We will be using <a href=\"http://processing.org/download/\">Processing 2.0 beta 8</a>\n                            and <a href=\"https://www.google.com/intl/en/chrome/browser/\">Google Chrome</a> among other tools we will mention when you need them.\n                          </p>\n                          <p>\n                            There is no official textbook for this course, however required readings will be listed.\n                          </p>\n                          <p>\n                            Recommended readings come from Daniel\n                            Schiffman's <a href=\"http://www.learningprocessing.com/\">Learning Processing</a>\n                            and <a href=\"http://natureofcode.com/\">Nature of Code</a> books.\n                          </p>\n                        </section>\n                      </section>\n\n                      <section id=\"calendar\">\n                        <section>\n                          <iframe src=\"https://www.google.com/calendar/embed?src=v61s4blmrbhfum46hn5aak2v00%40group.calendar.google.com&ctz=America/Vancouver\" style=\"border: 0\" width=\"900\" height=\"600\" frameborder=\"0\" scrolling=\"no\"></iframe>\n                        </section>\n                      </section>\n\n                <!--\n                \n                <section id=\"assignments\">\n                    <h2>Assignments</h2>\n                    <ul class=\"list-style-none\">\n                        <li><a href=\"assignment1.html\">Assignment 1</a></li>\n                        <li><a href=\"assignment2.html\">Assignment 2</a></li>\n                        <li><a href=\"assignment3.html\">Assignment 3</a></li>\n                    </ul>\n                </section>\n                \n                <section id=\"project\">\n                    <h2>Final Project</h2>\n                    <ul class=\"list-style-none\">\n                        <li><a href=\"proposal.html\">Project Proposal</a></li>\n                        <li><a href=\"project.html\">Project</a></li>\n                        <li>Report</li>\n                    </ul>\n                </section>\n\n              -->\n\n              <section id=\"graphics\">\n                <h2>Graphics</h2>\n                <ul class=\"list-style-none\">\n                  <li><a href=\"shapes.html\">Shapes</a></li>\n                  <li><a href=\"color.html\">Color</a></li>\n                  <li><a href=\"color.html\">Stroke</a></li>\n                  <li><a href=\"color.html\">Fill</a></li>\n                  <li><a href=\"complexshapes.html\">Complex Shapes</a></li>\n                  <li><a href=\"transformations.html\">Transformations</a></li>\n                </ul>\n              </section>\n\n                <!--\n                \n                <section id=\"datatypes\">\n                    <h2>Data Types</h2>\n                    <ul class=\"list-style-none\">\n                        <li><a href=\"primitive.html\">Primitive</a></li>\n                        <li><a href=\"strings.html\">Strings</a></li>\n                        <li><a href=\"arrays.html\">Arrays</a></li>\n                        <li><a href=\"arraylist.html\">ArrayList</a></li>\n                    </ul>\n                </section>\n                \n                <section id=\"methods\">\n                    <h2>Methods</h2>\n                    <ul class=\"list-style-none\">\n                        <li><a href=\"methods.html\">All About Methods</a></li>\n                        <li>Recursion</li>\n                    </ul>\n                </section>\n\n                <section id=\"objects\">\n                    <h2>Objects</h2>\n                    <ul class=\"list-style-none\">\n                        <li><a href=\"objects.html\">Object Oriented Programming</a></li>\n                        <li><a href=\"objectusage.html\">Using Objects</a></li>\n                        <li><a href=\"inheritance.html\">Inheritance</a></li>\n                    </ul>\n                </section>\n\n              -->\n\n              <script src=\"lib/js/head.min.js\"></script>\n              <script src=\"js/reveal.min.js\"></script>\n              <script src=\"js/codetabs.js\"></script>\n\n              <script>\n            // Full list of configuration options available here:\n            // https://github.com/hakimel/reveal.js#configuration\n            Reveal.initialize({\n              controls: true,\n              progress: true,\n              history: true,\n              center: true,\n\n                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme\n                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none\n\n                // Optional libraries used to extend on reveal.js\n                dependencies: [\n                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },\n                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },\n                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }\n                ]\n              });\n          </script>\n        </body>\n        </html>\n",
+			"file": "index.html",
+			"file_size": 20187,
+			"file_write_time": 130437867869609370,
+			"settings":
+			{
+				"buffer_size": 19591,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 256.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/gameprogramming/inheritance.html",
+		"/C/xampp/htdocs/gameprogramming/inputphysics.html",
+		"/C/xampp/htdocs/gameprogramming/levels.html",
+		"/C/xampp/htdocs/gameprogramming/loops.html",
+		"/C/xampp/htdocs/gameprogramming/methods.html",
+		"/C/xampp/htdocs/gameprogramming/movement.html",
+		"/C/xampp/htdocs/gameprogramming/objects.html",
+		"/C/xampp/htdocs/gameprogramming/objectusage.html",
+		"/C/xampp/htdocs/gameprogramming/primitive.html",
+		"/C/xampp/htdocs/gameprogramming/shapes.html",
+		"/C/xampp/htdocs/gameprogramming/strings.html",
+		"/C/xampp/htdocs/gameprogramming/transformations.html",
+		"/C/xampp/htdocs/gameprogramming/animation.html",
+		"/C/xampp/htdocs/gameprogramming/arraylist.html",
+		"/C/xampp/htdocs/gameprogramming/arrays.html",
+		"/C/xampp/htdocs/gameprogramming/collisions.html",
+		"/C/xampp/htdocs/gameprogramming/collisions.html.new",
+		"/C/xampp/htdocs/gameprogramming/color.html",
+		"/C/xampp/htdocs/gameprogramming/complexshapes.html",
+		"/C/xampp/htdocs/gameprogramming/control.html",
+		"/C/xampp/htdocs/gameprogramming/debug.html",
+		"/C/xampp/htdocs/gameprogramming/gameloops.html",
+		"/C/xampp/htdocs/gameprogramming/gamestate.html",
+		"/C/xampp/htdocs/gameprogramming/syllabus.html",
+		"/C/xampp/htdocs/gameprogramming/success.html",
+		"/C/xampp/htdocs/drive/ubi-buttons.js",
+		"/C/xampp/htdocs/drive/dist-index.html",
+		"/C/xampp/htdocs/drive/ubi.js",
+		"/C/xampp/htdocs/drive/main.css",
+		"/C/xampp/htdocs/drive/utils.js",
+		"/C/xampp/htdocs/drive/rt-collab.css",
+		"/C/xampp/htdocs/drive/rt-collab.js",
+		"/C/xampp/htdocs/drive/rt-chat.css",
+		"/C/xampp/htdocs/drive/index.html",
+		"/C/xampp/htdocs/drive/ubi-draw.js",
+		"/C/xampp/htdocs/drive/realtime.js",
+		"/C/xampp/htdocs/drive/ubi-link.js",
+		"/C/xampp/htdocs/drive/tween.min.js",
+		"/C/xampp/htdocs/drive/ubi-object.js",
+		"/C/xampp/htdocs/drive/ubi-image.js",
+		"/C/xampp/htdocs/drive/rt-chat.js",
+		"/C/xampp/htdocs/drive/dist/main.min.js",
+		"/C/xampp/htdocs/drive/jscolor/jscolor.js",
+		"/C/xampp/htdocs/drive/ubi-gestures.js",
+		"/C/xampp/htdocs/drive/ubi-text.js",
+		"/C/xampp/htdocs/drive/ubi-save.js",
+		"/C/xampp/htdocs/drive/html2canvas.min.js",
+		"/C/xampp/htdocs/drive/fakemt.js",
+		"/C/xampp/htdocs/drive/manifest.appcache",
+		"/C/xampp/htdocs/drive/drive.js",
+		"/C/xampp/htdocs/drive/ubi-gestures",
+		"/C/Users/Matt Lockyer/Desktop/Bib/format.html",
+		"/C/xampp/htdocs/drive/table.js",
+		"/C/xampp/htdocs/drive/editor.js",
+		"/C/Users/Matt Lockyer/Desktop/Butley/background.js",
+		"/C/Users/Matt Lockyer/Desktop/Butley/modules/utils.js",
+		"/C/Users/Matt Lockyer/Desktop/Website/public/javascripts/own_javascript.js",
+		"/C/xampp/htdocs/drive/realtime-client-utils.js",
+		"/C/xampp/htdocs/drive/realtime-client.js",
+		"/C/xampp/htdocs/drive/main-listeners.js",
+		"/C/xampp/htdocs/fbtest/js/fb-feed.js",
+		"/C/xampp/htdocs/fbtest/css/main.css",
+		"/C/xampp/htdocs/fbtest/js/main.js",
+		"/C/xampp/htdocs/drive/draw.js",
+		"/C/xampp/htdocs/drive/table",
+		"/C/xampp/htdocs/drive/interact.js",
+		"/C/xampp/htdocs/drive/realtime-utils",
+		"/C/xampp/htdocs/fbtest/index.html",
+		"/C/xampp/htdocs/drive/hammer.min.js",
+		"/C/Users/Matt Lockyer/Desktop/Tree/views/main.js",
+		"/C/Users/Matt Lockyer/Desktop/Tree/background.js",
+		"/C/xampp/htdocs/drive/test2.html",
+		"/C/xampp/htdocs/drive/three.min.js",
+		"/C/xampp/htdocs/drive/realtime-client-utils.html",
+		"/C/Users/Matt Lockyer/Desktop/three.min.js",
+		"/C/Users/Matt Lockyer/Desktop/test2.html",
+		"/C/Users/Matt Lockyer/Desktop/test.html",
+		"/C/Users/Matt Lockyer/Desktop/Butley/modules/twitter-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/Butley/content/content.js",
+		"/C/Users/Matt Lockyer/Desktop/Butley/content/fb-feed-content.js",
+		"/C/xampp/htdocs/fbtest/js/utils.js",
+		"/C/xampp/htdocs/fbtest/main.css",
+		"/C/xampp/htdocs/fbtest/main2.js",
+		"/C/Users/Matt Lockyer/Desktop/Butley/modules/fb-feed.js",
+		"/C/xampp/htdocs/fbtest/js/fb-fee.js",
+		"/C/xampp/htdocs/fbtest/js/fb-feed",
+		"/C/xampp/htdocs/fbtest/js/tween.min.js",
+		"/C/Users/Matt Lockyer/Desktop/Tree/modules/tree.js",
+		"/C/Users/Matt Lockyer/Desktop/Tree/modules/stage.js",
+		"/C/xampp/htdocs/fbtest/js/hammer.min.js",
+		"/C/xampp/htdocs/fbtest/main.js",
+		"/C/xampp/htdocs/fbtest/three.js",
+		"/C/xampp/htdocs/fbtest/three",
+		"/D/Node/Sublime Text 3 Portable/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Matt Lockyer/Desktop/Voice/popup/popup.js",
+		"/C/Users/Matt Lockyer/Desktop/FBTest/test.html",
+		"/C/Users/Matt Lockyer/Desktop/Butley/popup/popup.html",
+		"/C/Users/Matt Lockyer/Desktop/FB/lib/fa/css/font-awesome.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/lib/fa/css/font-awesome.min.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/popup/popup.html",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/xhr.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/twitter-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/fb-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/content.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/content.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/popup/popup.js",
+		"/C/Users/Matt Lockyer/Desktop/Voice/manifest.json",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/utils.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/google-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/client_secret_423390999580.apps.googleusercontent.com.json",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/twitter-feed-content.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/popup/css/popup.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/lib/oauth/chrome_ex_oauth.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/lib/oauth/chrome_ex_oauthsimple.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/lib/oauth/onload.js",
+		"/C/Users/Matt Lockyer/Desktop/Voice/background.js",
+		"/C/Users/Matt Lockyer/Desktop/Voice/popup/popup.css",
+		"/C/Users/Matt Lockyer/Desktop/Voice/popup/popup.html",
+		"/C/Users/Matt Lockyer/Desktop/FB/popup/bootstrap-switch.min.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/fb-feed-content.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/bootstrap.min.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/popup/popup.css",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/fb-message-content.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/modules/fb-inbox.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/content/fb-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/fb-feed.js",
+		"/C/Users/Matt Lockyer/Desktop/FB/chrome_ex_oauth.html",
+		"/C/Users/Matt Lockyer/Desktop/FB/background.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 126.0,
+		"where_history":
+		[
+			"C:\\xampp\\htdocs\\gameprogramming",
+			"C:\\xampp\\htdocs\\drive",
+			"C:\\Users\\Matt Lockyer\\Desktop\\FB",
+			"C:\\Users\\Matt Lockyer\\Desktop\\Tree",
+			"/home/matt/Node/Tree/app/scripts",
+			"/home/matt/Node/Tree/app/scripts/services",
+			"/home/matt/Node/Tree/app/scripts",
+			"/home/matt/Node/Tree/app/scripts/services",
+			"/home/matt/Node/Tree/app/scripts",
+			"/home/matt/Node/Tree/app/scripts/services",
+			"/home/matt/Node/Tree/app/bower_components/stt/src",
+			"/home/matt/Node/Tree/app/bower_components/threejs",
+			"/home/matt/Node/Tree/app/bower_components/threejs/examples/js",
+			"/home/matt/Node/Tree/app/bower_components/threejs",
+			"/home/matt/Node/Tree/app/bower_components"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"processing-1.4.1.min.js",
+			"RT.load",
+			"loadByID",
+			"loadByI",
+			"that file",
+			"()",
+			"permissions",
+			"fileId",
+			"setPerm",
+			"buttons",
+			"object-butt",
+			"pad-buttons",
+			"loadDocs",
+			"UBI.load",
+			"load",
+			"loadDocs",
+			"undoStack",
+			"lineWidthEl",
+			"pageX",
+			"drawPicker",
+			"isMobile",
+			"editObj",
+			"updatePos(",
+			"setUpdateTimeout",
+			"img",
+			"image",
+			"move",
+			"drag",
+			"children",
+			"obj.",
+			"obj.children",
+			"!obj.children",
+			"return false",
+			"add",
+			"UBI.add",
+			"preventDe",
+			"toggleChat",
+			"RTChat.init",
+			"fileLoaded",
+			"removeChild",
+			"clearContainer",
+			"document.querySelector",
+			"log",
+			"document.getElementBy",
+			"updateDragObj",
+			"case 'doubletap':\n\n            break;\n            ",
+			"resize",
+			"editObj",
+			"auto",
+			"prevDragObj",
+			"record(",
+			"downTime",
+			"updateInterval",
+			"downTime",
+			"blur",
+			"el.",
+			"4px",
+			"3px",
+			"activeObj",
+			"activeObject",
+			"obj.",
+			"dragObj",
+			"state",
+			"update(",
+			"addLine",
+			"update(",
+			"downTime",
+			"preventDefault",
+			"dragend",
+			"dragging",
+			"state",
+			"inOut",
+			"updateInter",
+			"downTime",
+			"getObjFromTarget",
+			"downTime",
+			"activeTextarea",
+			"mouseIn",
+			"selectedText",
+			"selection",
+			"className === 'ubi-draw small' || className === 'ubi-text small' || className === 'ubi-link small'",
+			"obj.el.value",
+			"span",
+			"cursor",
+			"cursor:move",
+			"add-btn",
+			"Map",
+			"Main",
+			"obj.line",
+			"document.body",
+			".add-btn",
+			"hideButtonn",
+			"objs",
+			"objs[",
+			"getObj",
+			"objs[",
+			"objs",
+			"objList",
+			"root.",
+			"UBI.Obj.model",
+			"UBI.Obj.",
+			"state",
+			"dragging",
+			"line",
+			"obj",
+			"downTime",
+			"mouse",
+			"state",
+			"dragend",
+			"state",
+			"editingstate",
+			"editing",
+			"state",
+			".resize",
+			"Main",
+			"addLine",
+			"downTime",
+			"setObjFromTarget",
+			"UBI.Object",
+			"setSty",
+			"setStyle",
+			"setMax",
+			"setPos(",
+			"addLine",
+			"setPos",
+			"loadCanvas",
+			"UBI.",
+			"};\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"processing.min.js",
+			"menuButtons",
+			"redoStack",
+			"img",
+			"obj",
+			"updateDragObj",
+			"",
+			"editObj",
+			"selText",
+			"sel",
+			"className.indexOf('small') !== -1",
+			"obj.el.innerHTML",
+			"div",
+			"ubi-btn",
+			"UBI.getObj(",
+			"obj = UBI.Obj.getObjFromTarget",
+			"UBI.Obj.getObjFromTarget",
+			"UBI.Obj.",
+			"UBI.resizeObj(",
+			"UBI.transform(",
+			"rootModel",
+			"obj.",
+			"addLine()",
+			"[id]",
+			"obj",
+			"scale",
+			"isComplete();",
+			"isComplete",
+			" !important;",
+			"id",
+			"tokenTabListener",
+			"tokenTab",
+			"url",
+			".fb2g .popover",
+			"}",
+			"",
+			", .fb2g ",
+			"} .fb2g ",
+			"",
+			" #fb2g .",
+			"#fb2g .",
+			"} #fb2g ",
+			";",
+			"url",
+			"Utils.getHours",
+			":",
+			"closePopover(",
+			"close(",
+			"result.",
+			" !important;",
+			"",
+			"paging",
+			"selectLabels",
+			"next",
+			"error",
+			"newTree();",
+			"editTree",
+			"newName",
+			"storeName",
+			"onerror",
+			"dbName",
+			"stt",
+			"stt.indexedDB.storeName",
+			"stt.indexedDB.name",
+			"stt",
+			"sendMessage",
+			"fChildren",
+			"fSelected",
+			"data",
+			"oldNode",
+			"branch",
+			"Utils",
+			"STT.",
+			" ",
+			"STT.",
+			"stt.",
+			".Amazon",
+			"amazon.",
+			"STT.AWS.",
+			"[AWS.defaults.provider]",
+			"google.",
+			"newTree",
+			"treeView",
+			"saveTree",
+			"loadTree",
+			"Params.win.",
+			"newData.",
+			".plane",
+			"console.log(",
+			"fb",
+			"aws",
+			"FB.",
+			"FB",
+			"AWS",
+			"getDynamo",
+			"stt.aws.",
+			"stt.fb.",
+			"params",
+			"cani.",
+			"Params",
+			"Stage",
+			"Params",
+			"Tree",
+			"Params",
+			"params.webview.",
+			"params.win.",
+			"params.webview.",
+			" ",
+			"tree.position();",
+			"wvParams.",
+			"wvParams",
+			"newWebview",
+			"reloadPage",
+			"auxCommits",
+			"auxUrls",
+			"auxNodes",
+			"auxIndex",
+			"auxWebviewCommits",
+			"cameraPositions.zFar",
+			"cameraPositions",
+			"newPage",
+			"prevUrl",
+			"b",
+			"",
+			"log"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "dg.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"findnode",
+				"node_modules/load-grunt-tasks/node_modules/findup-sync/node_modules/glob/node_modules/minimatch/test/defaults.js"
+			],
+			[
+				"brow",
+				"browser.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 164.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

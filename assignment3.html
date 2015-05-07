@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Assignment 3 - Your Game</title>
+        <meta name="description" content="IAT 167 - Digital Games - Assignment 2 - Transformations, Loops, Logic">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Assignment 3 - Your Game </h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Guidelines</a></li>
+                        <li><a href="#/2">Overview</a></li>
+                        <li><a href="#/3">Programming Requirements</a></li>
+                        <li><a href="#/4">Design Requirements</a></li>
+                        <li><a href="#/5">Ideas</a></li>
+                        <li><a href="#/6">Tips and Tricks</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Guidelines</h2>
+                        <h3>
+                            Due 11.59pm, Sunday, June 23rd.
+                        </h3>
+                        <ul class="list-style-none">
+                            <li>You are graded on the completeness, neatness, comments, and visual style of your final assignment</li>
+                            <li>All assignments are individual</li>
+                            <li>ZIP SKETCH FOLDER (not individual files) INTO ONE FILE</li>
+                            <li>Submit to WebCT before the deadline</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p class="important">
+                            There is no late policy for this course!
+                        </p>
+                        <p class="important">
+                            If you do not complete the assignment by the deadline, you will receive 0<br />
+                            You "may" be excused pending discussion with your TA
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>
+                        In this assignment, you will create your own game from 3 custom classes and 2 subclasses. You will practice the concepts of methods, parameters,
+                        arguments, if else statements, for loops, ArrayLists, objects and inheritance. Make sure you review these concepts and plan your assignment carefully!
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Programming Requirements
+                        </h2>
+                        <ul>
+                            <li>A class to describe a Character</li>
+                            <li>A class for a Player (extends Character)</li>
+                            <li>A class for a Projectile</li>
+                            <li>2 subclasses of Character, 1 "basic enemy" and 1 "boss enemy"</li>
+                            <li>More info below (click down)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            The Character Class
+                        </h2>
+                        <ul>
+                            <li>fields for position, velocity, acceleration, health, width, height</li>
+                            <li>update method for movement</li>
+                            <li>move method for movement</li>
+                            <li>hitCharacter method has a Character parameter and returns a boolean (true if characters touch each other's bounding boxes, use width and height)</li>
+                            <li>decreaseHealth has an int parameter</li>
+                            <li>any other general methods for ALL characters should go in this class</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            The Player Class (extends Character class)
+                        </h2>
+                        <ul>
+                            <li>moves with keyboard keys (a,w,s,d) or arrows</li>
+                            <li>DOES NOT move based on tiles, character slides around and can move in 2 directions at once</li>
+                            <li>can fire and keep track of projectile objects (ArrayList)</li>
+                            <li>has a method with a nested for loop to check all projectiles against all enemies (uses Projectile method hitCharacter in loop to check if a character has been hit)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            The Projectile Class
+                        </h2>
+                        <ul>
+                            <li>fields for position and velocity</li>
+                            <li>constructor with parameter for initial velocity</li>
+                            <li>update method, no damping Projectiles keep going, removed if offscreen</li>
+                            <li>draw method</li>
+                            <li>hitCharacter method has Character parameter and returns a boolean (true if Projectile position is inside character bounding box)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            The Basic Enemy (extends Character class)
+                        </h2>
+                        <ul>
+                            <li>does not fire but should be annoying and difficult to kill</li>
+                            <li>player is damaged if hit by enemy</li>
+                            <li>can take 2 - 3 hits to kill</li>
+                            <li>when health == 0, enemy appears dead for 2s, then is removed from list</li>
+                            <li>override of Character draw method</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            The Boss Enemy (extends Character class)
+                        </h2>
+                        <ul>
+                            <li>can fire and keep track of projectile objects</li>
+                            <li>has a method that loops projectiles and calls Projectile class method hitCharacter ONLY for the player object</li>
+                            <li>can take 10-20 hits to kill</li>
+                            <li>when health == 0, enemy appears dead for 2s, then is removed from list</li>
+                            <li>override of Character draw method</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Design Requirements
+                        </h2>
+                        <p>
+                            This is your game, but you must have a coherent design that also fulfills the programming requirements.
+                        </p>
+                        <ul>
+                            <li>Enemies should move in interesting ways, you decide if they should bounce on the walls or repeat, or maybe disappear when offscreen</li>
+                            <li>The game should be challenging but NOT impossible</li>
+                            <li>Backgrounds can be images</li>
+                            <li>Make sure you have a <a href="http://en.wikipedia.org/wiki/HUD_(video_gaming)" target="_blank">HUD</a> to display player health, enemies killed / score</li>
+                            <li>Characters (and projectiles) must be drawn using shapes</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Ideas
+                        </h2>
+                        <p>
+                            You have complete freedom to design any kind of game you want, here are some suggestions:
+                        </p>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=OSLZmtwJHJw" target="_blank">Asteroids</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=437Ld_rKM2s" target="_blank">Space Invaders</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=QIk2O9PRkZw" target="_blank">Scrolling Shooter</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=FP6jbyTc0Iw" target="_blank">Top Down Shooter</a></li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Tips and Tricks
+                        </h2>
+                        <ul>
+                            <li>Pay attention in the labs and lectures, check the notes and use the examples</li>
+                            <li>Style counts! Take time to design your scene and character</li>
+                            <li>Start now!</li>
+                        </ul>
+                    </section>
+                </section>
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

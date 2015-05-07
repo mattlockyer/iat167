@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Report</title>
+        <meta name="description" content="IAT 167 - Digital Games - Assignment 1">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Project Report</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Guidelines</a></li>
+                        <li><a href="#/2">Overview</a></li>
+                        <li><a href="#/3">Requirements</a></li>
+                        <li><a href="#/4">Tips and Tricks</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Guidelines</h2>
+                        <h3>
+                            Due 11.59pm, Sunday, Aug 10th.
+                        </h3>
+                        <ul class="list-style-none">
+                            <li>You will be graded on completeness and clarity</li>
+                            <li>All assignments are individual</li>
+                            <li>Submit to WebCT before the deadline</li>
+                            <li>ONE PDF FILE ONLY!!!</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p class="important">
+                            There is no late policy for this course!
+                        </p>
+                        <p class="important">
+                            If you do not complete the report by the deadline, you will receive 0<br />
+                            You "may" be excused pending discussion with your TA
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Overview
+                        </h2>
+                        <p>
+                            Now that your game is complete you are ready to write your final report. Your report should chronical the creation of each object used in your gamee.
+                            Interactions between objects should also be summarized. Given your report, another programmer should be able to recreate your game in a similar fashion without
+                            seeing the application. It is
+                            important that you use the language of the course and computer science in general to describe each detail of your game so that a fellow programmer may use it
+                            as a blueprint. Now that the application is finished, provide some rationale as to whether it was successful or not. Remember to include all details: what worked,
+                            what didn't, and what still needs to be done.
+                        </p>
+                    </section>
+
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            Report Requirements
+                        </h2>
+                        <p>
+                            The following slides below describe a template for a rough Software Requirement Specification (SRS).
+                            The purpose of this document is to FULLY describe your game, enough so that another programmer would be
+                            able to implement it. Follow each section below carefully, and use the <a href="terms.html" target="_blank" >language</a> of the course to describe
+                            your game.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 1: Introduction
+                        </h2>
+                        <p>
+                            A brief introduction to the game. This should give the reader the story, background, genre, gameplay style
+                            and any other pertinent information about your game.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 2: Features
+                        </h2>
+                        <ul>
+                            <li>2-3 paragraph simple description of ALL features of the application</li>
+                            <li>Include EVERYTHING the program can do</li>
+                            <li>DO NOT get into details, DO NOT explain HOW things work</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 3: Final UML Diagram
+                        </h2>
+                        <ul>
+                            <li>Include ALL Classes</li>
+                            <li>Follow the UML Example <a href="#/4/1">here</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 4: Detailed Classes Summary
+                        </h2>
+                        <ul>
+                            <li>Use snippets for complex sections of a class or algorithm</li>
+                            <li>Explain details</li>
+                            <li>Explain essential methods</li>
+                            <li>DO NOT explain trivial methods (getters / setters / simple methods)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 5: Main Application
+                        </h2>
+                        <ul>
+                            <li>How are your objects created, stored, destroyed?</li>
+                            <li>How many states are there in your program? (start, play, game over)</li>
+                            <li>How are objects iterated?</li>
+                            <li>How interactions between objects handled</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 6: Meeting Requirements
+                        </h2>
+                        <p>
+                            Describe how you met the following requirements:
+                        </p>
+                        <ul>
+                            <li>Inheritance</li>
+                            <li>Polymorphism via Overridding</li>
+                            <li>Method Overloading</li>
+                            <li>Objects as Parameters to Methods</li>
+                            <li>Objects Declared Within Objects</li>
+                        </ul>
+
+                        <p> 
+                            (use references to the classes section, example: see the collision method of the ball class)
+                        </p>
+                    </section>
+                    <section>
+                        <h2>
+                            Section 7: Summary
+                        </h2>
+                        <p>
+                            Summarize the application:
+                        </p>
+                        <ul>
+                            <li>What worked?</li>
+                            <li>What didn't?</li>
+                            <li>What needs to be done?</li>
+                            <li>Are you happy with the results?</li>
+                            <li>Do you think the client is happy?</li>
+                        </ul>
+                        <p> 
+                            (use references to any previous section)
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>UML Requirements:</h2>
+                        <ul>
+                            <li>Class name</li>
+                            <li>Fields with type</li>
+                            <li>Methods with name, parameters, and return type</li>
+                            <li>Inheritance relationships</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>
+                            Example:
+                        </h2>
+                        <img src="img/project/uml.png" />
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>
+                            Tips and Tricks
+                        </h2>
+                        <ul>
+                            <li>DO NOT WAIT UNTIL THE LAST MINUTE</li>
+                            <li>FOLLOW THE TEMPLATE SECTIONS EXACTLY</li>
+                            <li>USE THE <a href="terms.html" target="_blank" >TERMS</a> PAGE ON THE COURSE WEBSITE</li>
+                            <li>DESCRIBE EVERYTHING IN DETAIL</li>
+                            <li>IF WE CAN'T UNDERSTAND IT, THERE'S TROUBLE...</li>
+                        </ul>
+                    </section>
+                </section>
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

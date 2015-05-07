@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Control Flow</title>
+        <meta name="description" content="IAT 167 - Digital Games - Strings">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Control Flow</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Boolean Expressions</a></li>
+                        <li><a href="#/2">If Statements</a></li>
+                        <li><a href="#/3">Nested If Statements</a></li>
+                        <li><a href="#/4">Switch</a></li>
+                        <li><a href="#/5">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li>Required: 
+                        <a href="http://processing.org/learning/basics/conditionals1.html" target="_blank">conditionals 1</a>, 
+                        <a href="http://processing.org/learning/basics/conditionals1.html" target="_blank">conditionals 2</a> and
+                        <a href="http://processing.org/learning/basics/logicaloperators.html" target="_blank">operators</a></li>
+                        <li><a href="http://processing.org/reference/switch.html" target="_blank">Processing Switch (required)</a></li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 5 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        A real decision is measured by the fact that you've taken a new action. If there's no action, you haven't truly decided. [Tony Robbins]
+                    </blockquote>
+
+                </section>
+                <section>
+
+                    <section>
+                        <h3>
+                            Boolean expressions
+                        </h3>
+                        <p>
+                            Boolean expressions are statements that can one of two values: <span class="code">true</span> or <span class="code">false</span>.
+                        </p>
+                        <p>
+                            Example:<br>
+                            100 &gt; 50 -&gt; evaluates to <span class="code">true</span>
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>
+                            Boolean Operators
+                        </h3>
+                        <div class="row">
+                            <div class="col3">
+
+                                <ul class="list-style-none">
+                                    <li>!</li>
+                                    <li>&amp;&amp;</li>
+                                    <li>||</li>
+                                    <li>&gt;</li>
+                                    <li>&gt;=</li>
+                                    <li>&lt;=</li>
+                                    <li>&lt;</li>
+                                    <li>!=</li>
+                                    <li>==</li>
+                                </ul>
+
+                            </div>
+                            <div class="col2">
+
+                                <ul class="list-style-none">
+                                    <li><strong>negation</strong></li>
+                                    <li><strong>and</strong> (conjunction)</li>
+                                    <li><strong>or</strong> (disjunction)</li>
+                                    <li><strong>greater than</strong></li>
+                                    <li><strong>greater than or equal to</strong></li>
+                                    <li><strong>less than or equal to</strong></li>
+                                    <li><strong>less than</strong></li>
+                                    <li><strong>not equal</strong></li>
+                                    <li><strong>equal</strong> NOTE the difference between "=", which is the assignment operator</li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="clear"></div> 
+
+                        <div class="important">
+                            Boolean expressions evaluate to true or false.
+                        </div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>
+                            if statements
+                        </h3>
+                        <img class="left no-border" src="img/control/fork_in_road.png">
+                        <p class="left">
+                            if statements are used to allow your code to follow different paths depending on a condition.
+                        </p>
+                        <p class="left">
+                            The concept: if the statement is true, do the following bit of code.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="150" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+if ( xPos < 100 && xPos > 0){
+    fill(255, 0, 0);
+}
+                            </textarea>
+                        </div>
+                        </p>
+                        <p>
+                            The basic pattern:<br>
+                            if (  boolean expression  ) { code to be executed }
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h3>
+                            Else
+                        </h3>
+
+                        <p>
+                            If the expression we check is not true, a different set of instructions can be used.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="170" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+if ( boolean expresion){
+    // statements
+} else {
+    //statements
+}
+                            </textarea>
+                        </div>
+                        <p>
+                            A concrete example:
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="170" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+if ( xPos < 100 && xPos > 0){
+    fill(255, 0, 0);
+} else {
+    fill(0, 255, 0);
+}
+                            </textarea>
+                        </div>
+
+
+                    </section>
+                    <section>
+
+                        <p>
+                            We have a few more forms:
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="220" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+if ( boolean expression ) {
+    //statements.
+} else if ( another boolean expression ) {
+    //statements
+} else {
+    //statements (if the above two are not true)
+}
+                            </textarea>
+                        </div>
+                        <p>
+                            This shows an else if. It requires a second condition to be checked before moving on.
+                            In fact, you can chain else if's together to check a series of different condition making it work just like a switch (with more typing).
+                        </p>
+
+                        <div class="important"> if else statements use a boolean expression to determine which code to execute.</div>
+                    </section>
+                    <section>
+                        <h3>
+                            Nested  If  Statements
+                        </h3>
+                        <p>
+                            Now just to give you more control, you can put an  if  any place where you can put statements.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="220" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+if(boolean expression){
+    if(boolean expression){
+         //statements
+    }
+}else{
+    //statements
+}
+                            </textarea>
+                        </div>
+                        <div class="important">if  statements can be nested to deal with sub conditions.</div>
+                        <div class="important">You can put an if statement anywhere you can put a set of statements: method, loop, if, where ever it is needed.</div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>
+                            Switch
+                        </h3>
+
+                        <img class="left no-border" src="img/control/switch.png">
+
+                        <p class="left">
+                            <span class="code">switch</span> is a shortcut to using a long series of  if-else  statements<br/>
+                            You can only switch on ints, bytes, shorts, chars. You cannot use strings.
+                            <br/><br/>
+                            To use switch you define a number of cases, and a default case. Once the case has been completed you <span class="code">break</span> out of the block.</p>
+                    </section>
+                    <section>
+
+                        <h3>Basic Switch</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="320" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+switch(value){
+    case valueToMatch:
+        //statements to execute if value == valueToMatch
+        break; // end each case with a break statement
+    case valueToMatch2:
+        //statements to execute if value == valueToMatch2
+        break; // end each case with a break statement
+    default:
+        //statements to execute if no cases were equal to value
+        break;
+}
+                            </textarea>
+                        </div>
+
+                    </section>
+                    <section>
+                        <h3>A real world example</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="320" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+switch(shape){
+    case 1:
+        ellipse(0, 0, 10, 10 );
+        break;
+    case 2:
+        rect(0, 0, 10, 10 );
+        break;
+    default:
+        ellipse(0,0, 50, 100);
+        break;
+}
+                            </textarea>
+                        </div>		
+
+                        <div class="important">You must always have a <span class="code">default</span> case.</div>
+                        <div class="important">You cannot switch on string values.</div>
+                    </section>
+                </section>
+                <section id="sketch-parent">
+
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+/*
+Use 's', 'm', 'l' to control the size of the ellipse
+*/
+char shapeCode = 's';
+// you could use this to make a paint by mouse movement sketch
+
+
+void setup() {
+  size(fullWidth, fullHeight);
+  background(255);
+  smooth();
+}
+
+void draw() {
+  noStroke();
+
+  // set the fill color based on the mouse position
+  // UPPER left quadrant
+  if ((mouseX > 0 && mouseX < width/2) 
+        && (mouseY > 0 && mouseY < height/2)) {
+    fill(0, 255, 0);
+  // LOWER left quadrant
+  }else if((mouseX > 0 && mouseX < width/2) 
+        && (mouseY > height/2 && mouseY < height)) {
+    // fill orange
+    fill(255, 128, 0);
+  // LOWER RIGHT quadrant
+  }else if((mouseX > width/2 && mouseX < width) 
+        && (mouseY > height/2 && mouseY < height)){
+    fill(10, 0, 255);
+  }else{
+    fill(255, 0, 0);
+  }
+
+  pushMatrix();
+  translate(mouseX, mouseY);
+  
+  // set the size of the ellipse
+  switch(shapeCode){
+    case 's':
+      scale(0.25);
+      break;
+    case 'm':
+      scale(1);
+      break;
+      case 'l':
+      scale(1.75);
+      break;
+     default:
+        scale(0.75);  
+  }
+  ellipse(0, 0, 50, 50);
+  popMatrix();
+
+}
+
+void keyReleased(){
+  shapeCode = key;
+}
+                        </textarea>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

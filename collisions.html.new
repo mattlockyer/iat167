@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Collisions</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Collisions</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Radial Collisions</a></li>
+                        <li><a href="#/2">Bounding Boxes</a></li>
+                        <li><a href="#/3">The Next Level</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        TBA
+                    </ul>
+                    <blockquote>
+                        Man is flying too fast for a world that is round. Soon he will catch up with himself in a great rear end collision. [James Thurber]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Radial Collisions</h3>
+                        <p>
+                            Since we have been drawing our character's with a center point at 0,0 it is easy for us to place an ellipse around
+                            our character after translation by using <br /><span class="code">ellipse(0, 0, charWidth, charHeight);</span>
+                            where width and height are the width and height of the character.
+                        </p>
+                        <p>
+                            We're going to see a collision detection technique that works by measuring the distance of a point to the character's center
+                            and checking if that distance is less than a radius.
+                        </p>
+                        <p>
+                            Since we can only check one radius value for the entire circle around our character, this technique is best suited for characters
+                            with width == height.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <h3>In The Character Class</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="550" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+class Character {
+  PVector pos, ...;
+  int charWidth, charHeight, diameter, radius, ...;
+  ...
+  //NOTE: return type is not void, this method returns a boolean
+  boolean hasRadialCollision(Character other) {
+    //assume charWidth == charHeight or use "diameter" or "radius"
+    if ( dist(pos.x, pos.y, other.pos.x, other.pos.y) < 
+                    radius + other.radius) {
+      return true; //collision
+    }
+    return false; //no collision
+  }
+  ...
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>What Happened?</h3>
+
+                        <img class="left" src="img/collisions/circle.png" />
+
+                        <p class="left">
+                            We created a method that has a parameter of another Character, when the distance between both character's center points is less than the
+                            sum of their two width's (radii in this case), then we have a collision. If this is not true, we MUST return false.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="important">When using this technique, characters MUST be round or have width == height, otherwise results will be poor</div>
+                        <d

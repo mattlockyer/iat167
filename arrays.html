@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><!--
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+<title>Digital Games - Arrays</title>
+<meta name="description" content="IAT 167 - Digital Games - Strings" />
+<meta charset="utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="author" content="Matt Lockyer" />
+<link rel="stylesheet" href="css/reveal.min.css" />
+<link rel="stylesheet" href="css/theme/sky.css" id="theme" />
+<link rel="stylesheet" href="css/main.css" id="theme" /><!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" _wpro_href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" _wpro_href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script><!-- - [if lt IE 9]>
+<script src="lib/js/html5shiv.js"></script><! - [endif]-->
+<style type="text/css"></style>
+<style type="text/css"></style>
+<style type="text/css"></style>
+</head>
+<body><a class="backlink" href="index.html#/1">Back</a>
+<div class="reveal">
+<div class="slides">
+<section>
+<h3>Arrays</h3>
+<ul class="list-style-none">
+<li><a href="#/1">Reference Variables in Memory</a></li>
+<li><a href="#/2">Declaring Arrays</a></li>
+<li><a href="#/3">Using Arrays</a></li>
+<li><a href="#/4">Example</a></li></ul>
+<h3>Reading</h3>
+<ul class="list-style-none">
+<li><a href="http://processing.org/learning/basics/" target="_blank">Processing Basics</a> (required: array section)</li>
+<li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 9 (recommended)</li></ul>
+<blockquote>
+                        Words form the thread on which we string our experiences. [Aldous Huxley]</blockquote></section>
+<section>
+<section>
+<h3>Reference Variables in Memory</h3>
+<p>
+                            Before we declare an array, we need to understand the distinction between variables of the primitive type
+                            and variables of the reference type.</p>
+<p>
+                            A variable of the primitive type simply points to a location in memory where a value is stored.</p>
+<p>
+                            A reference variable points to the location of an object in memory, and that object stores pointers to
+                            each piece of information that it contains.</p></section>
+<section><img alt="" class="left" src="img/arrays/memory.gif" />
+<p class="left smaller">
+                            Since an array is an object, the variable for an array is a reference variable. This means that the variable
+                            itself does not represent a value, since an array is a collection of values it points to the collection.</p>
+<p>
+                            We will see how to access the insectionidual values and variables held in the array in the coming sections.</p></section></section>
+<section>
+<section>
+<h3>Declaring Arrays</h3>
+<p>
+                            An array is a special datatype. Much like the string an array is a collection of elements. The difference is
+                            that an array is a collection of any type of element we specify. Let's take a look at declaring some arrays of
+                            different types.</p>
+<p><span class="code">int[] lottoNumbers = new int[5];</span><br />
+                            Declare array of integers, lottoNumbers, with a size of 5.<br />
+<span class="code">String[] names = new String[3];</span><br />
+                            Declare array of String Objects, names, with a size of 3.<br />
+<span class="code">boolean[] lights = new boolean[10];</span><br />
+                            Declare array of booleans, lights, with a size of 10.</p></section>
+<section>
+<p>
+                            Arrays are zero indexed like strings which means that even though the size or length may be 3 or 5,
+                            the actual position of the last element is always size - 1, since the positions start with 0.
+                            Arrays must specify their size when being declared, notice how every example states the number of elements
+                            they will contain.</p></section>
+<section>
+<h3>Initializing Arrays</h3>
+<p>
+                            An array is useless unless each element is initialized. After declaring an array, we don't have any actual
+                            values in the positions in the array. Instead we have a list of empty buckets (no value) and we must initialize
+                            each bucket (position) in the array with a value. Let's take a look.</p>
+<p><span class="code">int[] lottoNumbers = new int[5];</span><br />
+                            The array lottoNumbers at any position has no value. Let's give it some values.<br />
+<span class="code">lottoNumbers[0] = 2;</span> initialize position 0 to 2<br />
+<span class="code">lottoNumbers[1] = 4;</span> initialize position 1 to 4<br />
+<span class="code">lottoNumbers[2] = 8;</span> ...<br />
+<span class="code">lottoNumbers[3] = 16;</span> ...<br />
+<span class="code">lottoNumbers[4] = 32;</span> ...</p></section>
+<section>
+<p>
+                            Now that the array has been initialized, we can ask some questions about the array.<br />
+<span class="code">println( lottoNumbers[3] );</span> prints 16<br />
+                            Had the array not been initialized we may have printed 0 since java / processing takes care of this for us.
+                            In other programming languages, this would result in a major error and some pretty wacky numbers.</p></section>
+<section>
+<div class="important">Arrays are collections of any type specified when the array is declared.</div>
+<div class="important">Every array must specify a size when declared.</div>
+<div class="important">Arrays are zero indexed, positions start at 0 and end at size - 1.</div>
+<div class="important">Arrays should always be initialized to a starting value before being used within a program.</div></section></section>
+<section>
+<h3>Using Arrays</h3>
+<p>
+                        Arrays are pretty useful, even better once you have learn loops. The following examples in this module will involve
+                        some loops. It is safe to assume for these example that all loops are simply looping over each position in the array.</p>
+<div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js" data-width="900" data-height="500" data-nofullscreen="true" data-fontsize="16px" data-lines="#eee"><textarea data-name="arrays.pde">//Declare our arrays
+float[] xPos = new float[500];
+float[] yPos = new float[500];
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(0, 128);
+  strokeWeight(2);
+  fill(255, 0, 0, 128);
+  //Loop over each position in our arrays and initialize with values
+  for (int i = 0; i &lt; xPos.length; i++) {
+    xPos[i] = random(width); //A random number from 0 to width (400)
+    yPos[i] = random(height); //A random number from 0 to height
+  }
+}
+void mousePressed() {
+  for (int i = 0; i &lt; xPos.length; i++) {
+    xPos[i] = random(width); //A random number from 0 to width (400)
+    yPos[i] = random(height); //A random number from 0 to height
+  }
+}
+void draw() {
+  background(255);
+  //Loop over each position in the array and draw an ellipse
+  for (int i = 0; i &lt; xPos.length; i++) {
+    pushMatrix();
+    translate(xPos[i], yPos[i]);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}</textarea></div></section>
+<section>
+<section id="sketch-parent">
+<div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js" data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee"><textarea data-name="sketch.pde">//Declare our arrays
+float[] xPos = new float[50];
+float[] yPos = new float[50];
+float[] xVel = new float[50];
+float[] yVel = new float[50];
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(0, 128);
+  strokeWeight(2);
+  fill(255, 0, 0, 128);
+  //Initialize all array positions with values
+  for (int i = 0; i &lt; xPos.length; i++) {
+    xPos[i] = random(16, width - 16);
+    yPos[i] = random(16, height - 16);
+    xVel[i] = random(-2, 2); //A random number between -2 and 2
+    yVel[i] = random(-2, 2);
+  }
+}
+
+void draw() {
+  background(255);
+  //Loop over all array positions, do some updates, and draw
+  for (int i = 0; i &lt; xPos.length; i++) {
+    //update position
+    xPos[i] += xVel[i];
+    yPos[i] += yVel[i];
+    //check walls, if we hit them we reverse our velocity ( vel *= -1 )
+    if (abs(xPos[i] - width/2) &gt; width/2 - 16) {
+      xVel[i] *= -1;
+    }
+    if (abs(yPos[i] - height/2) &gt; height/2 - 16) {
+      yVel[i] *= -1;
+    }
+    //draw ellipses
+    pushMatrix();
+    translate(xPos[i], yPos[i]);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}</textarea></div></section></section></div></div>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+<script src="js/codetabs.js"></script>
+<script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+<script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Game Loops</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Game Loops</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Refresher</a></li>
+                        <li><a href="#/2">Game Loops</a></li>
+                        <li><a href="#/3">Timers</a></li>
+                        <li><a href="#/4">Example Game (with timers)</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">                        
+                        <li><a href="http://en.wikipedia.org/wiki/Game_programming" target="_blank">Game Programming</a></li>
+                        <li><a href="http://entropyinteractive.com/2011/02/game-engine-design-the-game-loop/" target="_blank">Game Loop</a></li>
+                    </ul>
+
+                </section>
+                <section>
+                    <section>
+                        <h3>Refresher</h3>
+                        <p>
+                            Processing will "try" and execute everything in the draw loop at 60 frames per second (fps).
+                            Certain code will impact performance and of course there should be 0 redundant code.
+                        </p>
+                        <p>
+                            Redundant code includes: repeated statements or statements that have no effect.
+                        </p>
+                        <p>
+                            Another form of redundant code is unreachable code, this simply adds to your programs files size,
+                            which is important when your program is delivered online.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Performance Bottlenecks</h3>
+                        <ul>
+                            <li>Excessive draw calls</li>
+                            <li>Complex shapes</li>
+                            <li>Large images</li>
+                        </ul>
+                        <ul>
+                            <li>Redundant / repeated loops</li>
+                            <li>Redoing heavy calculations (dist, abs)</li>
+                            <li>Redundant code</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Tips for Improvement</h3>
+                        <ul>
+                            <li>
+                                Don't draw what cannot be seen
+                                (<a href="http://en.wikipedia.org/wiki/Clipping_(computer_graphics)">clipping</a>)</li>
+                            <li>Simplify your shapes</li>
+                            <li>Store heavy calculations temporarily (in a class or in the game loop)</li>
+                            <li>Break up large images into smaller pieces (background: tiles, mountains, trees, clouds)</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Game Loops</h3>
+
+                        <p>
+                            A game loop describes your main draw loop. This is where all objects in your game will be updated,
+                            and sometimes created and destroyed. There's some logic that doesn't belong in your game loop, most often
+                            specific adjustments to several fields of an object. This logic should be contained within the class
+                            of that object, in a method.
+                        </p>
+
+                        <p>
+                            We'll take a look at a good game loop and a bad game loop.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>A Good Game Loop</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void draw() {
+    for (int i = 0; i < objects.size(); i++) {
+        Object o = objects.get(i);
+        if (o.collision(player)) {
+            player.hit(10); //player takes 10 health points damage
+            o.hit(5); //enemy takes 5 health points damage
+        }
+        o.update(); //most likely overriden method in subclasses
+        o.draw();
+    }
+    player.update();
+    player.draw();
+}</textarea>
+                    </section>
+                    <section>
+                        <h3>A Bad Game Loop</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void draw() {
+    for (int i = 0; i < objects.size(); i++) {
+        Object o = objects.get(i);
+        if (dist(o.pos.x, o.pos.y, player.pos.x, player.pos.y) < o.radius + player.radius) {
+            player.health -= 10;
+            o.health -= 5;
+        }
+        o.vel.add(acc);
+        o.vel.mult(0.9);
+        o.pos.add(vel);
+        o.acc.set(0, 0, 0);
+        o.draw();
+    }
+    player.vel.add(acc);
+    player.vel.mult(0.9);
+    player.pos.add(vel);
+    player.acc.set(0, 0, 0);
+    player.draw();
+}</textarea>
+                    </section>
+                    <section>
+                        <h3>Discussion</h3>
+                        <p>
+                            As you can see the second loop is a lot messier. If we're having trouble coding our sketch it will be hard to find the specific statements in even a slightly more
+                            complicated program than this.
+                        </p>
+                        <p>
+                            By calling methods you will know exactly which part of your code to focus on when behavior is not as desired.
+                        </p>
+                        <div class="important">
+                            Never repeat code. Put it in a class. If it's shared, make it a superclass.
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Performance</h3>
+                        <p>
+                            An additional benefit of calling methods from your game loop instead of writing logic statements is performance. In order to determine bottlenecks (slow parts)
+                            you can simply comment out method calls to identify what is taking the most time.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Performance Testing</h3>
+                        <p>
+                            Take a look at the following code for a performance testing metric you can use in your code.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void draw() {
+    for (int i = 0; i < objects.size(); i++) {
+        Object o = objects.get(i);
+        if (o.collision(player)) {
+            player.hit(10); //player takes 10 health points damage
+            o.hit(5); //enemy takes 5 health points damage
+        }
+        o.update(); //most likely overriden method in subclasses
+        o.draw();
+    }
+    player.update();
+    int mills = millis();
+    player.draw();
+    //measure the time it took to draw the player
+    println(millis() - mills); 
+}</textarea>
+                    </section>
+
+                    <section>
+                        <div class="important">
+                            Never put statements in your game loop that belong in a method of a class.
+                        </div>
+                        <div class="important">
+                            Never (as much as you can) access fields from outside a class.
+                        </div>
+                        <div class="important">
+                            Never repeat code. Put it in a class. If it's shared, make it a superclass.
+                        </div>
+                        <div class="important">
+                            Test test test to find bottlenecks.
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Timers</h3>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right, fire;
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+    else if (keyCode == UP) fire = true;
+  } else {
+    if (key == ' ') fire = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+    else if (keyCode == UP) fire = false;
+  } else {
+    if (key == ' ') fire = false;
+  }
+}
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+
+  player = new Character(new PVector(width/2, height - 50));
+}
+
+void draw() {
+    background(255);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+    if (fire) player.fireMissile();
+
+    player.update();
+    player.draw();
+}
+                            </textarea>
+                            <textarea data-name="Missile.pde">
+//a class to describe a Tile
+class Missile {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    ArrayList<Explosion> explosions;
+    Missile(pos, vel, life, list) {
+        this.pos = pos;
+        this.vel = vel;
+        this.life = life;
+        this.list = list;
+        explosions = new ArrayList<Explosion>();
+    }
+    void update() {
+        pos.add(vel);
+        life--;
+        if (life == 0) {
+            for (int i = 0; i < 16; i++) {
+                explosions.add( new Explosion(new PVector(pos.x, pos.y), explosions ));
+            }
+        }
+        if (life < 0 && explosions.size() == 0) {
+            list.remove(this);
+        }
+        for (int i = 0; i < explosions.size(); i++) {
+            Explosion e = explosions.get(i);
+            e.update();
+            e.draw();
+        }
+    }
+    void draw() {
+        if (life > 0) {
+            pushMatrix();
+            translate(pos.x, pos.y);
+            ellipse(0, 0, 8, 8);
+            popMatrix();
+        }
+    }
+}</textarea>
+                                        <textarea data-name="Explosion.pde">
+//a class to describe a Tile
+class Explosion {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    float speed;
+    Explosion(pos, list) {
+        this.pos = pos;
+        this.list = list;
+        life = (int) random(32);
+        float angle = random(TWO_PI);
+        speed = 4;
+        vel = new PVector(speed * cos(angle), speed * sin(angle));
+    }
+    void update() {
+        pos.add(vel);
+        life--;
+        if (life < 0) {
+            list.remove(this);
+        }
+    }
+    void draw() {
+        pushMatrix();
+        translate(pos.x, pos.y);
+        rect(-2, -2, 4, 4);
+        popMatrix();
+    }
+}</textarea>
+                                        <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character {
+  //fields
+  PVector pos, vel, acc;
+  float damp = 0.8; //constant damping factor
+  ArrayList<Missle> missiles;
+
+  //control firing
+  int fireTimer = 0;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+    missiles = new ArrayList<Missle>();
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+
+  void fireMissile() {
+    if (fireTimer === 0) {
+        missiles.add( new Missile(new PVector(pos.x, pos.y), new PVector(0, -8), 30, missiles) );
+        fireTimer = 10;
+    }
+    fireTimer--;
+  }
+  
+  //update the character
+  void update() {
+    for (int i = 0; i < missiles.size(); i++) {
+        Missile m = missiles.get(i);
+        m.update();
+        m.draw();
+    }
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void draw() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}</textarea></div>
+
+                                                    </section>
+
+                                                    <section>
+                                                        <h3>The fireTimer</h3>
+                                                        <p>
+                                                            The fireTime variable is an integer stored in the player class to limit the rate of firing Missiles.
+                                                            Remember the draw loop executes at 60fps so if the UP key is held down, the player would fire (or try to)
+                                                            60 missiles per second.
+                                                        </p>
+                                                        <p>
+                                                            This is often undesirable, so we'll only let the player fire when the fireTimer variable == 0 and every
+                                                            time it is we'll reset the fireTimer variable to the delay we'd like to see in between Missile firings.
+                                                        </p>
+                                                    </section>
+
+                                                    <section>
+                                                        <h3>The Missile Life</h3>
+                                                        <p>
+                                                            The Missiles class contains a field for life, this is how we will keep track of how long the missile is "alive" and when
+                                                            it should explode or be removed from the ArrayList it belongs to.
+                                                        </p>
+                                                        <p>
+                                                            In the Missile update method life is decreased and when it reaches 0, the missile creates and stores a number of explosion objects which it will then
+                                                            update.
+                                                        </p>
+                                                        <p>
+                                                            Finally the missile class checks to see if all the explosions are removed from the ArrayList of explosions, if this is the case the missile will remove itself
+                                                            from the list it belongs to and cease to be a part of our program.
+                                                        </p>
+                                                    </section>
+
+                                                    <section>
+                                                        <h3>The Explosion Life</h3>
+                                                        <p>
+                                                            Explosion life is similar to missile life, when it hits zero or is below zero (it often doesn't matter) we will remove the explosion from
+                                                            the ArrayList it belongs to.
+                                                        </p>
+                                                        <p>
+                                                            Looking back at the Missile class we see that once all explosions are removed, we remove the instance of the missile class in order to eliminate
+                                                            it from our sketch.
+                                                        </p>
+                                                    </section>
+
+                                                    <section>
+                                                        <div class="important">
+                                                            Every object should manage it's own timer / lifespan / animation.
+                                                        </div>
+                                                        <div class="important">
+                                                            Each object should store a reference to the list it belongs to in order to be able to remove itself later.
+                                                        </div>
+                                                        <div class="important">
+                                                            Objects should take care of their own logic, including: updating, life, timers, removal... This is IMPORTANT!
+                                                        </div>
+                                                    </section>
+
+                                                    </section>
+
+
+                                                    <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right, fire;
+
+int addEnemy = 90;
+
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+    else if (keyCode == UP) fire = true;
+  } else {
+    if (key == ' ') fire = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+    else if (keyCode == UP) fire = false;
+  } else {
+    if (key == ' ') fire = false;
+  }
+}
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+
+  player = new Character(new PVector(width/2, height - 50));
+}
+
+void draw() {
+    background(255);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+    if (fire) player.fireMissile();
+
+    if (frameCount % addEnemy == 0) {
+        enemies.add( new Enemy(new PVector(random(64, width - 128), -64)) );
+        if (addEnemy > 20) {
+             addEnemy--;
+        }
+    }
+
+    for (int i = 0; i < enemies.size(); i++) {
+        Enemy e = enemies.get(i);
+        e.update();
+        e.draw();
+        if (e.collision(player)) {
+            player = new Character(new PVector(width/2, height - 50));
+        }
+    }
+
+    player.update();
+}
+                                                                </textarea>
+                                                                <textarea data-name="Missile.pde">
+//a class to describe a Tile
+class Missile {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    ArrayList<Explosion> explosions;
+    Missile(pos, vel, life, list) {
+        this.pos = pos;
+        this.vel = vel;
+        this.life = life;
+        this.list = list;
+        explosions = new ArrayList<Explosion>();
+    }
+    boolean collision(MovingObject other) {
+        if (dist(pos.x, pos.y, other.pos.x, other.pos.y) < other.radius) {
+            return true;
+        }
+        return false;
+    }
+    void update() {
+        pos.add(vel);
+        if (pos.y < 0) {
+            life = -1;
+        }
+        if (life == 0) {
+            for (int i = 0; i < 32; i++) {
+                explosions.add( new Explosion(new PVector(pos.x, pos.y), explosions ));
+            }
+        }
+        if (life < 0 && explosions.size() == 0) {
+            list.remove(this);
+        }
+        for (int i = 0; i < explosions.size(); i++) {
+            Explosion e = explosions.get(i);
+            e.update();
+            e.draw();
+        }
+        life--;
+    }
+    void draw() {
+        fill(63);
+        if (life > 0) {
+            pushMatrix();
+            translate(pos.x, pos.y);
+            ellipse(0, 0, 8, 8);
+            popMatrix();
+        }
+    }
+}</textarea>
+                                                                            <textarea data-name="Exp.pde">
+//a class to describe a Tile
+class Explosion {
+    PVector pos, vel;
+    int life;
+    ArrayList list;
+    float speed;
+    Explosion(pos, list) {
+        this.pos = pos;
+        this.list = list;
+        life = (int) random(24);
+        float angle = random(TWO_PI);
+        speed = 8;
+        vel = new PVector(speed * cos(angle), speed * sin(angle));
+    }
+    void update() {
+        pos.add(vel);
+        life--;
+        if (life < 0) {
+            list.remove(this);
+        }
+    }
+    void draw() {
+        fill(63);
+        pushMatrix();
+        translate(pos.x, pos.y);
+        rect(-2, -2, 4, 4);
+        popMatrix();
+    }
+}</textarea>
+                                                                            <textarea data-name="MO.pde">
+//a class to describe a generic Character
+class MovingObject {
+  //fields
+  PVector pos, vel, acc;
+  float radius;
+  float damp = 0.8; //constant damping factor
+
+  MovingObject(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  boolean collision(MovingObject other) {
+      if (dist(pos.x, pos.y, other.pos.x, other.pos.y) < radius + other.radius) {
+          return true;
+      }
+      return false;
+   }
+  //update the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void draw() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, 32, 32);
+    popMatrix();
+  }
+}</textarea>                                                                         
+                        <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character extends MovingObject {
+  ArrayList<Missle> missiles;
+  //control firing
+  int fireTimer = 0;
+  int startTimer = 60;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    super(pos);
+    missiles = new ArrayList<Missle>();
+    radius = 16;
+  }
+
+  void fireMissile() {
+    if (fireTimer === 0) {
+        missiles.add( new Missile(new PVector(pos.x, pos.y), new PVector(0, -8), 200, missiles) );
+        fireTimer = 6;
+    }
+    fireTimer--;
+  }
+  
+  //update the character
+  void update() {
+    for (int i = 0; i < missiles.size(); i++) {
+        Missile m = missiles.get(i);
+        m.update();
+        m.draw();
+        for (int j = 0; j < enemies.size(); j++) {
+            Enemy e = enemies.get(j);
+            if (m.collision(e) && m.life > 0) {
+                m.life = 0;
+                enemies.remove(e);
+            }
+        }
+    }
+    super.update();
+    if (startTimer > 0) {
+        if (startTimer % 2 == 0) {
+            draw();
+        }
+        startTimer--;
+    } else {
+        draw();
+    }
+  }
+  
+  void draw() {
+    fill(63);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, radius * 2, radius * 2);
+    popMatrix();
+  }
+}</textarea>
+                    <textarea data-name="Enemy.pde">
+//a class to describe a generic Character
+class Enemy extends MovingObject {
+  int health;
+  int dartTimer;
+  PVector down;
+  PVector dart;
+  Enemy(PVector pos) {
+    super(pos);
+    health = 5;
+    dartTimer = (int) random(height/10, height/4);
+    radius = 32;
+    down = new PVector(0, height * 0.001); //initialize here to use width / height
+    dart = new PVector(0, height * 0.008); //initialize here to use width / height
+  }
+  
+  //update the character
+  void update() {
+    dartTimer--;
+    if (dartTimer < 0) {
+        move(dart);
+    } else {
+        move(down);
+    }
+    super.update();
+  }
+  
+  void draw() {
+    fill(128, 0, 0);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, radius * 2, radius * 2);
+    popMatrix();
+  }
+}</textarea>
+                    
+                    </div>
+
+                                                    </section>
+                                                        
+</div>
+</div>
+    
+    
+    
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+<script src="js/codetabs.js"></script>
+<script type="text/javascript">
+    Reveal.addEventListener('ready', function() {
+        setTimeout(checkSketches, 1500);
+    });
+    Reveal.addEventListener('overviewshown', checkSketches);
+    Reveal.addEventListener('overviewhidden', checkSketches);
+    Reveal.addEventListener('slidechanged', checkSketches);
+    function checkSketches() {
+        var slide = Reveal.getCurrentSlide();
+        var sketch = document.getElementById('sketch');
+        if (sketch) {
+            sketch.hide();
+            if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                sketch.fadeIn();
+                document.getElementsByClassName('slides')[0].style.display = 'none';
+            } else {
+                document.getElementsByClassName('slides')[0].style.display = 'block';
+                Reveal.layout();
+            }
+        }
+    }
+</script>
+<script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        width: 1024,
+        height: 768,
+        margin: 0.06,
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        
+        // Optional libraries used to extend on reveal.js
+        dependencies: -[
+            {src: 'lib/js/classList.js', condition: function() {
+                    return !document.body.classList;
+                }},
+            {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                    return !!document.body.classList;
+                }},
+            {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                    return !!document.body.classList;
+                }}
+        ]
+    });
+</script>
+</body>
+</html>
+    

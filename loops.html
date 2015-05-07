@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Loops</title>
+        <meta name="description" content="IAT 167 - Digital Games - Strings">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Loops</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Loops</a></li>
+                        <li><a href="#/2">While Loops</a></li>
+                        <li><a href="#/3">For Loops</a></li>
+                        <li><a href="#/4">Nested Loops</a></li>
+                        <li><a href="#/5">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li>Processing Basics (required: <a href="http://processing.org/learning/basics/embeddediteration.html" target="_blank">loops</a> and
+                            <a href="http://processing.org/learning/basics/embeddediteration.html" target="_blank">nested loops</a>)</li>
+                        <li>Processing <a href="http://processing.org/reference/while.html" target="_blank">While</a> and 
+                            <a href="http://processing.org/reference/for.html" target="_blank">For</a> (required)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 6 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        Style is that which indicates how the writer takes himself and what he is saying. It is the mind skating circles around itself as it moves forward. [Robert Frost]
+                    </blockquote>
+
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Loops</h3>
+
+                        <img class="left" src="img/control/loop.png"></img>
+
+                        <p class="left">
+                            We use loops to repeatedly execute a block of code. There are two main types of loops:<br/>counter controlled loops and sentinel controlled loops.
+                        </p>
+
+                        <p class="left">
+                            A counter controlled loop uses a counter to control the number of times it executes. We call each time a loop runs an <strong>iteration</strong>.
+                        </p>
+
+                        <p class="left">A sentinel-controlled loop uses a boolean expression or flag to indicate how many times to iterate. It will iterate until the boolean expression is false.</p>
+
+                    </section>
+
+                    <section>
+                        <p><strong>Note:</strong> You can use <span class="code">break;</span> in any of these loops to exit out of a statement early.</p>
+
+                        <div class="rule"></div>
+
+                        <div class="important">Use loops to avoid copy and pasting code. Combine with a function for maximum impact.</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>while loops</h3>
+
+                        <p>
+                            The basic pattern:
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="200" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+while( expressionThatIsTRUE){
+    //do something
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Here is an example of a sentinel-controlled while loop.
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="200" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+while(mouseX < width/2){
+    // do something
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <p>Here is an example of a counter-controlled while loop.</p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="240" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+int count = 0;
+while(count < 5){
+    //do something
+    println(count);
+    count++;
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>Note: you can decided whether the counter should be updated before or after the code is executed. Beware of the difference.</p>
+
+                        <div class="rule"></div>
+
+                        <div class="important">Use while loops when you need to do something without counting.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>for loops</h3>
+
+                        <p>
+                            A for loop is a counter-controlled loop. The counter declaration and increment are part of the loops syntax. The loop increments after each iteration.
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="200" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+// the basic pattern
+for(initialize variable ;  condition ; "increment"){
+    // do something
+}</textarea></div>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="200" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+// practical example
+for(int i = 0; i < 10; i++){
+    println(i);
+    // do something while the variable i loops from 0 to 9
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <p>You can do more than just increment the variable. You can decrement / multiply / divide, or use whatever arithmetic your design requires.</p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="240" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="arrays.pde">
+// this loop counts down by twos from 100
+for(int i = 100; i >= 0; i -= 2){
+    println(i);
+    // do something
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">The loop increments after each iteration.</div>
+                        <div class="important">You can use any math in the loop increment portion of the syntax</div>
+
+                    </section>
+                </section>
+
+                <section>
+
+                    <h3>Nested loops</h3>
+
+                    <p>
+                        A nested loop is simply a loop inside of loop. We can add a loop anywhere where we can put <strong>statements</strong>.
+                    </p>
+                    <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                         data-width="900" data-height="260" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="arrays.pde">
+while(somethingistrue){
+    //do some stuff
+    // print five ellipses
+    for(int i = 0; i < 5; i++){
+        ellipse(i * 10, height/2, 50, 50);
+    }
+}</textarea></div>
+                    <p>More on this later. . . </p>
+
+                </section>
+                <section id="sketch-parent">
+
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+// global grid size
+int rectSize = 25;
+int halfRectSize = rectSize/2;
+int gridSize = 40;
+
+void setup() {
+  size(fullWidth, fullHeight);
+  background(255);
+  fill(32);
+}
+
+void draw() {
+  //clear background
+  background(0);
+  //no stroke called OUTSIDE LOOP! #perfmatters
+  noStroke();
+  for (int x = gridSize; x <= width - gridSize; x += gridSize) {
+    for (int y = gridSize; y <= height - gridSize; y += gridSize) {
+      pushMatrix();
+      translate(x, y);
+      rotate(atan2(mouseY - y, mouseX - x));
+      //pay attention to how this rectangle is drawn
+      //variables at top of sketch
+      rect(-halfRectSize, -halfRectSize, rectSize, rectSize);
+      popMatrix();
+    }
+  }
+  //lines drawn after rectangles so they appear on top
+  //splitting up looks like this will NOT slow down the program, why?
+  for (int x = gridSize; x <= width - gridSize; x += gridSize) {
+    for (int y = gridSize; y <= height - gridSize; y += gridSize) {
+      //some things are better drawn directly...
+      stroke(255, 64);
+      line(x, y, mouseX, mouseY);
+    }
+  }
+}
+                        </textarea>
+                    </div>
+                </section>
+
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Levels</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Levels</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Backgrounds</a></li>
+                        <li><a href="#/2">Platforms + Walls</a></li>
+                        <li><a href="#/3">Tiles</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">                        
+                        <li><a href="http://processingjs.nihongoresources.com/test/PjsGameEngine/docs/tutorial/mario.html" target="_blank">Mario Tutorial(required)</a></li>
+                        <li><a href="http://processing.org/examples/loaddisplayimage.html" target="_blank">Images (required)</a></li>
+                        <li><a href="http://www.acsu.buffalo.edu/~johnnoon/programming/sweeper_2.pdf" target="_blank">Minesweeper (recommended)</a></li>
+                        <li><a href="http://www.youtube.com/watch?v=hD8PGGly19w" target="_blank">Paddle Game (recommended)</a></li>
+                    </ul>
+                    <blockquote>
+                        All change is not growth, as all movement is not forward.. [Ellen Glasgow]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+                        <h3>Backgrounds</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right;
+
+ArrayList<Background> backgrounds = new ArrayList<Background>();
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+    else if (keyCode == UP) up = true;
+    else if (keyCode == DOWN) down = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+    else if (keyCode == UP) up = false;
+    else if (keyCode == DOWN) down = false;
+  }
+}
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+  player = new Character(new PVector(width/2, height/2));
+
+  backgrounds.add(new Background("img/levels/bg.jpg", 2, 2, 0.25));
+  backgrounds.add(new Background("img/levels/stars.png", 2, 2, 1));
+}
+void draw() {
+    background(255);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+
+    for (int i = 0; i < backgrounds.size(); i++) {
+        backgrounds.get(i).draw(new PVector(-player.pos.x, -player.pos.y));
+    }
+    player.update();
+    player.draw();
+}
+                                        </textarea>
+                                        <textarea data-name="Background.pde">
+//a class to describe a Background
+class Background {
+    PImage img;
+    int repeatX, repeatY;
+    float speed;
+    Background(String path, int repeatX, int repeatY, float speed) {
+        img = loadImage(path);
+        this.repeatX = repeatX;
+        this.repeatY = repeatY;
+        this.speed = speed;
+    }
+    void draw(PVector pos) {
+        pos.mult(speed);
+        //in java mode you may have to cast the right side
+        //of this assignment as an int, ex: = (int) -floor(...)
+        int tilesX = -floor(pos.x / img.width);
+        int tilesY = -floor(pos.y / img.height);
+        for (int i = tilesX - 1; i < tilesX + repeatX; i++) {
+            for (int j = tilesY - 1; j < tilesY + repeatY; j++) {
+                image(img, pos.x + img.width * i, pos.y + img.height * j);
+            }
+        }
+    }
+}</textarea>
+                                        <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character {
+  //fields
+  PVector pos, vel, acc, dim;
+  float damp = 0.8; //constant damping factor
+  boolean jumping = false;
+  Block block = null;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+    dim = new PVector(64, 32);
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  
+  //update the physics for the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void draw() {
+    pushMatrix();
+    translate(width/2, height/2);
+    rotate(atan2(vel.y, vel.x));
+    if (vel.x < 0) rotate(PI);
+    ellipse(0, 0, dim.x, dim.y);
+    arc(0, -4, dim.x / 1.4, dim.y, -PI, 0);
+    popMatrix();
+  }
+}</textarea></div>
+
+                                        </section>
+                                        <section>
+                                            <p>
+                                                How are the background images being drawn? We need 2 loops in order to draw a proper
+                                                grid of background images (think of them like tiles).
+                                            </p>
+                                            <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                 data-width="900" data-height="240" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                <textarea data-name="sketch.pde">
+for (int i = tilesX - 1; i < tilesX + repeatX; i++) {
+    for (int j = tilesY - 1; j < tilesY + repeatY; j++) {
+        image(img, pos.x + img.width * i, pos.y + img.height * j);
+    }
+}</textarea>
+                                                <p>
+                                                    But what are the values tilesX, tilesY, repeatX, and repeatY?
+                                                </p>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <p>
+                                                tilesX and tilesY need to be calculated based on the character's position, this will change the values
+                                                of our loop variables "i" and "j" so that the background images will be repositioned under the character as it moves around.
+                                            </p>
+                                            <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                 data-width="900" data-height="180" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                <textarea data-name="sketch.pde">
+tilesX = -Math.floor(pos.x / img.width);
+tilesY = -Math.floor(pos.y / img.height);
+                                                </textarea>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <p>
+                                                The reason we use the negative value of the player's position divided by the width and height of the screen is because the player
+                                                is constantly moving against the background, so we move the background against the player in the opposite direction.
+                                            </p>
+                                            <p>
+                                                The values repeatX and repeatY are how many times the background should be tiled so we don't see any edges around our background.
+                                                These values may change depending on how large your background images are.
+                                            </p>
+                                        </section>
+
+                                        <section>
+                                            <h3>Speed</h3>
+                                            <p>
+                                                Notice the background uses a speed variable, this will control the speed which the background moves against the player's
+                                                position. Smaller speeds (fractions < 1) will result in a scrolling effect called "Parallax".
+                                            </p>
+                                        </section>
+                                        </section>
+                                        <section>
+                                            <section>
+
+                                                <h3>Platforms</h3>
+
+                                                <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                     data-width="900" data-height="500" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                    <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed * 24);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, left, right;
+float grav = 2;
+PVector gravForce = new PVector(0, grav);
+
+ArrayList<Block> blocks = new ArrayList<Block>();
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) up = true;
+    else if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == UP) up = false;
+    else if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+  }
+}
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+  player = new Character(new PVector(width/4, height/4));
+  player.jumping = true;
+
+  blocks.add(new Block(new PVector(width/2, height - 20), new PVector(width, 40)));
+  blocks.add(new Block(new PVector(200, height - 120), new PVector(200, 40)));
+  blocks.add(new Block(new PVector(400, height - 240), new PVector(200, 40)));
+  blocks.add(new Block(new PVector(700, height - 360), new PVector(200, 40)));
+}
+void draw() {
+    background(255);
+    if (up && !player.jumping) {
+        player.jump();
+    }
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+
+    player.update();
+
+    if (player.block) {
+        if (!player.block.isOn(player)) {
+            player.jumping = true;
+        }
+    }
+    if (player.jumping) {
+        player.move(gravForce);
+        for (int i = 0; i < blocks.size(); i++) {
+            Block b = blocks.get(i);
+            if (b.check(player)) {
+                if (player.vel.y > 0) {
+                    player.landOn(b);
+                } else {
+                    player.fall();
+                }
+            }
+        }
+    }
+    for (int i = 0; i < blocks.size(); i++) {
+        blocks.get(i).draw();
+    }
+    
+    player.draw();
+}
+                                                                </textarea>
+                                                                <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character {
+  //fields
+  PVector pos, vel, acc, dim;
+  float damp = 0.8; //constant damping factor
+  boolean jumping = false;
+  Block block = null;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+    dim = new PVector(32, 48);
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  
+  //update the physics for the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void jump() {
+      player.move(upForce);
+      player.jumping = true;
+  }
+
+  void landOn(Block b) {
+    jumping = false;
+    block = b;
+    pos.y = b.pos.y - dim.y /2 - b.dim.y / 2;
+    vel.y = 0;
+    acc.y = 0;
+  }
+
+  void fall() {
+    vel.y *= -1;
+    acc.y = 0;
+  }
+  
+  void draw() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    ellipse(0, 0, dim.x, dim.y);
+    popMatrix();
+  }
+}</textarea>
+                                                                <textarea data-name="Block.pde">
+//a class to describe a Block
+class Block {
+    PVector pos, dim;
+    Block(PVector pos, PVector dim) {
+        this.pos = pos;
+        this.dim = dim;
+    }
+    boolean isOn(Character c) {
+        if (abs(c.pos.x - pos.x) < c.dim.x / 2 + dim.x / 2) {
+            return true;
+        }
+        return false;
+    }
+    boolean check(Character c) {
+        if (abs(c.pos.x - pos.x) < c.dim.x / 2 + dim.x / 2 &&
+            abs(c.pos.y - pos.y) < c.dim.y / 2 + dim.y / 2) {
+            return true;
+        }
+        return false;
+    }
+    void draw() {
+        pushMatrix();
+        translate(pos.x, pos.y);
+        rect(-dim.x/2, -dim.y/2, dim.x, dim.y);
+        popMatrix();
+    }
+}</textarea></div>
+
+                                                                </section>
+                                                                <section>
+                                                                    <p>
+                                                                        This is our classic Character example with a few additions, first let's look at the character class:
+                                                                    </p>
+                                                                    <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                                         data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                                        <textarea data-name="sketch.pde">
+//fields
+boolean jumping;
+Block block = null;
+//methods
+void jump() {
+    player.move(upForce);
+    player.jumping = true;
+}
+
+void landOn(Block b) {
+  jumping = false;
+  block = b;
+  pos.y = b.pos.y - dim.y /2 - b.dim.y / 2;
+  vel.y = 0;
+  acc.y = 0;
+}
+
+void fall() {
+  vel.y *= -1;
+  acc.y = 0;
+}</textarea>
+                                                                    </div>
+
+                                                                </section>
+                                                                <section>
+
+                                                                    <p>
+                                                                        The block class has 2 methods, one to check if the Character (who landed on the block) is still on it, the other
+                                                                        will check if the Character collides with the block (basic box collision)
+                                                                    </p>
+                                                                    <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                                         data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                                        <textarea data-name="sketch.pde">
+boolean isOn(Character c) {
+    if (abs(c.pos.x - pos.x) < c.dim.x / 2 + dim.x / 2) {
+        return true;
+    }
+    return false;
+}
+boolean check(Character c) {
+    if (abs(c.pos.x - pos.x) < c.dim.x / 2 + dim.x / 2 &&
+        abs(c.pos.y - pos.y) < c.dim.y / 2 + dim.y / 2) {
+        return true;
+    }
+    return false;
+}</textarea>
+                                                                    </div>
+
+                                                                </section>
+                                                                <section>
+
+                                                                    <p>
+                                                                        Finally in our main draw loop we only need to worry about calling the methods in the correct order and ensure our logic is
+                                                                        sound.
+                                                                    </p>
+                                                                    <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                                         data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                                        <textarea data-name="sketch.pde">
+if (up && !player.jumping) {
+    player.jump();
+}
+if (left) player.move(leftForce);
+if (right) player.move(rightForce);
+    
+player.update();
+    
+if (player.block) {
+    if (!player.block.isOn(player)) {
+        player.jumping = true;
+    }
+}
+if (player.jumping) {
+    player.move(gravForce);
+    for (int i = 0; i < blocks.size(); i++) {
+        Block b = blocks.get(i);
+        if (b.check(player)) {
+            if (player.vel.y > 0) {
+                player.landOn(b);
+            } else {
+                player.fall();
+            }
+        }
+    }
+}
+for (int i = 0; i < blocks.size(); i++) {
+    blocks.get(i).draw();
+}
+    
+player.draw();</textarea>
+                                                                    </div>
+
+                                                                </section>
+                                                                <section>
+                                                                    <p>
+                                                                        Notice if the player is jumping it cannot jump again, if it has a block it will be checked to see if it's still on,
+                                                                        if the player is jumping the gravity force is applied and all other blocks are checked. Optionally, the velocity is checked
+                                                                        and if the player is rising, the fall method will be called to push the player back down.
+                                                                    </p>
+                                                                </section>
+                                                                </section>
+                                                                <section>
+                                                                    <section>
+                                                                        <h3>Tiles</h3>
+
+                                                                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                                                                             data-width="900" data-height="500" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                                                                            <textarea data-name="sketch.pde">
+Character player;
+float speed = 2;
+PVector upForce = new PVector(0, -speed);
+PVector downForce = new PVector(0, speed);
+PVector leftForce = new PVector(-speed, 0);
+PVector rightForce = new PVector(speed, 0);
+boolean up, down, left, right;
+
+ArrayList<Tile> tiles = new ArrayList<Tile>();
+
+int tileSize = 64;
+PVector tileBounds;
+
+int[][] map = new int[128][64];
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = true;
+    else if (keyCode == RIGHT) right = true;
+    else if (keyCode == UP) up = true;
+    else if (keyCode == DOWN) down = true;
+  }
+}
+void keyReleased() {
+  if (key == CODED) {
+    if (keyCode == LEFT) left = false;
+    else if (keyCode == RIGHT) right = false;
+    else if (keyCode == UP) up = false;
+    else if (keyCode == DOWN) down = false;
+  }
+}
+
+void setup() {
+  size(fullWidth, fullHeight);
+  stroke(200);
+  strokeWeight(2);
+  fill(63);
+
+    //this code will loop the 2d map array and generate some objects 1 is a box, 0 is grass
+    for (int i = 0; i < map.length; i++) {
+        for (int j = 0; j < map[i].length; j++) {
+            //if we are not on the edge of the map
+            if (i != 0 && j !=0 && i != map.length - 1 && j != map[i].length - 1) {
+                //randomly decide to place block or grass, 1/4 chance of a block
+                if (random(0, 4) < 1) {
+                    map[i][j] = 1;
+                } else {
+                    map[i][j] = 0;
+                }
+            //on the edges of the map place blocks
+            } else {
+                map[i][j] = 1;
+            }
+            //using string concatenation to determine filename to grab
+            //files are tile0.jpg and tile1.jpg
+            String path = 'img/levels/tile' + map[i][j] + '.jpg';
+            //third argument is the map value, 1 means it will block the player, 0 does not block
+            tiles.add(new Tile(path, new PVector(150 + i * tileSize, 100 + j * tileSize), map[i][j]));
+            //NOTE we don't really use the map values after this point but it's important to store in case
+            //you want to make changes to your level at some point. You would put this code inside
+            //a method and call that method to rebuild your level
+        }
+    }
+
+tileBounds = new PVector(width/2 + tileSize, height/2 + tileSize);
+
+    //you must start on a tile that is not an edge
+    Tile startTile = tiles.get(200);
+    player = new Character(new PVector(startTile.pos.x, startTile.pos.y));
+}
+
+void draw() {
+    background(255);
+    if (left) player.move(leftForce);
+    if (right) player.move(rightForce);
+    if (up) player.move(upForce);
+    if (down) player.move(downForce);
+
+    for (int i = 0; i < tiles.size(); i++) {
+        Tile t = tiles.get(i);
+        if (t.collision(player)) {
+            player.vel.mult(0.4);
+            player.acc.set(0, 0, 0);
+        }
+        if (t.inWindow()) {
+            t.draw(player.pos);
+        }
+    }
+
+    player.update();
+    player.draw();
+}
+                                                                                        </textarea>
+                                                                                        <textarea data-name="Tile.pde">
+//a class to describe a Tile
+class Tile {
+    PVector pos, diff, absDiff;
+    PImage img;
+    boolean blocks;
+    Tile(String path, PVector pos, blocks) {
+        img = loadImage(path);
+        this.pos = pos;
+        this.blocks = blocks;
+    }
+    void collision(Character c) {
+        diff = PVector.sub(c.pos, pos);
+        absDiff = new PVector(abs(diff.x), abs(diff.y));
+        if (blocks && 
+            absDiff.x < c.dim.x / 2 + img.width / 2 && 
+            absDiff.y < c.dim.y / 2 + img.height / 2) {
+
+            c.pos.x += diff.x * 0.02;
+            c.pos.y += diff.y * 0.02;
+            return true;
+        }
+        return false;
+    }
+    void inWindow() {
+        if (absDiff.x < tileBounds.x && absDiff.y < tileBounds.y) {
+            return true;
+        }
+        return false;
+    }
+    void draw(PVector playerPos) {
+        pushMatrix();
+        translate(-playerPos.x + width/2 + pos.x, -playerPos.y + height/2 + pos.y);
+        scale(1.04, 1.04);
+        image(img, -img.width/2, -img.height/2);
+        popMatrix();
+    }
+}</textarea>
+                                                                                        <textarea data-name="Character.pde">
+//a class to describe a generic Character
+class Character {
+  //fields
+  PVector pos, vel, acc, dim;
+  float damp = 0.8; //constant damping factor
+  boolean jumping = false;
+  Block block = null;
+  //a constructor to initialize the fields above with initial values
+  Character(PVector pos) {
+    this.pos = pos;
+    vel = new PVector(); //must create instance
+    acc = new PVector(); //these are complex data types (i.e. objects)
+    dim = new PVector(32, 32);
+  }
+  //move method, PVector force as parameter, add to acceleration
+  void move(PVector force) {
+    acc.add(force);
+  }
+  
+  //update the physics for the character
+  void update() {
+    vel.add(acc); //add acceleration to velocity
+    vel.mult(damp); //multiply velocity by dampening factor (0.9-0.99);
+    pos.add(vel); //add velocity to position (moves character)
+    acc.set(0, 0, 0); //clear the acceleration for the next loop
+  }
+  
+  void draw() {
+    ellipse(width/2, height/2, dim.x, dim.y);
+  }
+}</textarea></div>
+
+                                                                                        </section>
+
+                <section>
+
+                    <p>
+                        Two methods are important in the Tile class: collision and inWindow
+                    </p>
+                    <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                         data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+void collision(Character c) {
+    diff = PVector.sub(c.pos, pos);
+    absDiff = new PVector(abs(diff.x), abs(diff.y));
+    if (blocks && 
+        absDiff.x < c.dim.x / 2 + img.width / 2 && 
+        absDiff.y < c.dim.y / 2 + img.height / 2) {
+
+        c.pos.x += diff.x * 0.02;
+        c.pos.y += diff.y * 0.02;
+        return true;
+    }
+    return false;
+}
+void inWindow() {
+    if (absDiff.x < tileBounds.x && absDiff.y < tileBounds.y) {
+        return true;
+    }
+    return false;
+}</textarea>
+                                                                                            </div>
+                                                                                                
+                                                                                        </section>
+        <section>
+            <h3>collision</h3>
+            <p>
+                This is the same as the typical box collision, but notice how we use PVector.sub(first, second) to get the difference
+                between the two vectors, and then store that information for later. Why? Because we will need it for the inWindow method
+                and it's much better to calculate once and store it temporarily.
+            </p>
+            <p>
+                Also notice how we resolve the collision a little bit, and push the player away from the block. This is sort of a
+                "magic number" solution that will probably need to be adjusted in your games. Otherwise the character's will
+                stick to the tiles that are blocking tiles.
+            </p>
+        </section>
+        <section>
+            <h3>inWindow</h3>
+            <p>
+                The inWindow method simply checks the stored values of absDiff to make sure they are within the tileBounds (how far tiles should
+                be visible). This enables us to have large game worlds without having to draw every single game tile all the time. You should know
+                already why this is important for performance.
+            </p>
+        </section>
+                                                                </section>
+                                                                                            
+            </div>
+        </div>
+
+
+
+                                                                                        <script src="lib/js/head.min.js"></script>
+                                                                                        <script src="js/reveal.min.js"></script>
+                                                                                        <script src="js/codetabs.js"></script>
+                                                                                        <script type="text/javascript">
+                                                                                            Reveal.addEventListener('ready', function() {
+                                                                                                setTimeout(checkSketches, 1500);
+                                                                                            });
+                                                                                            Reveal.addEventListener('overviewshown', checkSketches);
+                                                                                            Reveal.addEventListener('overviewhidden', checkSketches);
+                                                                                            Reveal.addEventListener('slidechanged', checkSketches);
+                                                                                            function checkSketches() {
+                                                                                                var slide = Reveal.getCurrentSlide();
+                                                                                                var sketch = document.getElementById('sketch');
+                                                                                                if (sketch) {
+                                                                                                    sketch.hide();
+                                                                                                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                                                                                                        sketch.fadeIn();
+                                                                                                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                                                                                                    } else {
+                                                                                                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                                                                                                        Reveal.layout();
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        </script>
+                                                                                        <script>
+                                                                                            // Full list of configuration options available here:
+                                                                                            // https://github.com/hakimel/reveal.js#configuration
+                                                                                            Reveal.initialize({
+                                                                                                width: 1024,
+                                                                                                height: 768,
+                                                                                                margin: 0.06,
+                                                                                                controls: true,
+                                                                                                progress: true,
+                                                                                                history: true,
+                                                                                                center: true,
+                                                                                                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                                                                                                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                                                                            
+                                                                                                // Optional libraries used to extend on reveal.js
+                                                                                                dependencies: -[
+                                                                                                    {src: 'lib/js/classList.js', condition: function() {
+                                                                                                            return !document.body.classList;
+                                                                                                        }},
+                                                                                                    {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                                                                                                            return !!document.body.classList;
+                                                                                                        }},
+                                                                                                    {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                                                                                                            return !!document.body.classList;
+                                                                                                        }}
+                                                                                                ]
+                                                                                            });
+                                                                                        </script>
+                                                                                        </body>
+                                                                                        </html>

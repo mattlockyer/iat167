@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Debugging</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Debugging</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Errors</a></li>
+                        <li><a href="#/2">Balancing Brackets</a></li>
+                        <li><a href="#/3">Print and Trace</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">                        
+                        <li><a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="_blank">Finite State Machine</a></li>
+                        <li><a href="http://www.youtube.com/watch?v=E0Al0-sOO_c" target="_blank">Game Loops + States</a></li>
+                    </ul>
+
+                </section>
+                <section>
+                    <section>
+                        <h3>Errors</h3>
+                        <p>
+                            There are 2 types of errors that can occur when programming: compile time errors and run time errors.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Compile time errors</h3>
+                        <p>
+                            Compile time errors occur before your program even runs and usually have something to do with 
+                            incorrect syntax: unbalanced brackets, mistyped variable name, missing semicolon, etc...
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Run time errros</h3>
+                        <p>
+                            Run time errors occur while your sketch is running and can be broken into 2 parts: unrecoverable
+                            (program crashes) and recoverable (program continues to run but output is wrong).
+                        </p>
+                        <p>
+                            The first error is most often an array index out of bounds or reference error, which basically means you're trying to access
+                            an item that simply isn't there.
+                        </p>
+                        <p>
+                            The second is harder to debug and it simply means the sketch does not perform the way it should, this includes
+                            weird glitches, oddities and things simply not showing up.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Balancing Brackets</h3>
+
+                        <p>
+                            Two strategies will help with balancing brackets.
+                        </p>
+                        <p>
+                            Always auto format your code using ctrl - t, this makes it easy to see that brackets may be missing.
+                        </p>
+                        <p>
+                            Processing also has a bracket highlighter which highlights the starting or ending bracket, this makes it
+                            easier to track where brackets may be missing.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Bracket Example</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+int[][][] map = new int[20][20][3];
+void setup() {
+  for (int i = 0; i < map.length; i++) {
+    for (int j = 0; j < map[i].length; j++ {
+      for (int k = 0; k < map[i][j].length; k++) {
+
+      }
+    }
+}</textarea>
+                    </section>
+                </section>
+
+
+                <section>
+                    <section>
+                        <h3>Print</h3>
+
+                        <p>
+                            <span class="code">print</span> and <span class="code">println</span> are your best friends for
+                            solving run time errors. Whether it's printing out a looping variable like i or j, or the position
+                            of an object, you should always use <span class="code">print</span> and <span class="code">println</span>
+                            to debug run time errors.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Tracing</h3>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-noplay="true" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void doThis() {
+  doThat();
+}
+void doThat() {
+  doItAgain();
+}
+void doItAgain() {
+  doThis();
+}
+doThis();
+                            </textarea>
+                    </section>
+
+                    <section>
+                        <h3>Tracing</h3>
+                        <p>
+                            You should be able to follow simple examples such as these and trace the path of execution.
+                            Obviously real examples are more complex but the same rules apply.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>The Stack</h3>
+                        <p>
+                            In a running program: function calls that have been made at any time are placed onto "the stack".
+                        </p>
+                        <p>
+                            When a program crashes and shows all the function calls that led to the crash, this is referred to
+                            as the "stack trace".
+                        </p>
+                        <p>
+                            You should be comfortable with tracing your own code when your program is not running in order to
+                            determine errors. In other words, build a stack trace in your brain!
+                        </p>
+                    </section>
+
+                </section>
+
+            </div>
+        </div>
+
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener('ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener('overviewshown', checkSketches);
+            Reveal.addEventListener('overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        
+                // Optional libraries used to extend on reveal.js
+                dependencies: -[
+                    {src: 'lib/js/classList.js', condition: function() {
+                            return !document.body.classList;
+                        }},
+                    {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }},
+                    {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                            return !!document.body.classList;
+                        }}
+                ]
+            });
+        </script>
+    </body>
+</html>

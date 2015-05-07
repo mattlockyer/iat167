@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Primitive Data Types</title>
+        <meta name="description" content="IAT 167 - Digital Games - Primative Data Types">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Primitive Data Types</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Types</a></li>
+                        <li><a href="#/2">Declaring</a></li>
+                        <li><a href="#/3">Initializing</a></li>
+                        <li><a href="#/4">Errors</a></li>
+                        <li><a href="#/5">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/basics/" target="_blank">Processing Basics</a> (required: data section)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 4 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        The crucial variable in the process of turning knowledge into value is creativity. [John Kao]
+                    </blockquote>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Types</h3>
+
+                        <p>
+                            There are many variable types in processing and it is important to know which variable type suits a particular situation.
+                        </p>
+                        <p>
+                            <span class="code">int</span> integers (whole numbers) between -2,147,483,648 and 2,147,483,647<br />
+                            <span class="code">float</span> floating point numbers (decimal numbers)<br />
+                            <span class="code">char</span> a single character<br />
+                            <span class="code">byte</span> integers between -127 and 128<br />
+                            <span class="code">boolean</span> true or false
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Variable types define what information the variable can store. A variable will always be the same type that was specified when
+                            it was declared (created).
+                        </p>
+                        <div class="important">Variable types define what type of information a variable holds.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Declaring</h3>
+
+                        <p>
+                            In order to create a variable we must declare it to processing by specifying the variable type and name.
+                        </p>
+                        <p>
+                            <span class="code">int xPosition;</span> declare variable xPosition of type int<br />
+                            <span class="code">float yPosition;</span> declare variable yPosition of type float<br />
+                            <span class="code">char aLetter;</span> declare variable aLetter of type char<br />
+                            <span class="code">byte numApples;</span> declare variable numApples of type byte<br />
+                            <span class="code">boolean lightOn;</span> declare variable lightOn of type boolean
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <p>
+                            Declaring a variable is an important step since the type and name of the variable will be set often for the duration
+                            of your program. Variable names cannot contain spaces or most special characters. For this reason there are some 
+                            conventions for naming variables. The first character or word of a variable
+                            name should not be capitalized, but each word thereafter should be capitalized. Check the examples above. This is called
+                            camel casing and it is a special convention for naming variables that makes for better readability of code.
+                        </p>
+
+
+
+                        <div class="important">Variable types and names are often set for the duration of a program, so declare variables wisely.</div>
+                        <div class="important">Variable names should be Camel Cased, first word lower case, each word after capitalized.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Initializing</h3>
+
+                        <p>
+                            In order to use a variable we must initialize it with a value so that our variable name represents some data.
+                        </p>
+                        <p>
+                            <span class="code">xPosition = 40;</span> sets the variable xPosition to 40<br />
+                            <span class="code">yPosition = 40.5;</span> sets the variable yPosition to 40.5<br />
+                            <span class="code">myFirstInitial = 'M';</span> sets the variable myFirstInitial to M<br />
+                            <span class="code">numOfApples = 8;</span> sets the variable numOfApples to 8<br />
+                            <span class="code">lightOn = true;</span> sets the variable lightOn to true
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            You assign variables some data by using the = sign. This is called the assignment operator which assigns the value of
+                            anything on the right to the variable on the left. Be careful when assigning values to variables since they should be
+                            of the same type.
+                        </p>
+                    </section>
+
+                    <section>
+
+                        <h3>Declaring and Initializing</h3>
+
+                        <p>
+                            Sometimes we will want to do these operations at once. Here is an example
+                        </p>
+                        <p>
+                            <span class="code">float yPosition = 40.5;</span> declare and initialize variable yPosition to 40.5<br />
+                        </p>
+                        <p>
+                            Now we can see what value yPosition is by calling the print statement with yPosition as an argument.
+                        </p>
+                        <p>
+                            <span class="code">print(yPosition);<br />
+                        </p>
+                        <p>
+                            Which will print out 40.5
+                        </p>
+                        <div class="important">Variables must be assigned only values that their type will accept.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Errors</h3>
+
+                        <p>
+                            Errors can arise when the value being assigned to the variable is of a different type. Here are some examples:
+                        </p>
+                        <p>
+                            <span class="code">int xPosition = 40.5;</span> cannot assign float to type int<br />
+                            <span class="code">boolean lightOn = 8;</span> cannot assign int to type boolean<br />
+                            <span class="code">char myFirstInitial = "ML";</span> cannot assign string to type char<br />
+                            <span class="code">float yPosition = 40;</span> works, but why?<br />
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <p>
+                            In the last example, the assignment of the integer value 40 to a float worked. This is only because a floating point
+                            number can represent an integer value as simply 40.0.
+                        </p>
+                        <p>
+                            Another type of error that is common is forgetting to initialize your variable. Usually processing will set this variable
+                            to 0 if it is an int, byte, float, an empty string if it is a char, and false if it is a boolean. These may not be the
+                            desired values for the variables in your program so you MUST always initialize your variables.
+                        </p>
+
+                        <div class="important">Do not assign values of a different type to a variable. You must use the type specified when the
+                            variable was declared.</div>
+                        <div class="important">Always initialize your variables, do not leave things to chance.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section id="sketch-parent">
+
+                        <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                             data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos;
+float yPos;
+
+void setup() {
+  size(fullWidth, fullHeight);
+  xPos = width/2;
+  yPos = height/2;
+}
+
+void draw() {
+  background(255);
+
+  fill(0);
+  text("mouseX: " + mouseX, 8, 20);
+  text("mouseY: " + mouseY, 8, 40);
+  text("xPos: " + xPos, 8, 60);
+  text("yPos: " + yPos, 8, 80);
+
+  stroke(0, 128);
+  strokeWeight(4);
+  fill(255, 0, 0, 128);
+  
+  xPos += (mouseX - xPos)/20;
+  yPos += (mouseY - yPos)/20;
+  
+  pushMatrix();
+  translate(xPos, yPos);
+  ellipse(0, 0, 64, 64);
+  popMatrix();
+}
+                            
+                            </textarea>
+                    </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

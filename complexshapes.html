@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Complex Shapes</title>
+        <meta name="description" content="IAT 167 - Digital Games - Complex Shapes">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+                <section>
+                    <h3>Complex Shapes</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Shape Modes</a></li>
+                        <li><a href="#/2">Plotting Verticies</a></li>
+                        <li><a href="#/3">Curved Vertices</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/curves" target="_blank">Curves</a> (required)</li>
+                        <li><a href="http://processing.org/learning/basics/" target="_blank">Basics</a> (required: form section)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 1 + 2 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        "I am a kind of paranoid in reverse. I suspect people of plotting to make me happy." ~ J. D. Salinger
+                    </blockquote>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Shape Modes</h3>
+
+                        <img class="left" src="img/complexshapes/shapes.png"></img class="left">
+
+                        <p class="smaller left">
+                            Processing has the ability to define custom shapes. Some of the shape types are shown here.
+                            The command to draw a particular shape type is:<br />
+                            <span class="code">beginShape( mode );</span><br />
+                            For each shape example the following 3 vertices were used:<br />
+                            <span class="code">vertex( 40, 40 );</span><br />
+                            <span class="code">vertex( 40, 80 );</span><br />
+                            <span class="code">vertex( 80, 80 );</span><br />
+                            Of course their y-values have changed for each example but the plotting remains the same.<br />
+                            The command to end a shape is:<br />
+                            <span class="code">endShape( CLOSE );</span><br />
+                            The use of CLOSE is optional but generally a good idea.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <p>
+                            Take a look at how some shapes appear incomplete. For example the LINES shape only draws one line.
+                            That is because it expects a pair of points for each line to be drawn. Since there are only 3 points, there is only 1 line.
+                            Also note the difference between using POLYGON with CLOSE and without.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <p>
+                            There are more shape types available in processing such as:
+                        </p>
+                        <ul>
+                            <li class="code">beginShape(TRIANGLE_STRIP);</li>
+                            <li class="code">beginShape(TRIANGLE_FAN);</li>
+                            <li class="code">beginShape(QUADS);</li>
+                            <li class="code">beginShape(QUAD_STRIP);</li>
+                        </ul>
+
+                    </section>
+                    <section>
+
+                        <div class="important">Every custom shape must call beginShape() and endShape()</div>
+                        <div class="important">Shapes are created by plotting vertices. 
+                            Different shape types will represent vertices in different ways.</div>
+                        <div class="important">endShape(CLOSE) is optional, but normally recommended.</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Plotting Verticies</h3>
+
+                        <img class="left" src="img/complexshapes/star.png"></img class="left">
+
+                        <p class="smaller left">
+                            Here is a simple star shape plotted using 10 vertices. It's important to note the symmetrical vertices of a shape
+                            since this will simplify the plotting of the shape. Here we have 4 symmetrical vertices on each side of the star.
+                            Below we'll see some code for how to draw the star shape.
+                        </p>
+
+
+                    </section>
+                    <section>
+                        <div class="codetabs" data-name="star" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-nofullscreen="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="star.pde">
+void setup() {
+  size(400, 400);
+  background(255);
+  stroke(255, 0, 0);
+  strokeWeight(4);
+  fill(255, 0, 0, 128);
+  beginShape();
+  //top point
+  vertex(200, 40);
+  vertex(140, 120);
+  vertex(40, 120);
+  vertex(140, 180);
+  vertex(40, 300);
+  //bottom middle point
+  vertex(200, 220);
+  vertex(360, 300);
+  vertex(260, 180);
+  vertex(360, 120);
+  vertex(260, 120);
+  endShape(CLOSE);
+}
+                            </textarea>
+                        </div>
+
+                    </section>
+                    <section>
+
+                        <div class="important">Plotting shapes can be tedious. The best technique is to plot out shapes
+                            on paper before attempting them in processing.</div>
+
+                        <div class="important">Identify symmetry that can be an advantage when plotting.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Curved Vertices</h3>
+
+                        <img class="left" src="img/complexshapes/starCurved.png"></img class="left">
+
+                        <p class="smaller left">
+                            Believe it or not, this is the same star shape plotted with curve vertices. Curve vertices are plotted with
+                            an additional control point at the beginning and end of the list of vertices. These control points define how the
+                            curve will start and end. The rest of the vertices are plotted normally. There is an option in processing
+                            to set the curve tightness. This means that as points are plotted, they are pulled through the point more tightly
+                            causing them to twist and bunch like you see in this picture. Usually curve tightness of 1 works quite well for drawing
+                            regular shapes, but it should be experimented with to get some interesting results.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="codetabs" data-name="starCurved" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-nofullscreen="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="starCurved.pde">
+void setup() {
+  size(400, 400);
+  background(255);
+  curveTightness(5);
+  stroke(255, 0, 0);
+  strokeWeight(4);
+  fill(255, 0, 0, 128);
+  beginShape();
+  //First Control Point
+  curveVertex(140, 120);
+  //First Point
+  curveVertex(200, 40);
+  
+  curveVertex(140, 120);
+  curveVertex(40, 120);
+  curveVertex(140, 180);
+  curveVertex(40, 300);
+  
+  curveVertex(200, 220);
+ 
+  curveVertex(360, 300);
+  curveVertex(260, 180);
+  curveVertex(360, 120);
+  curveVertex(260, 120);
+  
+  //End Point
+  curveVertex(200, 40);
+  //End Control Point
+  curveVertex(260, 120);
+ 
+  endShape();
+}
+                            </textarea>
+                        </div>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">Curved vertices begin and end with a vertex to represent the control point for the 
+                            first and last point.</div>
+
+                        <div class="important">The curveTightness( value ) method can be useful for creating some interesting designs
+                            using the curved vertices.</div>
+
+                    </section>
+                </section>
+
+
+                <section id="sketch-parent">
+
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  background(255);
+  
+  curveTightness( (float) (mouseX - 200) / 25 );
+  stroke(255, 0, 0);
+  strokeWeight(4);
+  fill(255, 0, 0, 128);
+  beginShape();
+  //First Control Point
+  curveVertex(140, 120);
+  //First Point
+  curveVertex(200, 40);
+  
+  curveVertex(140, 120);
+  curveVertex(40, 120);
+  curveVertex(140, 180);
+  curveVertex(40, 300);
+  
+  curveVertex(200, 220);
+ 
+  curveVertex(360, 300);
+  curveVertex(260, 180);
+  curveVertex(360, 120);
+  curveVertex(260, 120);
+  
+  //End Point
+  curveVertex(200, 40);
+  //End Control Point
+  curveVertex(260, 120);
+ 
+  endShape();
+}
+                        </textarea>
+                        <textarea data-name="sketch.css">
+canvas {
+  margin:32px;
+  border:2px solid #ddd;
+}
+                        </textarea>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                //resize sketches
+                var iframes = document.getElementsByTagName('iframe');
+                for (var i = 0 ; i < iframes.length; ++i) {
+                    iframes[0].resize();
+                    console.log('resizing');
+                }
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

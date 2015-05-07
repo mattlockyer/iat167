@@ -1,0 +1,40 @@
+body{
+    margin:32px;
+    padding:0px;
+    background-color: #FFF;
+    font-family: Arial;
+}
+
+.wrapper {
+    text-align:center;
+}
+.container {
+    margin:0px auto;
+    width:800px;
+}
+
+.heading {
+    float:left;
+    text-align: right;
+    color:#74a7cb;
+    width: 300px;
+    font-size: 2em;
+    font-weight: bold;
+    text-align:right;
+    padding-right: 15px;
+
+    -webkit-text-stroke: 1px black;
+}
+
+.divider{
+    clear: both;
+    height:32px;
+}
+
+.def {
+    text-align:left;
+    float:left;
+    width: 300px;
+
+    padding-left: 15px;
+}

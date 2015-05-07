@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Movement</title>
+        <meta name="description" content="IAT 167 - Digital Games - Using Objects">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Movement</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Linear</a></li>
+                        <li><a href="#/2">Oscillating</a></li>
+                        <li><a href="#/3">Physics and Noise</a></li>
+                        <li><a href="#/4">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/trig/" target="_blank">Trigonometry (required)</a></li>
+                        <li><a href="http://processing.org/learning/topics/bouncybubbles.html" target="_blank">Bouncy Bubbles (required)</a></li>
+                        <li><a href="http://processing.org/learning/topics/reflection1.html" target="_blank">Reflections (recommended)</a></li>
+                    </ul>
+                    <blockquote>
+                        All change is not growth, as all movement is not forward.. [Ellen Glasgow]
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+                        <h3>Linear Movement</h3>
+                        <p>
+                            Linear movement is the most basic movement type we can have. There are however several ways to program linear movement.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos = 20, yPos = 200;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+}
+void draw() {
+  background(255);
+  ellipse(xPos, yPos, 20, 20); 
+  xPos++;
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <h3>Angle Based Linear Movement</h3>
+                        <p>
+                            Now if we want to move linearly in the direction of some angle, let's call it "angle" then we need to update
+                            the xPos and yPos coordinate variables (for whatever shape we're moving) using the cos and sin of the "angle" angle variable.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos = 0, yPos = 200, angle = -PI/8;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+}
+void draw() {
+  background(255);
+  xPos += cos(angle);
+  yPos += sin(angle);
+  ellipse(xPos, yPos, 20, 20); 
+}</textarea></div>
+
+                    </section>
+                    <section>
+
+                        <h3>Changing Angles</h3>
+                        <p>
+                            What about using a data source like the mouse position to generate the angle? It's still linear movement, but much
+                            more interesting.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos = 200, yPos = 200, angle = -PI/8;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+}
+void draw() {
+  background(255);
+  angle = atan2(mouseY - yPos, mouseX - xPos);
+  xPos += cos(angle);
+  yPos += sin(angle);
+  ellipse(xPos, yPos, 20, 20); 
+}</textarea></div>
+
+
+                    </section>
+                    <section>
+                        <h3>Timing Linear Movement</h3>
+                        <p>
+                            We can use a simple integer as a timer for any motion (or in any object). We don't have to time only motion, we can time a fill,
+                            an animation, practically anything.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos = 200, yPos = 200, angle = -PI/4;
+int timer = 0;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+}
+void draw() {
+  background(255);
+  xPos += cos(angle);
+  yPos += sin(angle);
+  fill(timer * 6);
+  ellipse(xPos, yPos, 20, 20); 
+  timer++;
+  if (timer > 40) {
+    angle += PI/2;
+    timer = 0;
+  }
+}</textarea></div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Oscillatory</h3>
+                        <p>
+                            Wavy movement is usually performed by using sin and cos for the direction to travel but in a slightly different way.
+                        </p>
+
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos, angle;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+  xPos = width/2; yPos = height/2; angle = 0;
+}
+void draw() {
+  background(255);
+  ellipse(xPos + 40 * sin(angle), yPos, 20, 20); 
+  angle += 0.04;
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <h3>Circular Movement</h3>
+                        <p>
+                            If we combine cos and sin to effect the x and y positions at the same time, using the same angle, we will get a circular movement.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="300" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos, angle;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+  xPos = width/2; yPos = height/2; angle = 0;
+}
+void draw() {
+  background(255);
+  ellipse(xPos + 40*cos(angle), yPos + 40*sin(angle),20,20); 
+  angle += 0.04;
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Notice the number 40 in there? That's a chosen number, it could be anything. Since sin and cos are two functions that return numbers
+                            <strong>oscillating</strong> between <strong>( -1, 1 )</strong>, that number becomes the <strong>radius</strong> of the 
+                            circular motion in this example.
+                        </p>
+                        <p>
+                            Also note that the angle is always increasing at a constant rate. We could say the angle is increasing linearly with time. Why 0.04?
+                            It's a nice number that makes the movement smooth... That's all. Changing this number would simply make the circles faster or slower.
+                        </p>
+
+
+                    </section>
+                    <section>
+
+                        <h3>Vehicles Making Decisions</h3>
+                        <p>
+                            So what if we can move back and forth or in a circle? Well things become more interesting when we start changing the location and adding
+                            in a little bit of random behavior.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos, angle, speed;
+int dir = 1;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+  xPos = width/2; yPos = height/2; angle = 0, speed = 1;
+}
+void draw() {
+  background(255);
+  xPos += speed * cos(angle);
+  yPos += speed * sin(angle);
+  angle += 0.04 * dir;
+  if (random(0, 16) < 1) {
+    dir *= -1;
+  }
+  ellipse(xPos, yPos, 20, 20);
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Two things to notice here:
+                        </p>
+                        <p>
+                            The use of an integer to remember which way we should be increasing our angle. The "dir" variable is simply 1 or -1 and that will
+                            control how our angle is updated.
+                        </p>
+                        <p>
+                            The other is the use of the random function. Notice it's usage here: <span class="code">if (random(0, 16) < 1)</span> This
+                            use will give a 1 / 16 chance of the dir variable getting changed. That's what gives this dot it's random walk.
+                        </p>
+
+                    </section>
+                    <section>
+                        <h3>Death and Decay - Timing</h3>
+                        <p>
+                            So how would we give our little vehicle a lifespan. Eventually it walks completely offscreen, but what if we wanted to control how long
+                            it would be until that happened? Well we'd need to time it somehow using an integer.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos, angle, speed;
+int dir = 1, timer = 0;
+void setup() {
+  size(fullWidth, fullHeight); noStroke(); background(255);
+  xPos = width/2; yPos = height/2; angle = 0, speed = 1;
+}
+void draw() {
+  background(255);
+  fill(timer);
+  xPos += speed * cos(angle);
+  yPos += speed * sin(angle);
+  angle += 0.04 * dir;
+  if (random(0, 16) < 1) {
+    dir *= -1;
+  }
+  ellipse(xPos, yPos, 20, 20);
+  timer++;
+  if (timer > 255) {
+    xPos = width/2; yPos = height/2; timer = 0;
+  }
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Notice how when the timer reaches 255, we reset the xPos and yPos to the center, and reset the timer to 0 so the whole loop will
+                            happen again with this object.
+                        </p>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Attract and Repel</h3>
+                        <p>
+                            We've seen a basic attraction equation before, but let's take another look:
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+  xPos = width/2, yPos = height/2;
+}
+void draw() {
+  background(255);
+  xPos += (mouseX - xPos)/30;
+  yPos += (mouseY - yPos)/30;
+  ellipse(xPos, yPos, 20, 20);
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Notice what makes the attraction happen? It's the vector (distance and direction) to the mouse position divided by some number (30).
+                            So what we are adding to the xPos and yPos is a piece of that vector to the mouse. The more we divide this vector, the
+                            slower the object will move towards the mouse?
+                        </p>
+
+                    </section>
+                    <section>
+                        <p>
+                            How about repulsion?
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos, yPos;
+void setup() {
+  size(fullWidth, fullHeight); fill(0);
+  xPos = width/2, yPos = height/2;
+}
+void draw() {
+  background(255);
+  xPos -= (mouseX - xPos)/300;
+  yPos -= (mouseY - yPos)/300;
+  ellipse(xPos, yPos, 20, 20);
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Notice that instead of adding the vector in the direction of the mouse, we're subtracting it from the xPos and yPos variables.
+                            Also, we had to increase the divisor (30) to 300 in this case, because otherwise our object would move too fast and would leave
+                            the screen before we had a chance to find out what happened.
+                        </p>
+                        <p>
+                            There is another way to do repulsion and it has to do with how we calculate the vector:<br />
+                            <span class="code">xPos += (xPos - mouseX)/300;</span> <br />
+                            <span class="code">yPos += (yPos - mouseY)/300;</span> <br />
+                            Now the vector faces the opposite direction. When we add this to our object (not subtracting) we're actually adding a vector facing
+                            away from the mouse.
+                        </p>
+
+                    </section>
+                    <section>
+                        <h3>Frictionless Physics Attraction (orbiting)</h3>
+                        <p>
+                            Attraction can be physics based, including a mass and force.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+PVector pos, vel, acc;
+float mass, force;
+void setup() {
+  size(fullWidth, fullHeight);
+  pos = new PVector(random(width), random(height));
+  vel = new PVector();
+  acc = new PVector();
+  mass = 1;
+  force = 1;
+}
+void draw() {
+  background(255);
+  //attraction to the center of the screen
+  PVector diff = PVector.sub(new PVector(width/2, height/2), pos); //the edge between our object and the center of the screen
+  float distance = diff.mag(); //the distance between our object and the center
+  if (distance > 32.0) { //as long as we're not within 32 pixels of the center
+    diff.div(distance); //the further we are, the less attraction
+    diff.mult(mass * force); //multiply by the mass of our object
+    acc.add(diff); //add to acceleration
+  }
+  vel.add(acc); //add acceleration to velocity
+  acc.set(0,0,0); //reset acceleration
+  pos.add(vel); //update position
+  //ellipse
+  ellipse(pos.x, pos.y, 20, 20);
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <h3>Perlin Noise</h3>
+                        <p>
+                            Perlin noise is a smooth random noise function. Have you ever used the "clouds" filter in photoshop? Then you've seen Perlin noise.
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+void setup() {
+  size(fullWidth, fullHeight); background(255); noStroke();
+}
+void draw() {
+  int bit = 8;
+  for (int i = 0; i < width; i += bit) {
+    for (int j = 0; j < height; j += bit) {
+      float bright = noise(i * 0.005, j * 0.005);
+      fill(bright * 255);
+      rect(i, j, bit, bit);
+    }
+  }
+}</textarea></div>
+
+                    </section>
+                    <section>
+                        <p>
+                            Now imagine if we controlled the angle of some object based on the brightness of the noise where the object's position was?
+                        </p>
+                        <div class="codetabs" data-name="arrays" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="400" data-nofullscreen="true" data-nozip="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="sketch.pde">
+float xPos = 200, yPos = 200;
+void setup() {
+  size(fullWidth, fullHeight); background(255); noStroke();
+}
+void draw() {
+  float angle = 45 * noise(xPos * 0.005, yPos * 0.005);
+  xPos += cos(angle);
+  yPos += sin(angle);
+  
+  int bit = 32;
+  for (int i = 0; i < width; i += bit) {
+    for (int j = 0; j < height; j += bit) {
+      
+      float bright = noise(i * 0.005, j * 0.005);
+      fill(bright * 255);
+      rect(i, j, bit, bit);
+    }
+  }
+  fill(255, 0, 0);
+  ellipse(xPos, yPos, 16, 16);
+}</textarea></div>
+
+                    </section>
+                </section>
+                <section id="sketch-parent">
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+int newNoiseSeed = (int) random(100000);
+int maxParticle = 256;
+ArrayList<Particle> objects = new ArrayList<Particle>();
+
+void setup() {
+  size(fullWidth, fullHeight);
+  background(255);
+  smooth();
+}
+
+void keyPressed() {
+  if (key == ' ') background(255);
+}
+
+void draw() {
+  if (mousePressed && objects.size() < maxParticle) {
+    objects.add( new Particle( mouseX, mouseY ));
+  }
+
+  for (int i = 0; i < objects.size(); i++) {
+    Particle p = objects.get(i);
+    p.addPerlin();
+    p.update();
+    p.drawMe();
+  }
+}</textarea>
+                                    <textarea data-name="Particle.pde">
+class Particle {
+  PVector pos, pPos, vel, acc;
+  float damp, weight;
+  color c;
+
+  Particle(float xPos, float yPos) {
+    pos = new PVector(xPos, yPos);
+    pPos = new PVector(0, 0);
+    vel = new PVector(0, 0);
+    acc = new PVector(0, 0);
+    damp = 0.96;
+    weight = 1;
+    c = color(0, random(128), random(128, 255), 16);
+  }
+
+  void update() {
+    vel.add(acc);
+    vel.mult(damp);
+    pPos.set(pos.x, pos.y, 0);
+    pos.add(vel);
+    acc.set(0, 0, 0);
+    outside();
+  }
+
+  void outside() {
+    if (pos.x > width || pos.x < 0
+      || pos.y > height || pos.y < 0) {
+      objects.remove(this);
+    };
+  }
+  
+  void addPerlin() {
+    float depth = 0.006;
+    float bright = 15 * noise(pos.x * depth, pos.y * depth, newNoiseSeed);
+    PVector perlin = new PVector( cos(bright), sin(bright) );
+    //perlin.mult(0.04);
+    acc.add( perlin );
+    acc.limit(1);
+  }
+
+  void drawMe() {
+    stroke(c);
+    strokeWeight(weight);
+    line(pos.x, pos.y, pPos.x, pPos.y);
+  }
+}</textarea></div>
+                                    </section>
+
+                                    </div>
+                                    </div>
+
+
+
+                                    <script src="lib/js/head.min.js"></script>
+                                    <script src="js/reveal.min.js"></script>
+                                    <script src="js/codetabs.js"></script>
+                                    <script type="text/javascript">
+                                        Reveal.addEventListener('ready', function() {
+                                            setTimeout(checkSketches, 1500);
+                                        });
+                                        Reveal.addEventListener('overviewshown', checkSketches);
+                                        Reveal.addEventListener('overviewhidden', checkSketches);
+                                        Reveal.addEventListener('slidechanged', checkSketches);
+                                        function checkSketches() {
+                                            var slide = Reveal.getCurrentSlide();
+                                            var sketch = document.getElementById('sketch');
+                                            if (sketch) {
+                                                sketch.hide();
+                                                if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                                                    sketch.fadeIn();
+                                                    document.getElementsByClassName('slides')[0].style.display = 'none';
+                                                } else {
+                                                    document.getElementsByClassName('slides')[0].style.display = 'block';
+                                                    Reveal.layout();
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                    <script>
+                                        // Full list of configuration options available here:
+                                        // https://github.com/hakimel/reveal.js#configuration
+                                        Reveal.initialize({
+                                            width: 1024,
+                                            height: 768,
+                                            margin: 0.06,
+                                            controls: true,
+                                            progress: true,
+                                            history: true,
+                                            center: true,
+                                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                                            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                                            // Optional libraries used to extend on reveal.js
+                                            dependencies: -[
+                                                {src: 'lib/js/classList.js', condition: function() {
+                                                        return !document.body.classList;
+                                                    }},
+                                                {src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }},
+                                                {src: 'plugin/notes/notes.js', async: true, condition: function() {
+                                                        return !!document.body.classList;
+                                                    }}
+                                            ]
+                                        });
+                                    </script>
+                                    </body>
+                                    </html>

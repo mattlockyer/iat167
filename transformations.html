@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Transformations</title>
+        <meta name="description" content="IAT 167 - Digital Games - Transformations">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+                <section>
+                    <h3>Transformations</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Drawing Directly</a></li>
+                        <li><a href="#/2">Translation</a></li>
+                        <li><a href="#/3">Rotation and Scale</a></li>
+                        <li><a href="#/4">Push and Pop</a></li>
+                        <li><a href="#/5">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/transform2d/" target="_blank">Transforms</a> (required)</li>
+                        <li><a href="http://processing.org/learning/basics/" target="_blank">Basics</a> (required: transform section)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 1 + 2 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        "The universe is transformation; our life is what our thoughts make it. [Marcus Aurelius]"
+                    </blockquote>
+
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Drawing Directly</h3>
+
+                        <img class="left" src="img/transformations/directRect1.png"></img>
+
+                        <p class="smaller left">
+                            We can always draw our shapes where we want them to appear on the screen, and for the most part there's nothing
+                            wrong with that. Here's an example of a rectangle drawn with it's top left corner at (40, 200), with a width and height
+                            of 40 pixels. Now how would we go about rotating or scaling this rectangle? Let's take a look.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/directRect2.png"></img>
+
+                        <p class="smaller left">
+                            Notice that our rectangle has been rotated by 45 degrees, however it's entire location has been rotated as well.
+                            This is because when the rotate( angle ) method is used in processing, it doesn't rotate the objects, it rotates the whole
+                            screen. So our rectangle drawn at (40, 200) has been moved due to the rotation of the screen. Let's take a look at
+                            what this screen rotation looks like.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/directRect3.png"></img>
+
+                        <p class="smaller left">
+                            Here we've rotated the grid as well as the square so it's clear to see how the square ended up where it did inside the window.
+                            Notice that relative to the grid, which is now also rotated, the square is in fact drawn with it's top left corner at
+                            (40, 200). There is an issue with drawing our shapes this way though, since we don't know where the rectangle actually is
+                            with respect to the screen, we don't have control over our rectangles location, and more advanced topics like collision detection
+                            will become extremely messy with our shapes spinning all over the screen like this.
+                        </p>
+
+                    </section>
+                    <section>
+                        <div class="important">We can draw our shapes directly at a specific location in processing, but it raises some issues if we
+                            want to rotate or scale the shape.</div>
+                        <div class="important">Shapes drawn directly that have a rotation or scale applied are difficult to track and may end up
+                            in undesirable locations (usually outside the window).</div>
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Translation</h3>
+
+                        <img class="left" src="img/transformations/translate1.png"></img>
+
+                        <p class="smaller left">
+                            Let's say we wanted to have our shape in the same location, but instead of drawing our shape there we first moved the paper
+                            to the location (40, 200), so that when we drew our shape at the location (0, 0) it would appear at (40, 200). The following
+                            commands do exactly that. The translate( x, y ) method will move the entire screen and everything drawn after it. Let's take
+                            a closer look at how the screen moves.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/translate2.png"></img>
+
+                        <p class="smaller left">
+                            See how the grid has actually moved in this image. The grid represents our drawing area in processing, which means the top
+                            left corner of the grid actually represents (0, 0) for anything drawn on it. So when we move the screen by translating, we
+                            actually move the processing drawing area and everything drawn after it will be relative to the drawing area's new location.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/translate3.png"></img>
+
+                        <p class="smaller left">
+                            This example shows we can actually draw some items in negative numbers. Remember that we always draw our rectangles from the
+                            top left corner and with a width and height, so by making the top left corner negative coordinates half the width and the height
+                            of the rectangle, we're able to place the rectangles center at (0, 0). If we always know that my rectangle will be centered at
+                            the location we are translating to, then we can be assured that we know where it is at all times.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="important">Translating moves the processing drawing area to a certain location. The new origin (0, 0) now represents
+                            the location that was translated to.</div>
+                        <div class="important">Always translate before drawing  shapes so their locations are known.</div>
+                        <div class="important">Always draw shapes around the origin of the processing drawing area (0, 0) and use
+                            translate to move the location of each shape.</div>
+
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+
+                        <h3>Rotation and Scale</h3>
+
+                        <img class="left" src="img/transformations/rotate1.png"></img>
+
+                        <p class="smaller left">
+                            Let's take a look at the example where we drew our rectangle around the point (0, 0) instead of using (0, 0) as the top
+                            left corner of the rectangle. Why would we want our rectangle centered around (0, 0) and what's so special about it?
+                            Well imagine we wanted to rotate our rectangle. If the rectangle has it's top left corner at (0, 0) the rectangle will
+                            swing around this point. But if our rectangle is centered over (0, 0) and we rotate the screen, we will spin our rectangle
+                            on the spot and it's center will remain the same. Take a look.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/rotate2.png"></img>
+
+                        <p class="smaller left">
+                            So the center of our rectangle has not changed, however it's been rotated. The blue rectangle represents our rectangle
+                            that was drawn with it's top left corner at (0, 0). Notice how unlike the red rectangle which is centered at (0, 0) the
+                            blue rectangle tends to swing around it's top left corner. That is because when the rotate method is called the screen in
+                            processing actually rotates around this (0, 0) point. Let's take a look at how things scale.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <img class="left" src="img/transformations/rotate3.png"></img>
+
+                        <p class="smaller left">
+                            Here we see that our shape has been scaled by a factor of 2. This means that the coordinates in the processing drawing area
+                            are also scaled by a factor of 2. So if we decided to move our rectangle on this grid, each move would actually be double
+                            what we specified. For example, a rectangle drawn at (40, 40) is shown in blue. The blue rectangle is clearly no where near
+                            the point (40, 40) if we're looking at the original drawing area with the top left corner at (0, 0). This is where translation,
+                            rotation and scale can be a little tricky.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <div class="important">Rotation and Scale will effect where shapes are drawn if they are not centered around (0, 0)
+                            this is because the whole drawing area is rotated and scaled, which means the coordinates are too.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+
+                        <h3>Push and Pop Matrix</h3>
+
+                        <img class="left" src="img/transformations/pushPop.png"></img>
+
+                        <p class="smaller left">
+                            There is a problem with translating to a location to draw each shape, how do we get back to (0, 0) so we can translate
+                            to another location to draw a different shape. The answer is: we call the pushMatrix() method to save all of our translation,
+                            rotation and scale information, and when we are finished we call popMatrix() to return us back to (0, 0) with no rotation
+                            and no scale. Take a look at the image and try to figure out how the same call to the rect method is drawing the rectangle
+                            in two different locations.
+                        </p>
+
+                    </section>
+                    <section>
+
+                        <p>
+                            The following example should give you some practice with the push and pop matrix methods. Try commenting out some of the
+                            calls to push and pop matrix and see what happens.
+                        </p>
+
+                        <div class="codetabs" data-name="pushpop" data-processing="js/local/processing.min.js"
+                             data-width="900" data-height="500" data-nofullscreen="true" data-fontsize="16px" data-lines="#eee">
+                            <textarea data-name="pushpop.pde">
+void setup() {
+  size(400, 400);
+  background(255);
+
+  pushMatrix();
+  translate(200, 200);   //move to the center of the window
+  ellipse(0, 0, 54, 54);  
+  pushMatrix();          //saves translation to the center
+  translate(-100, -100); //move up and to the left
+  rotate(-PI/4);         //rotate 45 degrees counter-clockwise
+  rect(-20, -20, 40, 40);
+  popMatrix();           //take us back to the center of the window
+  pushMatrix();          //saves translation to the center
+  translate(100, -100);  //move up and to the right
+  rotate(PI/4);          //rotate 45 degrees clockwise
+  rect(-20, -20, 40, 40);
+  popMatrix();           //take us back to the center of the window
+  rect(-20, -20, 40, 40);
+  popMatrix();           //take us back to 0, 0
+}
+                            </textarea>
+                        </div>
+
+
+                    </section>
+                    <section>
+
+                        <div class="important">Each time you translate, rotate or scale, it's referred to as a transformation.</div>
+                        <div class="important">Always call pushMatrix() before any translation, rotation or scale, draw your shape, then call popMatrix()
+                            to return to the previous transformation.</div>
+                        <div class="important">We can call pushMatrix() several times, but each call to pushMatrix() must have a matching
+                            call to popMatrix();</div>
+
+                    </section>
+                </section>
+
+                <section id="sketch-parent">
+
+                    <div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+void setup() {
+  size(fullWidth, fullHeight);
+}
+
+void draw() {
+  background(255);
+  stroke(0, 128);
+  strokeWeight(2);
+  
+  pushMatrix();
+  translate( mouseX, mouseY );
+  
+  pushMatrix();
+  rotate( (float) mouseX / fullWidth * PI * 2 );
+  scale( (float) mouseY / 100 );
+  fill(255, 0, 0, 128);
+  rect(-20, -20, 40, 40);
+  popMatrix();
+  
+  pushMatrix();
+  translate( 100, 0 );
+  rotate( (float) mouseX / -fullWidth * PI * 2 );
+  scale( (float) mouseY / 100 );
+  fill(0, 255, 0, 128);
+  rect(-20, -20, 40, 40);
+  popMatrix();
+  
+  pushMatrix();
+  translate( -100, 0 );
+  rotate( (float) mouseX / -fullWidth * PI * 2 );
+  scale( (float) mouseY / 100 );
+  fill(0, 0, 255, 128);
+  rect(-20, -20, 40, 40);
+  popMatrix();
+  
+  popMatrix();
+}
+                        
+                        </textarea>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                //resize sketches
+                var iframes = document.getElementsByTagName('iframe');
+                for (var i = 0 ; i < iframes.length; ++i) {
+                    iframes[0].resize();
+                    console.log('resizing');
+                }
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

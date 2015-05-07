@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 
+        This page uses the Reveal.js presentation framework
+        To find out more about reveal, visit http://lab.hakim.se/reveal-js/
+        or https://github.com/hakimel/reveal.js
+        -->
+        <title>Digital Games - Color</title>
+        <meta name="description" content="IAT 167 - Digital Games - Color">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="author" content="Matt Lockyer">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+        <link rel="stylesheet" href="css/main.css" id="theme">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!-- - [if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <! - [endif]-->
+    </head>
+    <body>
+        <a class="backlink" href="index.html#/1">Back</a>
+        <div class="reveal">
+            <div class="slides">
+
+
+                <section>
+                    <h3>Color, Stroke, Fill</h3>
+                    <ul class="list-style-none">
+                        <li><a href="#/1">Color</a></li>
+                        <li><a href="#/2">Stroke</a></li>
+                        <li><a href="#/3">Fill</a></li>
+                        <li><a href="#/4">No Stroke, No Fill</a></li>
+                        <li><a href="#/5">Other Color Systems</a></li>
+                        <li><a href="#/6">Example</a></li>
+                    </ul>
+                    <h3>Reading</h3>
+                    <ul class="list-style-none">
+                        <li><a href="http://processing.org/learning/color/" target="_blank">Color</a> (required)</li>
+                        <li><a href="http://processing.org/learning/basics/" target="_blank">Basics</a> (required: color section)</li>
+                        <li><a href="http://www.learningprocessing.com/" target="_blank">Learning Processing:</a> Chapter 1 + 2 (recommended)</li>
+                    </ul>
+                    <blockquote>
+                        Any ground subtracts its own hue from the colors which it carries and therefore influences. [Josef Albers]
+                    </blockquote>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Color</h3>
+                        <img class="left" src="img/color/color.png"></img>
+                        <p class="smaller left">
+                            Color in processing is different from traditional paint colors in two ways: primary colors and blending.<br />
+                            The primary colors for computer programming are red, green, blue. Color blending is additive, 
+                            which means that as colors combine, they become brighter.
+                            Traditional paint color mixing rules don't apply here. Take a look at the secondary colors
+                            created from the blends of primary colors in processing.                         
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Color for strokes and fills can be set 4 different ways:
+                        </p>
+                        <ul class="list-style-none">
+                            <li class="code">fill( red, green, blue, alpha );</li>
+                            <li class="code">fill( red, green, blue );</li>
+                            <li class="code">fill( gray, alpha );</li>
+                            <li class="code">fill( gray );</li>
+                        </ul>
+                        <div class="important">Primary colors are red, green, blue.</div>
+                        <div class="important">Color is additive, more color = more brightness.</div>
+                        <div class="important">Color can be set any one of 4 ways.</div>
+
+                    </section>
+                </section>
+
+                <section>
+                    <h3>Stroke</h3>
+
+                    <img class="left" src="img/color/stroke.png"></img>
+
+                    <p class="smaller left">
+                        A stroke is the line style for a shape.<br />
+                        For any shape drawn in processing, always set the stroke before drawing.<br />
+                        Here is how to set the stroke color:<br />
+                        <span class="code">stroke( red, green, blue, alpha );</span><br />
+                        Here is how to set the stroke thickness:<br />
+                        <span class="code">strokeWeight( thickness );</span><br />
+                        The strokeWeight expects the number of pixels the line thickness should be.<br />
+                    </p>
+
+                    <div class="important">Strokes have two components, color and weight.</div>
+                </section>
+                <section>
+
+                    <h3>Fill</h3>
+
+                    <img class="left" src="img/color/fill.png"></img>
+
+                    <p class="smaller left">
+                        A fill is the color of a shape.<br />
+                        The name fill means for the shape to be filled in with this color.<br />
+                        Here is how to set the fill color:<br />
+                        <span class="code">fill( red, green, blue, alpha );</span><br />
+                        The method of specifying red, green, blue and alpha is the most complete method available in processing.<br />
+                        There are other ways to set colors in processing that we will look at.<br />
+                    </p>
+                </section>
+                <section>
+
+                    <section>
+                        <h3>
+                            No Stroke, No Fill
+                        </h3>
+                        <ul class="list-style-none">
+                            <li class="code">noStroke();</li>
+                            <li class="code">noFill();</li>
+                        </ul>
+                        <p>
+                            These two commands can be called to eliminate the stroke or fill respectively. It's better than setting an alpha of 0
+                            since the stroke or fill will not be rendered, boosting draw speed.
+                        </p>
+                    </section>
+                    <section>
+
+                        <div class="important">Strokes and fills should be set BEFORE drawing any shape, otherwise they will be drawn with
+                            the last saved stroke and fill</div>
+                        <div class="important">The default stroke is black with weight 1 and the default fill is white</div>
+                        <div class="important">noStroke() and noFill() are fast ways of turning off strokes and fills</div>
+
+                    </section>
+                </section>
+
+
+                <section>
+
+                    <h3>Other Color Systems</h3>
+
+                    <img class="left" src="img/color/otherColor.png"></img>
+
+                    <p class="smaller left">
+                        There are two different color spaces in processing. RGB which is the most basic and HSB which stands for
+                        hue, saturation, brightness. The photoshop color picker shows each color representation possible, two of these
+                        are RGB and HSB. You can switch between color spaces and set their maxima like this:<br />
+                        <span class="code">colorMode( mode, max value );</span><br />
+                        Take a look at the following example and try to figure out why all of the squares are red.           
+                    </p>
+
+
+
+                    <div class="important">
+                        When setting a mode like colorMode( ... ) in processing, remember it will be set for all shapes drawn after.
+                        This could be trouble knowing which mode is set unless the mode is RESET to the default after drawing.
+                    </div>
+
+                </section>
+
+                <section id="sketch-parent">
+
+<div class="codetabs" data-name="sketch" data-processing="js/local/processing.min.js"
+                         data-appendbody="true" data-width="800" data-height="550" data-ishidden="true" data-fontsize="16px" data-lines="#eee">
+                        <textarea data-name="sketch.pde">
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  noStroke();
+  background(400);
+  colorMode(RGB, 400);
+  //Column One
+  fill( mouseX, mouseY, 0 );
+  rect( 50, 50, 100, 100 );
+  fill( mouseX, 0, mouseY );
+  rect( 50, 150, 100, 100 );
+  fill( 0, mouseX, mouseY );
+  rect( 50, 250, 100, 100 );
+  //Column Two
+  fill( mouseX, 0, 0 );
+  rect( 150, 50, 100, 100 );
+  fill( 0, mouseX, 0 );
+  rect( 150, 150, 100, 100 );
+  fill( 0, 0, mouseX );
+  rect( 150, 250, 100, 100 );
+  //Column Three
+  fill( mouseY, mouseX, 0 );
+  rect( 250, 50, 100, 100 );
+  fill( mouseY, 0, mouseX );
+  rect( 250, 150, 100, 100 );
+  fill( 0, mouseY, mouseX );
+  rect( 250, 250, 100, 100 );
+}
+                        </textarea>
+                    </div>
+
+
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="js/codetabs.js"></script>
+        <script type="text/javascript">
+            Reveal.addEventListener( 'ready', function() {
+                setTimeout(checkSketches, 1500);
+            });
+            Reveal.addEventListener( 'overviewshown', checkSketches);
+            Reveal.addEventListener( 'overviewhidden', checkSketches);
+            Reveal.addEventListener('slidechanged', checkSketches);
+            function checkSketches() {
+                var slide = Reveal.getCurrentSlide();
+                var sketch = document.getElementById('sketch');
+                if (sketch) {
+                    sketch.hide();
+                    if (!Reveal.isOverview() && slide === document.getElementById('sketch-parent')) {
+                        sketch.fadeIn();
+                        document.getElementsByClassName('slides')[0].style.display = 'none';
+                    } else {
+                        document.getElementsByClassName('slides')[0].style.display = 'block';
+                        Reveal.layout();
+                    }
+                }
+            }
+        </script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                width: 1024,
+                height: 768,
+                margin: 0.06,
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                                            
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                                            
+                // Optional libraries used to extend on reveal.js
+                dependencies:  - [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>
